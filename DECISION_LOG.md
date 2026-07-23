@@ -31,3 +31,10 @@
 | 2026-07-16 | DEC-016 | 상태 분리 원칙 | order/fulfillment/payment/tax_invoice 상태 별도 관리 | "거래완료" 모호성 제거 | 주문, 출고, 정산 |
 | 2026-07-16 | DEC-017 | 상품 데이터 확대 순서 | 20→50→200→시험→1,000 단계적 확대 | 50에서 1,000으로 직행 금지 | 운영 |
 | 2026-07-16 | DEC-018 | RFQ 분류 | Customer Pilot Must-Have | 1,000 SKU로 미등록 상품 요청 필수 | 주문 |
+| 2026-07-23 | DEC-019 | 금액 데이터형 | NUMERIC + currency_code — KRW는 NUMERIC(15,0), 외화 NUMERIC(15,4), 환율 NUMERIC(12,6) | 운영자 가독성, 외화 확장성, FLOAT 오차 방지 | 전체 금액 필드 |
+| 2026-07-23 | DEC-020 | open_quantity | 저장하지 않고 계산: accepted - shipped - cancelled | 동기화 부담 제거, 불변식 단순화 | 주문 품목 |
+| 2026-07-23 | DEC-021 | 상태 이력 구조 | 3개 독립 이력 테이블 + sales_order는 status_type 컬럼으로 4종 구분 | FK 무결성 보장, RLS 단순화 | 주문, 출고 |
+| 2026-07-23 | DEC-022 | 낙관적 동시성 제어 | version 컬럼 (INTEGER, DEFAULT 1) — UPDATE 시 version 검증 | 동시 수정 충돌 방지 | 주요 업무 테이블 |
+| 2026-07-23 | DEC-023 | Import State Machine | 12단계 상태: uploaded→validating→validated→dry_run→approval→applying→applied | 전체 흐름 표준화 | Import |
+| 2026-07-23 | DEC-024 | Storage 버킷 전략 | 3 버킷: public-product-assets, private-business-documents, private-rfq-attachments | 공개/비공개 분리, signed URL 정책 차등 | 파일 보안 |
+

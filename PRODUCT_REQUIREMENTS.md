@@ -108,9 +108,10 @@ graph LR
   subgraph "Order Request"
     OR_DRAFT["draft"] --> OR_SUBMITTED["submitted"]
     OR_SUBMITTED --> OR_REVIEW["under_review"]
-    OR_REVIEW --> OR_REVISED["revised"]
-    OR_REVISED --> OR_APPROVED["customer_approved"]
-    OR_REVIEW --> OR_CONFIRMED["confirmed"]
+    OR_REVIEW --> OR_REVISED["revision_pending"]
+    OR_REVISED --> OR_ACCEPTED["accepted"]
+    OR_REVIEW --> OR_ACCEPTED
+    OR_ACCEPTED --> OR_CONVERTED["converted_to_sales_order"]
     OR_SUBMITTED --> OR_CANCELLED["cancelled"]
   end
 ```
@@ -118,21 +119,21 @@ graph LR
 ```mermaid
 graph LR
   subgraph "Sales Order"
-    SO_CREATED["created"] --> SO_PROCESSING["processing"]
-    SO_PROCESSING --> SO_PARTIAL["partially_fulfilled"]
-    SO_PARTIAL --> SO_FULFILLED["fulfilled"]
-    SO_PROCESSING --> SO_FULFILLED
-    SO_PROCESSING --> SO_CANCELLED["cancelled"]
+    SO_CONFIRMED["confirmed"] --> SO_PROCESSING["processing"]
+    SO_PROCESSING --> SO_PARTIAL["fulfillment_in_progress"]
+    SO_PARTIAL --> SO_COMPLETE["fulfillment_complete"]
+    SO_COMPLETE --> SO_CLOSED["closed"]
+    SO_PROCESSING --> SO_CANCEL_REQ["cancel_requested"]
   end
 ```
 
 ```mermaid
 graph LR
   subgraph "Shipment"
-    SH_PENDING["pending"] --> SH_PICKED["picked"]
-    SH_PICKED --> SH_SHIPPED["shipped"]
-    SH_SHIPPED --> SH_DELIVERED["delivered"]
-    SH_PENDING --> SH_CANCELLED["cancelled"]
+    SH_PREPARING["preparing"] --> SH_DISPATCHED["dispatched"]
+    SH_DISPATCHED --> SH_DELIVERED["delivered"]
+    SH_PREPARING --> SH_CANCELLED["cancelled"]
+    SH_DISPATCHED --> SH_FAILED["failed"]
   end
 ```
 

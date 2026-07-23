@@ -6,6 +6,30 @@
 
 ---
 
+## [Phase 0] 2026-07-23 — Checkpoint B 기술 설계
+
+Git 정리:
+- `master` → `main` 브랜치 변경
+- `phase0-checkpoint-a-approved` 태그 생성
+- `docs/checkpoint-b` 작업 브랜치 생성
+
+Checkpoint A 감사:
+- PRODUCT_REQUIREMENTS.md State Machine 상태값을 BUSINESS_RULES.md SSOT와 일치 수정
+
+Checkpoint B 문서 5개 작성:
+- `DATABASE_SCHEMA.md` — 42 Required + 10 Optional + 15 Future = 67 테이블, 8 Migration Group, 8 ERD
+- `SECURITY_RULES.md` — RLS 정책, 접근 매트릭스, 8 보안 시나리오, Storage 3 버킷
+- `DATA_IMPORT_SPEC.md` — 3 Import 템플릿, Import State Machine, 검증 규칙
+- `INTERNATIONALIZATION.md` — MVP 기본값, 번역 구조, 통화, UOM 표시
+- `TEST_PLAN.md` — 111 테스트 케이스 (74 Critical), 8 영역, 성능 기준
+
+운영 문서 갱신:
+- `DECISION_LOG.md` — DEC-019~024 추가 (6개)
+- `OPEN_DECISIONS.md` — OD-020~022 추가 (3개)
+- `CHANGELOG.md` — 이력 업데이트
+
+---
+
 ## [Phase 0] 2026-07-16 — Checkpoint A 문서 작성
 
 Checkpoint A 문서 8개 작성 완료:
