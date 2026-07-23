@@ -267,6 +267,58 @@ first_needed_phase: Phase 4
 
 ---
 
+## 10-A. 인증·거래처 테스트
+
+| ID | 테스트 | 우선순위 | Phase | PRD |
+|---|---|---|---|---|
+| TC-AUTH-001 | 사업자 회원가입 → 승인대기 상태 | Critical | 2 | PRD-1 |
+| TC-AUTH-002 | 관리자 거래처 승인 → 활성화 | Critical | 2 | PRD-2 |
+| TC-AUTH-003 | 관리자 거래처 거절 | Critical | 2 | PRD-2 |
+| TC-AUTH-004 | 로그인/로그아웃 정상 동작 | Critical | 2 | PRD-3 |
+| TC-AUTH-005 | 역할별 접근권한 (RLS 기본 검증) | Critical | 2 | PRD-4 |
+| TC-AUTH-006 | 조직 다중역할 (buyer+supplier 동시) | High | 2 | PRD-5 |
+
+---
+
+## 10-B. 카탈로그 관리 테스트
+
+| ID | 테스트 | 우선순위 | Phase | PRD |
+|---|---|---|---|---|
+| TC-CAT-001 | 브랜드 CRUD | Critical | 3 | PRD-6 |
+| TC-CAT-002 | 카테고리 트리 CRUD | Critical | 3 | PRD-6 |
+| TC-CAT-003 | 상품-SKU 분리 구조 생성 | Critical | 3 | PRD-7 |
+| TC-CAT-004 | 상품 이미지 업로드·대표 이미지 설정 | High | 3 | PRD-11 |
+| TC-CAT-005 | 기술자료(PDF) 업로드·조회 | High | 3 | PRD-11 |
+
+---
+
+## 10-C. 관리자 운영 테스트
+
+| ID | 테스트 | 우선순위 | Phase | PRD |
+|---|---|---|---|---|
+| TC-ADM-001 | 거래처 승인·등급·개별가격 일괄 관리 | Critical | 4 | PRD-33 |
+| TC-ADM-002 | 상품/SKU/UOM/바코드 CRUD | Critical | 3 | PRD-34 |
+| TC-ADM-003 | 가격표/수량구간/개별가격 관리 | Critical | 4 | PRD-35 |
+| TC-ADM-004 | 공급조건(supplier_offers) 관리 | High | 3 | PRD-36 |
+| TC-ADM-005 | 주문 검토/확정/출고 워크플로 | Critical | 4 | PRD-37 |
+| TC-ADM-006 | 감사로그 기록·조회 (주요 변경사항) | Critical | 2 | PRD-38 |
+| TC-ADM-007 | Import 이력 조회·오류 확인 | High | 3 | PRD-39 |
+
+---
+
+## 10-D. 출고·상태 테스트
+
+| ID | 테스트 | 우선순위 | Phase | PRD |
+|---|---|---|---|---|
+| TC-SHP-001 | 배송방식 선택 (택배/화물/방문수령) | Critical | 4 | PRD-40 |
+| TC-SHP-002 | 송장번호 등록 및 조회 | Critical | 4 | PRD-41 |
+| TC-SHP-003 | 부분출고/분할출고 정합성 | Critical | 4 | PRD-42 |
+| TC-SHP-004 | 4개 독립 상태 관리 (order/fulfillment/payment/tax_invoice) | Critical | 4 | PRD-43 |
+| TC-SHP-005 | 하나의 상태 변경이 다른 상태에 영향 없음 | Critical | 4 | PRD-43 |
+| TC-SHP-006 | fulfillment 상태 자동 갱신 (출고완료 시) | High | 4 | PRD-43 |
+
+---
+
 ## 11. 성능 기준 (Provisional)
 
 초기 1,000 SKU, 시험 거래처 3~5곳 규모 기준. Phase 6 측정 후 조정.
@@ -297,7 +349,11 @@ first_needed_phase: Phase 4
 | Import | 12 | 9 | 3~4 |
 | 검색 | 14 | 5 | 3~5 |
 | 운영 | 9 | 5 | 2~6 |
-| **합계** | **111** | **74** | |
+| 인증·거래처 | 6 | 5 | 2 |
+| 카탈로그 관리 | 5 | 3 | 3 |
+| 관리자 운영 | 7 | 4 | 2~4 |
+| 출고·상태 | 6 | 5 | 4 |
+| **합계** | **135** | **91** | |
 
 ---
 
@@ -311,3 +367,4 @@ first_needed_phase: Phase 4
 | DATA_IMPORT_SPEC.md | Import 검증 규칙, State Machine |
 | PRODUCT_REQUIREMENTS.md | 기능 번호 (PRD-##) |
 | ROADMAP.md | Phase별 테스트 시점 |
+
