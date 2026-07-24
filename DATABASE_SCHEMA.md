@@ -45,12 +45,15 @@
 
 | 항목 | 데이터형 | 근거 |
 |---|---|---|
-| KRW 금액 | `NUMERIC(15,0)` | 원 단위 정수, 소수점 불필요 |
-| 외화 금액 | `NUMERIC(15,4)` | USD/CNY 등 소수 지원 |
-| 환율 | `NUMERIC(12,6)` | 환율 정밀도 보장 |
+| 단가 (unit_price, purchase_price) | `NUMERIC(19,4)` | 다중통화 대비, 소수 4자리 |
+| 금액 합계 (subtotal, tax, total) | `NUMERIC(19,4)` | 다중통화 대비, KRW는 Application에서 소수부 0 검증 |
+| 수량 | `NUMERIC(18,6)` | M, KG 등 소수 허용 단위 대비 |
+| 단위변환비 (conversion_to_base) | `NUMERIC(18,6)` | 정밀 변환 |
+| 환율 | `NUMERIC(20,8)` | 환율 정밀도 확보 |
+| 세율 (tax_rate) | `NUMERIC(9,6)` | 소수 비율 (0.100000 = 10%) |
 | 통화코드 | `TEXT` (ISO 4217) | 금액과 항상 함께 저장 |
 
-> 최소통화단위 정수 방식(B안) 대비: KRW는 소수점이 없어 변환 불필요하고, 외화 도입 시 NUMERIC이 자연스러움. 운영자가 DB를 직접 조회할 때도 금액을 바로 읽을 수 있음.
+> KRW 확정 주문은 적용된 세금 정책에 따라 최종 금액의 소수부분이 0인지 Application에서 검증한다. DB 컬럼은 다중통화 확장을 위해 NUMERIC(19,4)로 통일한다.
 
 ### 1.5 수량 — NUMERIC + precision 메타
 
@@ -58,9 +61,8 @@
 
 | 항목 | 데이터형 | 설명 |
 |---|---|---|
-| 정수 수량 (EA, BOX) | `NUMERIC(12,0)` | 정수 단위 |
-| 소수 수량 (M, KG) | `NUMERIC(12,4)` | 소수 허용 단위 |
-| conversion_to_base | `NUMERIC(10,4)` | 단위 변환 비율 |
+| 수량 (모든 단위) | `NUMERIC(18,6)` | 정수·소수 통합, quantity_precision으로 제어 |
+| conversion_to_base | `NUMERIC(18,6)` | 단위 변환 비율 |
 
 각 `sku_uoms` 레코드의 `quantity_precision`과 `allow_fractional_quantity`로 해당 UOM의 소수 허용 여부를 제어.
 
@@ -102,23 +104,87 @@
 
 | 계층 | 테이블 수 | 설명 |
 |---|---|---|
-| **Release 1 Required** | **42** | MVP 출시에 반드시 필요 |
+| **Release 1 Required** | **44 테이블 + 1 View** | MVP 출시에 반드시 필요 |
 | **Release 1 Optional** | **10** | Feature Flag로 선택적 활성화 |
 | **Future Extension** | **15** | Stage 3 이후 |
 | **합계** | **67** | |
 
-### 2.2 Migration Group 총괄
+### 2.2 Schema Inventory — Release 1 Required
+
+이 표가 Release 1 Required 테이블의 **SSOT**입니다.
+
+| # | table_name | schema_tier | first_needed_phase | migration_group | required_for_pilot | api_exposure | rls_required | audit_required | personal_data | financial_data |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | profiles | Required | Phase 2 | MG-01 | ✅ | authenticated_direct | ✅ | ✅ | ✅ | ❌ |
+| 2 | organizations | Required | Phase 2 | MG-01 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ |
+| 3 | organization_roles | Required | Phase 2 | MG-01 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ |
+| 4 | organization_business_profiles | Required | Phase 2 | MG-01 | ✅ | authenticated_direct | ✅ | ❌ | ✅ | ❌ |
+| 5 | buyer_accounts | Required | Phase 2 | MG-01 | ✅ | authenticated_direct | ✅ | ✅ | ❌ | ✅ |
+| 6 | organization_members | Required | Phase 2 | MG-01 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ |
+| 7 | addresses | Required | Phase 2 | MG-01 | ✅ | authenticated_direct | ✅ | ❌ | ✅ | ❌ |
+| 8 | brands | Required | Phase 3 | MG-02 | ✅ | public_read | ✅ | ❌ | ❌ | ❌ |
+| 9 | categories | Required | Phase 3 | MG-02 | ✅ | public_read | ✅ | ❌ | ❌ | ❌ |
+| 10 | products | Required | Phase 3 | MG-02 | ✅ | public_read | ✅ | ❌ | ❌ | ❌ |
+| 11 | product_skus | Required | Phase 3 | MG-02 | ✅ | public_read | ✅ | ❌ | ❌ | ❌ |
+| 12 | product_images | Required | Phase 3 | MG-02 | ❌ | public_read | ✅ | ❌ | ❌ | ❌ |
+| 13 | product_documents | Required | Phase 3 | MG-02 | ❌ | public_read | ✅ | ❌ | ❌ | ❌ |
+| 14 | search_synonyms | Required | Phase 3 | MG-02 | ❌ | public_read | ✅ | ❌ | ❌ | ❌ |
+| 15 | sku_uoms | Required | Phase 3 | MG-03 | ✅ | public_read | ✅ | ❌ | ❌ | ❌ |
+| 16 | sku_barcodes | Required | Phase 3 | MG-03 | ❌ | public_read | ✅ | ❌ | ❌ | ❌ |
+| 17 | product_search_terms | Required | Phase 3 | MG-03 | ❌ | public_read | ✅ | ❌ | ❌ | ❌ |
+| 18 | search_events | Required | Phase 5 | MG-03 | ✅ | server_only | ✅ | ❌ | ⚠️ | ❌ |
+| 19 | price_books | Required | Phase 4 | MG-04 | ✅ | operator_direct | ✅ | ✅ | ❌ | ✅ |
+| 20 | price_book_items | Required | Phase 4 | MG-04 | ✅ | operator_direct | ✅ | ✅ | ❌ | ✅ |
+| 21 | organization_price_books | Required | Phase 4 | MG-04 | ✅ | authenticated_direct | ✅ | ✅ | ❌ | ❌ |
+| 22 | organization_price_overrides | Required | Phase 4 | MG-04 | ✅ | authenticated_direct | ✅ | ✅ | ❌ | ✅ |
+| 23 | supplier_offers | Required | Phase 3 | MG-04 | ✅ | operator_direct | ✅ | ✅ | ❌ | ✅ |
+| 24 | carts | Required | Phase 4 | MG-05 | ❌ | authenticated_direct | ✅ | ❌ | ❌ | ❌ |
+| 25 | cart_items | Required | Phase 4 | MG-05 | ❌ | authenticated_direct | ✅ | ❌ | ❌ | ❌ |
+| 26 | order_requests | Required | Phase 4 | MG-05 | ✅ | authenticated_direct | ✅ | ✅ | ❌ | ✅ |
+| 27 | order_request_items | Required | Phase 4 | MG-05 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ✅ |
+| 28 | order_revisions | Required | Phase 4 | MG-05 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ |
+| 29 | order_revision_items | Required | Phase 4 | MG-05 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ |
+| 30 | sales_orders | Required | Phase 4 | MG-06 | ✅ | authenticated_direct | ✅ | ✅ | ✅ | ✅ |
+| 31 | sales_order_items | Required | Phase 4 | MG-06 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ✅ |
+| 32 | shipments | Required | Phase 4 | MG-06 | ✅ | authenticated_direct | ✅ | ✅ | ❌ | ❌ |
+| 33 | shipment_items | Required | Phase 4 | MG-06 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ |
+| 34 | order_request_status_history | Required | Phase 4 | MG-06 | ❌ | server_only | ✅ | ❌ | ❌ | ❌ |
+| 35 | sales_order_status_history | Required | Phase 4 | MG-06 | ❌ | server_only | ✅ | ❌ | ❌ | ❌ |
+| 36 | catalog_imports | Required | Phase 3 | MG-07 | ✅ | operator_direct | ✅ | ❌ | ❌ | ❌ |
+| 37 | catalog_import_rows | Required | Phase 3 | MG-07 | ❌ | operator_direct | ✅ | ❌ | ❌ | ❌ |
+| 38 | catalog_import_errors | Required | Phase 3 | MG-07 | ❌ | operator_direct | ✅ | ❌ | ❌ | ❌ |
+| 39 | audit_logs | Required | Phase 2 | MG-07 | ✅ | server_only | ✅ | ❌ | ❌ | ❌ |
+| 40 | rfqs | Required | Phase 5 | MG-08 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ |
+| 41 | rfq_items | Required | Phase 5 | MG-08 | ❌ | authenticated_direct | ✅ | ❌ | ❌ | ✅ |
+| 42 | rfq_attachments | Required | Phase 5 | MG-08 | ❌ | authenticated_direct | ✅ | ❌ | ❌ | ❌ |
+| 43 | shipment_status_history | Required | Phase 4 | MG-08 | ❌ | server_only | ✅ | ❌ | ❌ | ❌ |
+| 44 | tax_policies | Required | Phase 4 | MG-08 | ❌ | operator_direct | ✅ | ❌ | ❌ | ❌ |
+| V1 | sku_search_index (View) | Required | Phase 3 | MG-03 | ❌ | view_only | ✅ (SECURITY INVOKER) | ❌ | ❌ | ❌ |
+
+**합계: 44 테이블 + 1 View = 45 항목**
+
+`api_exposure` 정의:
+
+| 값 | 설명 | RLS |
+|---|---|---|
+| `public_read` | anon/authenticated SELECT 가능 (active 필터), operator INSERT/UPDATE | ✅ 필수 |
+| `authenticated_direct` | authenticated 사용자 조직 범위 접근 | ✅ 필수 |
+| `operator_direct` | 운영사 권한자만 접근 | ✅ 필수 |
+| `server_only` | 서버 함수/service_role만 접근, anon/authenticated GRANT 제거 | ✅ 필수 |
+| `view_only` | View를 통해서만 노출, SECURITY INVOKER | ✅ 간접 |
+
+### 2.3 Migration Group 총괄
 
 | Group | 이름 | 테이블 수 | 대응 Phase |
 |---|---|---|---|
 | MG-01 | Identity & Organizations | 7 | Phase 2 |
-| MG-02 | Catalog Core | 8 | Phase 3 |
-| MG-03 | UOM & Search | 5 | Phase 3 |
-| MG-04 | Pricing | 5 | Phase 4 |
-| MG-05 | Cart & Order Request | 7 | Phase 4 |
+| MG-02 | Catalog Core | 7 | Phase 3 |
+| MG-03 | UOM & Search | 4 테이블 + 1 View | Phase 3~5 |
+| MG-04 | Pricing | 5 | Phase 3~4 |
+| MG-05 | Cart & Order Request | 6 | Phase 4 |
 | MG-06 | Sales Order & Shipment | 6 | Phase 4 |
-| MG-07 | Import & Audit | 4 | Phase 3~5 |
-| MG-08 | RFQ & Pilot | 4 | Phase 5 |
+| MG-07 | Import & Audit | 4 | Phase 2~5 |
+| MG-08 | RFQ & Pilot | 5 | Phase 4~5 |
 | MG-OPT | Optional Features | 10 | Phase 4~6 |
 | MG-FUT | Future Extension | 15 | Phase 7+ |
 
@@ -271,7 +337,7 @@ UNIQUE(organization_id, role_type)
 | approved_by | UUID FK | → profiles | 승인자 |
 | payment_terms_code | TEXT | | 결제조건 코드 |
 | default_price_book_id | UUID FK | → price_books | 기본 가격표 |
-| credit_limit | NUMERIC(15,0) | | 신용한도 (OD-011) |
+| credit_limit | NUMERIC(19,4) | | 신용한도 (OD-011) |
 | order_hold_reason | TEXT | | 주문 보류 사유 |
 | buyer_approval_enabled | BOOLEAN | DEFAULT false | 내부 승인 활성화 |
 | notes | TEXT | | 관리자 메모 |
@@ -565,13 +631,13 @@ SKU별 판매단위. EA, PACK, BOX 등 복수 주문단위.
 | id | UUID PK | | |
 | sku_id | UUID FK | NOT NULL, → product_skus | |
 | uom_code | TEXT | NOT NULL | EA, PACK, SET, BOX 등 |
-| conversion_to_base | NUMERIC(10,4) | NOT NULL, DEFAULT 1 | 기본단위 변환비율 |
+| conversion_to_base | NUMERIC(18,6) | NOT NULL, DEFAULT 1 | 기본단위 변환비율 |
 | quantity_precision | INTEGER | NOT NULL, DEFAULT 0 | 소수 자릿수 |
 | allow_fractional_quantity | BOOLEAN | DEFAULT false | 소수 수량 허용 |
 | is_orderable | BOOLEAN | DEFAULT true | 주문 가능 여부 |
 | is_default_sales_uom | BOOLEAN | DEFAULT false | 기본 판매단위 |
-| minimum_order_quantity | NUMERIC(12,4) | NOT NULL, DEFAULT 1 | MOQ |
-| order_increment | NUMERIC(12,4) | NOT NULL, DEFAULT 1 | 주문 증가단위 |
+| minimum_order_quantity | NUMERIC(18,6) | NOT NULL, DEFAULT 1 | MOQ |
+| order_increment | NUMERIC(18,6) | NOT NULL, DEFAULT 1 | 주문 증가단위 |
 | packaging_level | TEXT | | inner, case, pallet |
 | active | BOOLEAN | DEFAULT true | |
 | created_at | timestamptz | | |
@@ -656,15 +722,23 @@ SKU별 검색 키워드.
 
 ---
 
-#### `sku_search_index`
+#### `sku_search_index (SECURITY INVOKER View)`
 
-검색 성능을 위한 정규화된 검색 인덱스 뷰/Materialized View.
+검색 성능을 위한 정규화된 검색 인덱스 **View** (SECURITY INVOKER).
 
 | 메타 | 값 |
 |---|---|
 | schema_tier | Required |
+| type | **View** (SECURITY INVOKER) |
 | first_needed_phase | Phase 3 |
 | migration_group | MG-03 |
+| api_exposure | view_only |
+| security_invoker | ✅ |
+| rls_required | ✅ (기반 테이블 RLS 적용) |
+
+초기 1,000 SKU에서는 일반 SECURITY INVOKER View로 시작한다.
+Materialized View 전환은 검색 성능이 목표를 초과할 때 검토한다 (OD-022).
+Materialized View로 전환 시에는 비노출 스키마에 배치하고 안전한 View/RPC로만 노출한다.
 
 | 컬럼 | 타입 | 설명 |
 |---|---|---|
@@ -741,9 +815,9 @@ SKU별 검색 키워드.
 | id | UUID PK | | |
 | price_book_id | UUID FK | NOT NULL, → price_books | |
 | sku_uom_id | UUID FK | NOT NULL, → sku_uoms | SKU+UOM 조합 |
-| min_quantity | NUMERIC(12,4) | NOT NULL, DEFAULT 1 | 구간 최소수량 |
-| max_quantity | NUMERIC(12,4) | | NULL = 상한 없음 |
-| unit_price | NUMERIC(15,4) | NOT NULL | 단가 |
+| min_quantity | NUMERIC(18,6) | NOT NULL, DEFAULT 1 | 구간 최소수량 |
+| max_quantity | NUMERIC(18,6) | | NULL = 상한 없음 |
+| unit_price | NUMERIC(19,4) | NOT NULL | 단가 |
 | currency_code | TEXT | NOT NULL, DEFAULT 'KRW' | |
 | tax_inclusion_mode | TEXT | NOT NULL, DEFAULT 'exclusive' | exclusive, inclusive |
 | valid_from | timestamptz | | |
@@ -801,9 +875,9 @@ UNIQUE(organization_id, price_book_id)
 | id | UUID PK | | |
 | organization_id | UUID FK | NOT NULL, → organizations | |
 | sku_uom_id | UUID FK | NOT NULL, → sku_uoms | |
-| min_quantity | NUMERIC(12,4) | NOT NULL, DEFAULT 1 | |
-| max_quantity | NUMERIC(12,4) | | NULL = 상한 없음 |
-| unit_price | NUMERIC(15,4) | NOT NULL | |
+| min_quantity | NUMERIC(18,6) | NOT NULL, DEFAULT 1 | |
+| max_quantity | NUMERIC(18,6) | | NULL = 상한 없음 |
+| unit_price | NUMERIC(19,4) | NOT NULL | |
 | currency_code | TEXT | NOT NULL, DEFAULT 'KRW' | |
 | tax_inclusion_mode | TEXT | NOT NULL, DEFAULT 'exclusive' | |
 | valid_from | timestamptz | | |
@@ -836,12 +910,12 @@ UNIQUE(organization_id, price_book_id)
 | supplier_organization_id | UUID FK | NOT NULL, → organizations | 공급업체 |
 | sku_uom_id | UUID FK | NOT NULL, → sku_uoms | |
 | supplier_item_code | TEXT | | 공급업체 상품코드 |
-| purchase_price | NUMERIC(15,4) | NOT NULL | 매입 단가 |
+| purchase_price | NUMERIC(19,4) | NOT NULL | 매입 단가 |
 | currency_code | TEXT | DEFAULT 'KRW' | |
-| minimum_order_quantity | NUMERIC(12,4) | DEFAULT 1 | 공급업체 MOQ |
-| order_increment | NUMERIC(12,4) | DEFAULT 1 | |
+| minimum_order_quantity | NUMERIC(18,6) | DEFAULT 1 | 공급업체 MOQ |
+| order_increment | NUMERIC(18,6) | DEFAULT 1 | |
 | stock_status | TEXT | DEFAULT 'unknown' | in_stock, limited, out_of_stock, discontinued, unknown |
-| available_quantity | NUMERIC(12,4) | | |
+| available_quantity | NUMERIC(18,6) | | |
 | lead_time_min_days | INTEGER | | 최소 납기(일) |
 | lead_time_max_days | INTEGER | | 최대 납기(일) |
 | direct_ship_available | BOOLEAN | DEFAULT false | 직배송 가능 |
@@ -894,7 +968,7 @@ UNIQUE(organization_id, price_book_id)
 | cart_id | UUID FK | NOT NULL, → carts ON DELETE CASCADE | |
 | sku_id | UUID FK | NOT NULL, → product_skus | |
 | sku_uom_id | UUID FK | NOT NULL, → sku_uoms | |
-| quantity | NUMERIC(12,4) | NOT NULL | |
+| quantity | NUMERIC(18,6) | NOT NULL | |
 | notes | TEXT | | 품목 메모 |
 | created_at | timestamptz | | |
 | updated_at | timestamptz | | |
@@ -935,9 +1009,9 @@ UNIQUE(cart_id, sku_id, sku_uom_id)
 | customer_notes | TEXT | | 요청사항 |
 | admin_notes | TEXT | | 관리자 내부 메모 |
 | response_deadline | timestamptz | | 수정안 응답기한 |
-| subtotal | NUMERIC(15,0) | | 공급가 합계 |
-| tax_amount | NUMERIC(15,0) | | 부가세 합계 |
-| total_amount | NUMERIC(15,0) | | 총액 |
+| subtotal | NUMERIC(19,4) | | 공급가 합계 |
+| tax_amount | NUMERIC(19,4) | | 부가세 합계 |
+| total_amount | NUMERIC(19,4) | | 총액 |
 | currency_code | TEXT | DEFAULT 'KRW' | |
 | created_at | timestamptz | | |
 | updated_at | timestamptz | | |
@@ -953,20 +1027,20 @@ UNIQUE(cart_id, sku_id, sku_uom_id)
 | order_request_id | UUID FK | NOT NULL, → order_requests | |
 | sku_id | UUID FK | NOT NULL, → product_skus | |
 | sku_uom_id | UUID FK | NOT NULL, → sku_uoms | |
-| requested_quantity | NUMERIC(12,4) | NOT NULL | 요청 수량 |
+| requested_quantity | NUMERIC(18,6) | NOT NULL | 요청 수량 |
 | ordered_uom_code | TEXT | NOT NULL | 스냅샷 |
-| conversion_to_base | NUMERIC(10,4) | NOT NULL | 스냅샷 |
-| base_quantity | NUMERIC(12,4) | NOT NULL | 기본단위 환산 |
-| minimum_order_quantity | NUMERIC(12,4) | | 스냅샷 |
-| order_increment | NUMERIC(12,4) | | 스냅샷 |
-| unit_price | NUMERIC(15,4) | | 요청 시점 단가 |
+| conversion_to_base | NUMERIC(18,6) | NOT NULL | 스냅샷 |
+| base_quantity | NUMERIC(18,6) | NOT NULL | 기본단위 환산 |
+| minimum_order_quantity | NUMERIC(18,6) | | 스냅샷 |
+| order_increment | NUMERIC(18,6) | | 스냅샷 |
+| unit_price | NUMERIC(19,4) | | 요청 시점 단가 |
 | price_source_type | TEXT | | individual, price_book, base |
 | price_source_id | UUID | | |
-| tier_min_quantity | NUMERIC(12,4) | | 적용 구간 |
-| tier_max_quantity | NUMERIC(12,4) | | |
-| line_subtotal | NUMERIC(15,0) | | |
-| line_tax | NUMERIC(15,0) | | |
-| line_total | NUMERIC(15,0) | | |
+| tier_min_quantity | NUMERIC(18,6) | | 적용 구간 |
+| tier_max_quantity | NUMERIC(18,6) | | |
+| line_subtotal | NUMERIC(19,4) | | |
+| line_tax | NUMERIC(19,4) | | |
+| line_total | NUMERIC(19,4) | | |
 | product_name_snapshot | TEXT | | 상품명 스냅샷 |
 | brand_name_snapshot | TEXT | | 브랜드명 스냅샷 |
 | model_name_snapshot | TEXT | | 모델명 스냅샷 |
@@ -1007,8 +1081,8 @@ UNIQUE(order_request_id, revision_number)
 | id | UUID PK | | |
 | revision_id | UUID FK | NOT NULL, → order_revisions | |
 | order_request_item_id | UUID FK | NOT NULL, → order_request_items | |
-| proposed_quantity | NUMERIC(12,4) | | 제안 수량 |
-| proposed_unit_price | NUMERIC(15,4) | | 제안 단가 |
+| proposed_quantity | NUMERIC(18,6) | | 제안 수량 |
+| proposed_unit_price | NUMERIC(19,4) | | 제안 단가 |
 | proposed_lead_time_days | INTEGER | | 제안 납기 |
 | change_reason | TEXT | | 변경 사유 |
 | item_status | TEXT | DEFAULT 'proposed' | proposed, accepted, rejected |
@@ -1067,9 +1141,9 @@ UNIQUE(order_request_id, revision_number)
 | tax_policy_code | TEXT | | 적용 세금정책 |
 | tax_policy_version | INTEGER | | |
 | — 금액 — | | | |
-| subtotal | NUMERIC(15,0) | NOT NULL | |
-| tax_amount | NUMERIC(15,0) | NOT NULL | |
-| total_amount | NUMERIC(15,0) | NOT NULL | |
+| subtotal | NUMERIC(19,4) | NOT NULL | |
+| tax_amount | NUMERIC(19,4) | NOT NULL | |
+| total_amount | NUMERIC(19,4) | NOT NULL | |
 | currency_code | TEXT | NOT NULL, DEFAULT 'KRW' | |
 | — 관리 — | | | |
 | admin_notes | TEXT | | |
@@ -1100,29 +1174,28 @@ UNIQUE(order_request_id, revision_number)
 | model_name | TEXT | | |
 | specification_text | TEXT | | |
 | ordered_uom_code | TEXT | NOT NULL | |
-| conversion_to_base | NUMERIC(10,4) | NOT NULL | |
+| conversion_to_base | NUMERIC(18,6) | NOT NULL | |
 | — 수량 (BUSINESS_RULES 섹션 6) — | | | |
-| requested_quantity | NUMERIC(12,4) | NOT NULL | |
-| accepted_quantity | NUMERIC(12,4) | NOT NULL | |
-| rejected_quantity | NUMERIC(12,4) | NOT NULL, DEFAULT 0 | |
-| shipped_quantity | NUMERIC(12,4) | NOT NULL, DEFAULT 0 | |
-| cancelled_quantity | NUMERIC(12,4) | NOT NULL, DEFAULT 0 | |
-| backordered_quantity | NUMERIC(12,4) | NOT NULL, DEFAULT 0 | |
+| requested_quantity | NUMERIC(18,6) | NOT NULL | |
+| accepted_quantity | NUMERIC(18,6) | NOT NULL | |
+| rejected_quantity | NUMERIC(18,6) | NOT NULL, DEFAULT 0 | |
+| cancelled_quantity | NUMERIC(18,6) | NOT NULL, DEFAULT 0 | |
+| backordered_quantity | NUMERIC(18,6) | NOT NULL, DEFAULT 0 | |
 | line_status | TEXT | NOT NULL, DEFAULT 'open' | open, partially_shipped, shipped, cancelled, backordered |
 | — 가격 스냅샷 — | | | |
-| unit_price | NUMERIC(15,4) | NOT NULL | |
+| unit_price | NUMERIC(19,4) | NOT NULL | |
 | price_source_type | TEXT | | individual, price_book, base |
 | price_source_id | UUID | | |
 | price_source_version | INTEGER | | |
 | price_calculated_at | timestamptz | | |
 | price_book_code | TEXT | | |
-| tier_min_quantity | NUMERIC(12,4) | | |
-| tier_max_quantity | NUMERIC(12,4) | | |
-| supply_cost | NUMERIC(15,4) | | 공급가 (관리자 전용) |
+| tier_min_quantity | NUMERIC(18,6) | | |
+| tier_max_quantity | NUMERIC(18,6) | | |
+| supply_cost | NUMERIC(19,4) | | 공급가 (관리자 전용) |
 | tax_inclusion_mode | TEXT | | |
-| line_subtotal | NUMERIC(15,0) | NOT NULL | |
-| line_tax | NUMERIC(15,0) | NOT NULL | |
-| line_total | NUMERIC(15,0) | NOT NULL | |
+| line_subtotal | NUMERIC(19,4) | NOT NULL | |
+| line_tax | NUMERIC(19,4) | NOT NULL | |
+| line_total | NUMERIC(19,4) | NOT NULL | |
 | currency_code | TEXT | DEFAULT 'KRW' | |
 | — 납기 — | | | |
 | expected_lead_time_days | INTEGER | | |
@@ -1132,11 +1205,30 @@ UNIQUE(order_request_id, revision_number)
 | created_at | timestamptz | | |
 | updated_at | timestamptz | | |
 
+**shipped_quantity**: 저장하지 않고 **계산**으로 도출.
+`shipped_quantity = SUM(shipment_items.shipped_quantity) WHERE shipment.shipment_status IN ('dispatched', 'delivered')`
+
+Source of Truth: `shipment_items` 테이블의 유효 출고수량 합계.
+근거: sales_order_items에 중복 저장하면 shipment_items와의 동기화 부담 발생. 1,000 SKU 규모에서 JOIN 계산 비용은 무시 가능.
+
 **open_quantity**: 저장하지 않고 **계산**으로 도출.
+`open_quantity = accepted_quantity - shipped_quantity(계산) - cancelled_quantity`
 
-`open_quantity = accepted_quantity - shipped_quantity - cancelled_quantity`
+**수량 불변식 — DB CHECK 제약조건:**
 
-근거: shipped_quantity와 cancelled_quantity가 변경될 때마다 open_quantity를 동기화해야 하는 부담을 제거. 불변식 검증이 단순해짐. Application에서 `open_quantity`를 계산 필드로 제공.
+```sql
+CHECK (requested_quantity >= 0)
+CHECK (accepted_quantity >= 0)
+CHECK (rejected_quantity >= 0)
+CHECK (cancelled_quantity >= 0)
+CHECK (backordered_quantity >= 0)
+CHECK (accepted_quantity + rejected_quantity = requested_quantity)
+CHECK (cancelled_quantity <= accepted_quantity)
+CHECK (backordered_quantity <= accepted_quantity - cancelled_quantity)
+```
+
+`shipped_quantity`는 저장 컬럼이 아니므로 CHECK 대상이 아님. Application과 DB Function에서 다음을 검증:
+`SUM(shipment_items.shipped_quantity) + cancelled_quantity <= accepted_quantity`
 
 ---
 
@@ -1184,7 +1276,7 @@ UNIQUE(order_request_id, revision_number)
 | id | UUID PK | | |
 | shipment_id | UUID FK | NOT NULL, → shipments ON DELETE CASCADE | |
 | sales_order_item_id | UUID FK | NOT NULL, → sales_order_items | |
-| shipped_quantity | NUMERIC(12,4) | NOT NULL | 이 출고 건의 수량 |
+| shipped_quantity | NUMERIC(18,6) | NOT NULL | 이 출고 건의 수량 |
 | notes | TEXT | | |
 | created_at | timestamptz | | |
 
@@ -1393,12 +1485,12 @@ Import 오류/경고 상세.
 | brand_name | TEXT | | |
 | model_name | TEXT | | |
 | specification | TEXT | | 규격 |
-| quantity | NUMERIC(12,4) | | |
+| quantity | NUMERIC(18,6) | | |
 | uom_code | TEXT | | |
 | desired_delivery_date | DATE | | 원하는 납기 |
 | notes | TEXT | | |
 | — 견적 응답 — | | | |
-| quoted_unit_price | NUMERIC(15,4) | | |
+| quoted_unit_price | NUMERIC(19,4) | | |
 | quoted_currency | TEXT | | |
 | quoted_lead_time_days | INTEGER | | |
 | quoted_notes | TEXT | | |
@@ -1453,7 +1545,7 @@ Import 오류/경고 상세.
 | id | UUID PK | | |
 | code | TEXT | NOT NULL | 정책 코드 |
 | version | INTEGER | NOT NULL | |
-| tax_rate | NUMERIC(5,4) | NOT NULL | 세율 (예: 0.1000 = 10%) |
+| tax_rate | NUMERIC(9,6) | NOT NULL | 세율 (예: 0.1000 = 10%) |
 | tax_calculation_basis | TEXT | | per_line_item, order_total (OD-005) |
 | tax_rounding_mode | TEXT | | floor, round, ceil (OD-006) |
 | price_display_mode | TEXT | | tax_exclusive, tax_inclusive |

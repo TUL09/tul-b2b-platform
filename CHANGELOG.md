@@ -6,6 +6,17 @@
 
 ---
 
+## [Phase 0] 2026-07-24 — Checkpoint B 보안 강화
+
+보안 감사 (Checkpoint B Security Correction):
+- `DATABASE_SCHEMA.md` — Numeric 정밀도 통합 (NUMERIC(19,4)/NUMERIC(18,6)/NUMERIC(20,8)/NUMERIC(9,6)), Schema Inventory 45항목 추가, shipped_quantity 계산 전환, 수량 불변식 CHECK 제약조건 추가, sku_search_index SECURITY INVOKER View 확정
+- `SECURITY_RULES.md` — RLS 기본원칙 13개항 교체, 자식 테이블 9개 자체 RLS 정책 27개 추가, 공개 상품 테이블 10개 RLS 정책, GRANT/REVOKE 매트릭스, DB Function 보안 목록 7개
+- `TEST_PLAN.md` — 보안 강화 테스트 15개 + 수량 정합성 5개 추가 (155 TC, 111 Critical)
+- `DECISION_LOG.md` — DEC-025~031 추가 (7개)
+- `CHANGELOG.md` — 이력 업데이트
+
+---
+
 ## [Phase 0] 2026-07-23 — Checkpoint B 기술 설계
 
 Git 정리:

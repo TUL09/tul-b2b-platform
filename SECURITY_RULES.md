@@ -11,16 +11,28 @@
 
 ## 1. 기본 원칙
 
-| 원칙 | 설명 |
-|---|---|
-| **Deny by default** | 명시적으로 허용하지 않은 접근은 모두 거부 |
-| **조직 간 데이터 격리** | A 거래처는 B 거래처 데이터를 절대 볼 수 없음 |
-| **최소권한** | 필요한 최소한의 권한만 부여 |
-| **서버 재검증** | 클라이언트 전달 가격·권한·수량을 신뢰하지 않음 |
-| **service_role key 보호** | 브라우저에 노출 금지, 서버 환경변수로만 관리 |
-| **MFA** | 운영사 관리자 MFA 필수 |
-| **민감 데이터 최소수집** | 사업에 필요한 최소한의 개인정보만 수집 |
-| **감사로그 append-only** | 기존 로그를 수정·삭제 불가 |
+| # | 원칙 | 설명 |
+|---|---|---|
+| 1 | **모든 노출 테이블 RLS 활성화** | Supabase Data API에 노출되는 모든 테이블은 RLS를 활성화한다 |
+| 2 | **공개 읽기도 RLS 필수** | 공개 읽기가 필요한 테이블도 RLS를 활성화하고 공개 SELECT 정책을 명시적으로 생성한다 |
+| 3 | **자식 테이블 자체 RLS** | 각 자식 테이블은 자기 테이블의 RLS 정책을 가진다. 부모 RLS나 FK가 자식 테이블의 직접 조회를 보호하지 않는다 |
+| 4 | **DB RLS ≠ Storage 정책** | DB 테이블 RLS와 Storage 정책을 별도로 설계한다. Storage를 DB 보안의 대체수단으로 사용하지 않는다 |
+| 5 | **비노출 스키마 격리** | RLS를 사용하지 않는 테이블은 반드시 비노출 스키마(private)에 두고 anon/authenticated 권한을 제거한다 |
+| 6 | **Deny by default** | 명시적으로 허용하지 않은 접근은 모두 거부 |
+| 7 | **조직 간 데이터 격리** | A 거래처는 B 거래처 데이터를 절대 볼 수 없음 |
+| 8 | **최소권한** | 필요한 최소한의 권한만 부여 |
+| 9 | **서버 재검증** | 클라이언트 전달 가격·권한·수량을 신뢰하지 않음 |
+| 10 | **service_role key 보호** | 브라우저에 노출 금지, 서버 환경변수로만 관리 |
+| 11 | **MFA** | 운영사 관리자 MFA 필수 |
+| 12 | **민감 데이터 최소수집** | 사업에 필요한 최소한의 개인정보만 수집 |
+| 13 | **감사로그 append-only** | 기존 로그를 수정·삭제 불가 |
+
+> [!IMPORTANT]
+> 다음 가정은 폐기되었다:
+> - ~~자식 테이블은 부모 RLS로 간접 보호된다~~
+> - ~~ON DELETE CASCADE가 접근 격리를 제공한다~~
+> - ~~공개 읽기 테이블은 RLS가 필요 없다~~
+> - ~~Storage 정책이 DB 테이블을 보호한다~~
 
 ---
 
@@ -220,6 +232,107 @@
 | audit_update | **없음** | 수정 금지 |
 | audit_delete | **없음** | 삭제 금지 |
 
+### 4.3 자식 테이블 RLS 정책
+
+모든 자식 테이블은 부모의 organization_id를 EXISTS 서브쿼리로 확인하여 조직 격리를 보장한다.
+
+#### cart_items
+
+| 정책 | 액션 | 조건 |
+|---|---|---|
+| `cart_items_select_own_org` | SELECT | EXISTS (SELECT 1 FROM carts WHERE carts.id = cart_items.cart_id AND carts.organization_id IN (사용자 소속 조직)) |
+| `cart_items_insert_own_org` | INSERT | EXISTS (SELECT 1 FROM carts WHERE carts.id = cart_items.cart_id AND carts.organization_id IN (사용자 소속 조직)) |
+| `cart_items_update_own_org` | UPDATE | 동일 조건 |
+| `cart_items_delete_own_org` | DELETE | 동일 조건 (장바구니 항목 삭제 허용) |
+
+#### order_request_items
+
+| 정책 | 액션 | 조건 |
+|---|---|---|
+| `ori_select_own_org` | SELECT | EXISTS (SELECT 1 FROM order_requests WHERE order_requests.id = order_request_items.order_request_id AND order_requests.organization_id IN (사용자 소속 조직)) |
+| `ori_select_operator` | SELECT | 운영사 역할 + can_manage_orders |
+| `ori_insert_buyer_draft` | INSERT | 자사 + order_request status='draft' |
+
+#### order_revisions
+
+| 정책 | 액션 | 조건 |
+|---|---|---|
+| `orev_select_own_org` | SELECT | EXISTS (SELECT 1 FROM order_requests WHERE order_requests.id = order_revisions.order_request_id AND order_requests.organization_id IN (사용자 소속 조직)) |
+| `orev_select_operator` | SELECT | 운영사 역할 |
+| `orev_insert_operator` | INSERT | 운영사 + can_manage_orders |
+
+#### order_revision_items
+
+| 정책 | 액션 | 조건 |
+|---|---|---|
+| `orevi_select_own_org` | SELECT | EXISTS via order_revisions → order_requests.organization_id |
+| `orevi_select_operator` | SELECT | 운영사 역할 |
+| `orevi_insert_operator` | INSERT | 운영사 + can_manage_orders |
+
+#### sales_order_items
+
+| 정책 | 액션 | 조건 |
+|---|---|---|
+| `soi_select_own_org` | SELECT | EXISTS (SELECT 1 FROM sales_orders WHERE sales_orders.id = sales_order_items.sales_order_id AND sales_orders.organization_id IN (사용자 소속 조직)) |
+| `soi_select_operator` | SELECT | 운영사 역할 |
+
+#### shipment_items
+
+| 정책 | 액션 | 조건 |
+|---|---|---|
+| `shi_select_own_org` | SELECT | EXISTS (SELECT 1 FROM shipments JOIN sales_orders ON shipments.sales_order_id = sales_orders.id WHERE shipments.id = shipment_items.shipment_id AND sales_orders.organization_id IN (사용자 소속 조직)) |
+| `shi_select_operator` | SELECT | 운영사 역할 |
+| `shi_insert_operator` | INSERT | 운영사 + can_manage_shipments |
+
+#### order_request_status_history
+
+| 정책 | 액션 | 조건 |
+|---|---|---|
+| `orsh_select_own_org` | SELECT | EXISTS via order_requests.organization_id |
+| `orsh_select_operator` | SELECT | 운영사 역할 |
+| `orsh_insert_service` | INSERT | service_role only |
+| UPDATE/DELETE | **없음** | append-only |
+
+#### sales_order_status_history
+
+| 정책 | 액션 | 조건 |
+|---|---|---|
+| `sosh_select_own_org` | SELECT | EXISTS via sales_orders.organization_id |
+| `sosh_select_operator` | SELECT | 운영사 역할 |
+| `sosh_insert_service` | INSERT | service_role only |
+| UPDATE/DELETE | **없음** | append-only |
+
+#### shipment_status_history
+
+| 정책 | 액션 | 조건 |
+|---|---|---|
+| `shsh_select_own_org` | SELECT | EXISTS via shipments → sales_orders.organization_id |
+| `shsh_select_operator` | SELECT | 운영사 역할 |
+| `shsh_insert_service` | INSERT | service_role only |
+| UPDATE/DELETE | **없음** | append-only |
+
+### 4.4 공개 상품 테이블 RLS 정책
+
+다음 테이블은 RLS를 활성화하고 공개 SELECT 정책을 생성한다.
+내부 전용 데이터(비공개 상품, 관리자 메모, 비활성 항목)는 공개 SELECT에서 제외한다.
+
+| 테이블 | 공개 SELECT 조건 | INSERT | UPDATE | DELETE |
+|---|---|---|---|---|
+| brands | status = 'active' | Op + can_manage_products | Op + can_manage_products | ❌ (status 비활성화) |
+| categories | status = 'active' | Op + can_manage_products | Op + can_manage_products | ❌ |
+| products | status = 'active' | Op + can_manage_products | Op + can_manage_products | ❌ |
+| product_skus | status = 'active' AND product.status = 'active' | Op + can_manage_products | Op + can_manage_products | ❌ |
+| product_images | product.status = 'active' AND permission_status = 'approved' | Op + can_manage_products | Op + can_manage_products | ❌ |
+| product_documents | product.status = 'active' AND permission_status = 'approved' | Op + can_manage_products | Op + can_manage_products | ❌ |
+| sku_barcodes | sku.status = 'active' | Op + can_manage_products | Op + can_manage_products | ❌ |
+| product_search_terms | sku.status = 'active' | Op + can_manage_products | Op + can_manage_products | ❌ |
+| search_synonyms | status = 'active' | Op + can_manage_products | Op + can_manage_products | ❌ |
+| sku_uoms | sku.status = 'active' AND active = true | Op + can_manage_products | Op + can_manage_products | ❌ |
+
+> [!NOTE]
+> 비공개 상품 자료, 관리자 메모, draft 상태 상품은 공개 SELECT에 포함하지 않는다.
+> Storage 정책은 DB RLS와 별도로 설계한다.
+
 ---
 
 ## 5. 특별 보안 시나리오
@@ -394,6 +507,75 @@ DATABASE_SCHEMA.md `audit_logs` 테이블 참조.
 - 탈퇴 시: profiles.status → 'deactivated', 개인정보 마스킹 (완전 삭제는 법적 의무 보관 종료 후)
 - 주문·출고 기록은 법적 보관 의무에 따라 보존
 - 감사로그는 삭제하지 않음
+
+---
+
+## 11. GRANT/REVOKE 매트릭스
+
+### 11.1 테이블 권한
+
+| 테이블 분류 | anon | authenticated | service_role | 비고 |
+|---|---|---|---|---|
+| **public_read** (brands, categories 등 10개) | SELECT | SELECT | ALL | RLS로 active 필터 |
+| **authenticated_direct** (profiles, orders 등 20개) | ❌ REVOKE ALL | SELECT, INSERT, UPDATE | ALL | RLS로 조직 격리 |
+| **operator_direct** (price_books, imports 등 8개) | ❌ REVOKE ALL | SELECT (RLS 필터) | ALL | 운영사 RLS 정책 |
+| **server_only** (audit_logs, status_history 등 5개) | ❌ REVOKE ALL | ❌ REVOKE ALL | ALL | 서버 함수만 접근 |
+| **view_only** (sku_search_index) | SELECT | SELECT | ALL | SECURITY INVOKER |
+
+### 11.2 명시적 DELETE 권한
+
+| 테이블 | anon DELETE | authenticated DELETE | 비고 |
+|---|---|---|---|
+| 모든 테이블 (기본) | ❌ REVOKE | ❌ REVOKE | soft delete 정책 |
+| cart_items | ❌ | ✅ (자사 장바구니만, RLS) | 장바구니 항목 삭제 허용 |
+| addresses | ❌ | ✅ (자사만, RLS) | 배송지 삭제 허용 |
+
+### 11.3 append-only 테이블
+
+| 테이블 | SELECT | INSERT | UPDATE | DELETE |
+|---|---|---|---|---|
+| audit_logs | Op Admin (RLS) | service_role only | ❌ 모두 금지 | ❌ 모두 금지 |
+| order_request_status_history | 자사 + 운영사 (RLS) | service_role only | ❌ 모두 금지 | ❌ 모두 금지 |
+| sales_order_status_history | 자사 + 운영사 (RLS) | service_role only | ❌ 모두 금지 | ❌ 모두 금지 |
+| shipment_status_history | 자사 + 운영사 (RLS) | service_role only | ❌ 모두 금지 | ❌ 모두 금지 |
+
+### 11.4 Function 실행 권한
+
+```sql
+-- 기본: 모든 함수의 public 실행권한 제거
+REVOKE EXECUTE ON ALL FUNCTIONS IN SCHEMA public FROM public;
+REVOKE EXECUTE ON ALL FUNCTIONS IN SCHEMA public FROM anon;
+REVOKE EXECUTE ON ALL FUNCTIONS IN SCHEMA public FROM authenticated;
+
+-- 각 함수별로 필요한 역할에만 GRANT
+GRANT EXECUTE ON FUNCTION fn_name TO authenticated;
+```
+
+---
+
+## 12. Database Function 보안 목록 (예상)
+
+아직 함수를 구현하지 않지만, 고위험 기능의 예상 Function/RPC 목록:
+
+| # | Function 이름 (예상) | 기능 | security_mode | 호출 가능 역할 | search_path | RLS 우회 | EXECUTE 권한 | 관련 테스트 |
+|---|---|---|---|---|---|---|---|---|
+| F-01 | `fn_calculate_price` | 거래처별 가격 계산 (4단계 우선순위) | SECURITY INVOKER | authenticated | `SET search_path = public, pg_temp` | ❌ | authenticated | TC-PRC-001~034, TC-RLS-012 |
+| F-02 | `fn_submit_order_request` | 주문 요청 제출 (가격 재계산, 불변식 검증) | SECURITY INVOKER | authenticated | 고정 | ❌ | authenticated | TC-ORD-001, TC-RLS-013 |
+| F-03 | `fn_approve_revision` | 수정안 승인 (만료 확인, 상태 전이) | SECURITY INVOKER | authenticated | 고정 | ❌ | authenticated | TC-ORD-010~013 |
+| F-04 | `fn_create_sales_order` | 확정 주문 생성 (스냅샷, 이중 확정 차단) | SECURITY DEFINER | service_role (Server Action에서 호출) | `SET search_path = public, pg_temp` | ✅ (트랜잭션 내) | service_role | TC-ORD-023, TC-ORD-050~053, TC-RLS-013 |
+| F-05 | `fn_record_shipment` | 출고 수량 반영 (shipped ≤ accepted 검증) | SECURITY DEFINER | service_role | 고정 | ✅ | service_role | TC-ORD-040~043, TC-SHP-003 |
+| F-06 | `fn_apply_import` | Import Apply (STRICT_ATOMIC 트랜잭션) | SECURITY DEFINER | service_role | 고정 | ✅ | service_role | TC-IMP-001~012 |
+| F-07 | `fn_update_prices` | 관리자 가격 변경 (감사로그 기록) | SECURITY INVOKER | authenticated (Op + can_manage_prices) | 고정 | ❌ | authenticated | TC-PRC-030~034, TC-ADM-003 |
+
+### SECURITY DEFINER 사용 조건
+
+| 조건 | 설명 |
+|---|---|
+| 내부 서비스 로직만 | 클라이언트 직접 호출 금지 (Server Action/Edge Function 경유) |
+| 입력 검증 필수 | 모든 파라미터 유효성 검증 |
+| 고정 search_path | `SET search_path = public, pg_temp` |
+| 감사로그 기록 | audit_logs에 변경 기록 |
+| 코드 리뷰 필수 | PR 리뷰 없이 배포 금지 |
 
 ---
 

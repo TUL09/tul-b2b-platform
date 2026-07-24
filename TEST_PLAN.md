@@ -319,6 +319,40 @@ first_needed_phase: Phase 4
 
 ---
 
+## 10-E. 보안 강화 테스트
+
+| ID | 테스트 | 우선순위 | Phase |
+|---|---|---|---|
+| TC-SEC-001 | public 스키마의 모든 테이블 RLS 활성화 확인 (ALTER TABLE ENABLE RLS) | Critical | 2 |
+| TC-SEC-002 | RLS 대상 누락 0건 — Schema Inventory 기준 전수 점검 | Critical | 2 |
+| TC-SEC-003 | 자식 테이블(cart_items) 직접 SELECT → 타 조직 행 미노출 | Critical | 2 |
+| TC-SEC-004 | 자식 테이블(order_request_items) 직접 INSERT → 타 조직 부모 연결 차단 | Critical | 2 |
+| TC-SEC-005 | 자식 테이블(sales_order_items) 직접 UPDATE → 타 조직 행 변경 차단 | Critical | 2 |
+| TC-SEC-006 | 부모 행 ID 추측 → 자식 행 접근 불가 | Critical | 2 |
+| TC-SEC-007 | 공개 상품 테이블 → 비공개(draft/inactive) 행 SELECT 차단 | Critical | 3 |
+| TC-SEC-008 | 일반 거래처 사용자 → 상품 테이블 INSERT/UPDATE/DELETE 차단 | Critical | 3 |
+| TC-SEC-009 | 상태 이력 테이블(order_request_status_history 등) UPDATE 차단 | Critical | 2 |
+| TC-SEC-010 | 상태 이력 테이블 DELETE 차단 | Critical | 2 |
+| TC-SEC-011 | audit_logs UPDATE/DELETE 차단 (append-only) | Critical | 2 |
+| TC-SEC-012 | server_only 테이블 → anon/authenticated 직접 API 접근 차단 | Critical | 2 |
+| TC-SEC-013 | sku_search_index View → SECURITY INVOKER 확인, 기반 테이블 RLS 적용 | Critical | 3 |
+| TC-SEC-014 | SECURITY DEFINER Function → 고정 search_path 확인 | Critical | 4 |
+| TC-SEC-015 | GRANT/REVOKE 검증 — anon/authenticated에 대한 불필요 권한 미존재 | Critical | 2 |
+
+---
+
+## 10-F. 수량 정합성 테스트
+
+| ID | 테스트 | 우선순위 | Phase |
+|---|---|---|---|
+| TC-QTY-001 | shipment_items 합계와 sales_order_items 출고수량 계산 일치 | Critical | 4 |
+| TC-QTY-002 | accepted + rejected = requested CHECK 제약조건 검증 | Critical | 4 |
+| TC-QTY-003 | cancelled ≤ accepted CHECK 제약조건 검증 | Critical | 4 |
+| TC-QTY-004 | backordered ≤ accepted - cancelled CHECK 제약조건 검증 | Critical | 4 |
+| TC-QTY-005 | 모든 수량 ≥ 0 CHECK 제약조건 검증 | Critical | 4 |
+
+---
+
 ## 11. 성능 기준 (Provisional)
 
 초기 1,000 SKU, 시험 거래처 3~5곳 규모 기준. Phase 6 측정 후 조정.
@@ -353,7 +387,9 @@ first_needed_phase: Phase 4
 | 카탈로그 관리 | 5 | 3 | 3 |
 | 관리자 운영 | 7 | 4 | 2~4 |
 | 출고·상태 | 6 | 5 | 4 |
-| **합계** | **135** | **91** | |
+| 보안 강화 | 15 | 15 | 2~4 |
+| 수량 정합성 | 5 | 5 | 4 |
+| **합계** | **155** | **111** | |
 
 ---
 
@@ -362,8 +398,8 @@ first_needed_phase: Phase 4
 | 문서 | 참조 내용 |
 |---|---|
 | BUSINESS_RULES.md | 가격 4단계, 수량 불변식, State Machine |
-| DATABASE_SCHEMA.md | 테이블·컬럼·제약조건 |
-| SECURITY_RULES.md | RLS 정책, 접근 매트릭스, MFA |
+| DATABASE_SCHEMA.md | 테이블·컬럼·제약조건, Schema Inventory |
+| SECURITY_RULES.md | RLS 정책, GRANT/REVOKE, DB Function 보안, 접근 매트릭스 |
 | DATA_IMPORT_SPEC.md | Import 검증 규칙, State Machine |
 | PRODUCT_REQUIREMENTS.md | 기능 번호 (PRD-##) |
 | ROADMAP.md | Phase별 테스트 시점 |

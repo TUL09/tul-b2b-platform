@@ -37,4 +37,10 @@
 | 2026-07-23 | DEC-022 | 낙관적 동시성 제어 | version 컬럼 (INTEGER, DEFAULT 1) — UPDATE 시 version 검증 | 동시 수정 충돌 방지 | 주요 업무 테이블 |
 | 2026-07-23 | DEC-023 | Import State Machine | 12단계 상태: uploaded→validating→validated→dry_run→approval→applying→applied | 전체 흐름 표준화 | Import |
 | 2026-07-23 | DEC-024 | Storage 버킷 전략 | 3 버킷: public-product-assets, private-business-documents, private-rfq-attachments | 공개/비공개 분리, signed URL 정책 차등 | 파일 보안 |
-
+| 2026-07-24 | DEC-025 | RLS 기본원칙 강화 | Supabase Data API에 노출되는 모든 테이블은 RLS를 활성화한다. 공개 읽기 테이블도 RLS 필수. 자식 테이블은 자체 RLS 정책을 가진다. 부모 RLS·FK·CASCADE로 간접 보호한다는 가정을 폐기한다 | Supabase PostgREST는 RLS 미활성 테이블에 무제한 접근 허용 | 전체 44 테이블 + 1 View |
+| 2026-07-24 | DEC-026 | 자식 테이블 자체 RLS | cart_items, order_request_items, order_revisions, order_revision_items, sales_order_items, shipment_items, order_request_status_history, sales_order_status_history, shipment_status_history — 9개 자식 테이블에 EXISTS 서브쿼리 기반 자체 RLS 적용 | FK·CASCADE는 조회 격리를 제공하지 않음 | 보안, 테스트 |
+| 2026-07-24 | DEC-027 | Numeric 정밀도 통합 | 단가/금액: NUMERIC(19,4), 수량: NUMERIC(18,6), 환율: NUMERIC(20,8), 세율: NUMERIC(9,6). 기존 NUMERIC(15,0)/(15,4)/(12,4)/(10,4)/(5,4)/(12,6) 폐기 | 다중통화 확장, USD·CNY 소수 지원, 정밀 변환 | 전체 금액·수량 필드 |
+| 2026-07-24 | DEC-028 | shipped_quantity Source of Truth | sales_order_items에 저장하지 않음. shipment_items의 유효 출고수량 합계로 계산. open_quantity도 계산으로 도출 | 중복 저장 시 동기화 부담, 1,000 SKU에서 JOIN 비용 무시 가능 | 주문 품목, 출고 |
+| 2026-07-24 | DEC-029 | sku_search_index 유형 | SECURITY INVOKER View로 확정. MV 전환은 검색 성능이 목표 초과 시 검토 (OD-022) | 초기 1,000 SKU에서 일반 View 충분, SECURITY INVOKER로 기반 테이블 RLS 적용 | 검색, 보안 |
+| 2026-07-24 | DEC-030 | GRANT/REVOKE 정책 | anon/authenticated의 DELETE 명시적 REVOKE. server_only 테이블은 anon/authenticated REVOKE ALL. Function은 REVOKE EXECUTE ON ALL 후 개별 GRANT | RLS만으로 불충분한 권한 제어 보완 | 전체 테이블·함수 |
+| 2026-07-24 | DEC-031 | tax_rate 소수 비율 | 세율은 소수 비율로 정의: 0.100000 = 10%. NUMERIC(9,6). KRW 확정 금액은 Application에서 소수부 0 검증 | 국제 표준, 계산 편의, 정밀도 확보 | 세금 정책, 주문 금액 |
