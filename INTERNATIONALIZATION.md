@@ -106,9 +106,14 @@ UNIQUE(product_id, sku_id, locale)
 
 | 통화 | 금액 정밀도 | 표시 형식 |
 |---|---|---|
-| KRW | NUMERIC(15,0) | ₩1,234,567 (소수점 없음) |
-| USD | NUMERIC(15,4) | $1,234.5678 (단가 4자리, 합계 2자리) |
-| CNY | NUMERIC(15,4) | ¥1,234.5678 |
+| KRW | NUMERIC(19,4) | ₩1,234,567 (Application에서 소수부 0 검증) |
+| USD | NUMERIC(19,4) | $1,234.5678 (단가 4자리, 합계 2자리) |
+| CNY | NUMERIC(19,4) | ¥1,234.5678 |
+
+> [!NOTE]
+> 모든 통화는 동일한 `NUMERIC(19,4)` 데이터형을 사용합니다.
+> KRW는 Application 레이어에서 소수부가 0인지 검증합니다.
+> 정밀도 상세는 `DATABASE_SCHEMA.md` Section 1.4를 참조하세요.
 
 ### 4.3 MVP 제외 항목
 

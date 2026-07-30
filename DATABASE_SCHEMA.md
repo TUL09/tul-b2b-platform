@@ -113,65 +113,77 @@
 
 이 표가 Release 1 Required 테이블의 **SSOT**입니다.
 
-| # | table_name | schema_tier | first_needed_phase | migration_group | required_for_pilot | api_exposure | rls_required | audit_required | personal_data | financial_data |
-|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | profiles | Required | Phase 2 | MG-01 | ✅ | authenticated_direct | ✅ | ✅ | ✅ | ❌ |
-| 2 | organizations | Required | Phase 2 | MG-01 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ |
-| 3 | organization_roles | Required | Phase 2 | MG-01 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ |
-| 4 | organization_business_profiles | Required | Phase 2 | MG-01 | ✅ | authenticated_direct | ✅ | ❌ | ✅ | ❌ |
-| 5 | buyer_accounts | Required | Phase 2 | MG-01 | ✅ | authenticated_direct | ✅ | ✅ | ❌ | ✅ |
-| 6 | organization_members | Required | Phase 2 | MG-01 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ |
-| 7 | addresses | Required | Phase 2 | MG-01 | ✅ | authenticated_direct | ✅ | ❌ | ✅ | ❌ |
-| 8 | brands | Required | Phase 3 | MG-02 | ✅ | public_read | ✅ | ❌ | ❌ | ❌ |
-| 9 | categories | Required | Phase 3 | MG-02 | ✅ | public_read | ✅ | ❌ | ❌ | ❌ |
-| 10 | products | Required | Phase 3 | MG-02 | ✅ | public_read | ✅ | ❌ | ❌ | ❌ |
-| 11 | product_skus | Required | Phase 3 | MG-02 | ✅ | public_read | ✅ | ❌ | ❌ | ❌ |
-| 12 | product_images | Required | Phase 3 | MG-02 | ❌ | public_read | ✅ | ❌ | ❌ | ❌ |
-| 13 | product_documents | Required | Phase 3 | MG-02 | ❌ | public_read | ✅ | ❌ | ❌ | ❌ |
-| 14 | search_synonyms | Required | Phase 3 | MG-02 | ❌ | public_read | ✅ | ❌ | ❌ | ❌ |
-| 15 | sku_uoms | Required | Phase 3 | MG-03 | ✅ | public_read | ✅ | ❌ | ❌ | ❌ |
-| 16 | sku_barcodes | Required | Phase 3 | MG-03 | ❌ | public_read | ✅ | ❌ | ❌ | ❌ |
-| 17 | product_search_terms | Required | Phase 3 | MG-03 | ❌ | public_read | ✅ | ❌ | ❌ | ❌ |
-| 18 | search_events | Required | Phase 5 | MG-03 | ✅ | server_only | ✅ | ❌ | ⚠️ | ❌ |
-| 19 | price_books | Required | Phase 4 | MG-04 | ✅ | operator_direct | ✅ | ✅ | ❌ | ✅ |
-| 20 | price_book_items | Required | Phase 4 | MG-04 | ✅ | operator_direct | ✅ | ✅ | ❌ | ✅ |
-| 21 | organization_price_books | Required | Phase 4 | MG-04 | ✅ | authenticated_direct | ✅ | ✅ | ❌ | ❌ |
-| 22 | organization_price_overrides | Required | Phase 4 | MG-04 | ✅ | authenticated_direct | ✅ | ✅ | ❌ | ✅ |
-| 23 | supplier_offers | Required | Phase 3 | MG-04 | ✅ | operator_direct | ✅ | ✅ | ❌ | ✅ |
-| 24 | carts | Required | Phase 4 | MG-05 | ❌ | authenticated_direct | ✅ | ❌ | ❌ | ❌ |
-| 25 | cart_items | Required | Phase 4 | MG-05 | ❌ | authenticated_direct | ✅ | ❌ | ❌ | ❌ |
-| 26 | order_requests | Required | Phase 4 | MG-05 | ✅ | authenticated_direct | ✅ | ✅ | ❌ | ✅ |
-| 27 | order_request_items | Required | Phase 4 | MG-05 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ✅ |
-| 28 | order_revisions | Required | Phase 4 | MG-05 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ |
-| 29 | order_revision_items | Required | Phase 4 | MG-05 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ |
-| 30 | sales_orders | Required | Phase 4 | MG-06 | ✅ | authenticated_direct | ✅ | ✅ | ✅ | ✅ |
-| 31 | sales_order_items | Required | Phase 4 | MG-06 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ✅ |
-| 32 | shipments | Required | Phase 4 | MG-06 | ✅ | authenticated_direct | ✅ | ✅ | ❌ | ❌ |
-| 33 | shipment_items | Required | Phase 4 | MG-06 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ |
-| 34 | order_request_status_history | Required | Phase 4 | MG-06 | ❌ | server_only | ✅ | ❌ | ❌ | ❌ |
-| 35 | sales_order_status_history | Required | Phase 4 | MG-06 | ❌ | server_only | ✅ | ❌ | ❌ | ❌ |
-| 36 | catalog_imports | Required | Phase 3 | MG-07 | ✅ | operator_direct | ✅ | ❌ | ❌ | ❌ |
-| 37 | catalog_import_rows | Required | Phase 3 | MG-07 | ❌ | operator_direct | ✅ | ❌ | ❌ | ❌ |
-| 38 | catalog_import_errors | Required | Phase 3 | MG-07 | ❌ | operator_direct | ✅ | ❌ | ❌ | ❌ |
-| 39 | audit_logs | Required | Phase 2 | MG-07 | ✅ | server_only | ✅ | ❌ | ❌ | ❌ |
-| 40 | rfqs | Required | Phase 5 | MG-08 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ |
-| 41 | rfq_items | Required | Phase 5 | MG-08 | ❌ | authenticated_direct | ✅ | ❌ | ❌ | ✅ |
-| 42 | rfq_attachments | Required | Phase 5 | MG-08 | ❌ | authenticated_direct | ✅ | ❌ | ❌ | ❌ |
-| 43 | shipment_status_history | Required | Phase 4 | MG-08 | ❌ | server_only | ✅ | ❌ | ❌ | ❌ |
-| 44 | tax_policies | Required | Phase 4 | MG-08 | ❌ | operator_direct | ✅ | ❌ | ❌ | ❌ |
-| V1 | sku_search_index (View) | Required | Phase 3 | MG-03 | ❌ | view_only | ✅ (SECURITY INVOKER) | ❌ | ❌ | ❌ |
+| # | table_name | schema_tier | phase | mg | pilot | api_exposure | rls | audit | pii | fin | read_path | write_path |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | profiles | Req | Ph2 | 01 | ✅ | authenticated_direct | ✅ | ✅ | ✅ | ❌ | direct_authenticated_rls | direct_authenticated_rls |
+| 2 | organizations | Req | Ph2 | 01 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ | direct_authenticated_rls | server_route_service_role |
+| 3 | organization_roles | Req | Ph2 | 01 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ | direct_authenticated_rls | server_route_service_role |
+| 4 | organization_business_profiles | Req | Ph2 | 01 | ✅ | authenticated_direct | ✅ | ❌ | ✅ | ❌ | direct_authenticated_rls | server_route_service_role |
+| 5 | buyer_accounts | Req | Ph2 | 01 | ✅ | authenticated_direct | ✅ | ✅ | ❌ | ✅ | direct_authenticated_rls | server_route_service_role |
+| 6 | organization_members | Req | Ph2 | 01 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ | direct_authenticated_rls | server_route_service_role |
+| 7 | addresses | Req | Ph2 | 01 | ✅ | authenticated_direct | ✅ | ❌ | ✅ | ❌ | direct_authenticated_rls | direct_authenticated_rls |
+| 8 | brands | Req | Ph3 | 02 | ✅ | public_read | ✅ | ❌ | ❌ | ❌ | direct_public_rls | direct_authenticated_rls |
+| 9 | categories | Req | Ph3 | 02 | ✅ | public_read | ✅ | ❌ | ❌ | ❌ | direct_public_rls | direct_authenticated_rls |
+| 10 | products | Req | Ph3 | 02 | ✅ | public_read | ✅ | ❌ | ❌ | ❌ | direct_public_rls | direct_authenticated_rls |
+| 11 | product_skus | Req | Ph3 | 02 | ✅ | public_read | ✅ | ❌ | ❌ | ❌ | direct_public_rls | direct_authenticated_rls |
+| 12 | product_images | Req | Ph3 | 02 | ❌ | public_read | ✅ | ❌ | ❌ | ❌ | direct_public_rls | direct_authenticated_rls |
+| 13 | product_documents | Req | Ph3 | 02 | ❌ | public_read | ✅ | ❌ | ❌ | ❌ | direct_public_rls | direct_authenticated_rls |
+| 14 | search_synonyms | Req | Ph3 | 02 | ❌ | public_read | ✅ | ❌ | ❌ | ❌ | direct_public_rls | direct_authenticated_rls |
+| 15 | sku_uoms | Req | Ph3 | 03 | ✅ | public_read | ✅ | ❌ | ❌ | ❌ | direct_public_rls | direct_authenticated_rls |
+| 16 | sku_barcodes | Req | Ph3 | 03 | ❌ | public_read | ✅ | ❌ | ❌ | ❌ | direct_public_rls | direct_authenticated_rls |
+| 17 | product_search_terms | Req | Ph3 | 03 | ❌ | public_read | ✅ | ❌ | ❌ | ❌ | direct_public_rls | direct_authenticated_rls |
+| 18 | search_events | Req | Ph5 | 03 | ✅ | server_only | ✅ | ❌ | ⚠️ | ❌ | server_route_service_role | server_route_service_role |
+| 19 | price_books | Req | Ph4 | 04 | ✅ | operator_direct | ✅ | ✅ | ❌ | ✅ | direct_authenticated_rls | direct_authenticated_rls |
+| 20 | price_book_items | Req | Ph4 | 04 | ✅ | operator_direct | ✅ | ✅ | ❌ | ✅ | direct_authenticated_rls | direct_authenticated_rls |
+| 21 | organization_price_books | Req | Ph4 | 04 | ✅ | authenticated_direct | ✅ | ✅ | ❌ | ❌ | direct_authenticated_rls | direct_authenticated_rls |
+| 22 | organization_price_overrides | Req | Ph4 | 04 | ✅ | authenticated_direct | ✅ | ✅ | ❌ | ✅ | direct_authenticated_rls | direct_authenticated_rls |
+| 23 | supplier_offers | Req | Ph3 | 04 | ✅ | operator_direct | ✅ | ✅ | ❌ | ✅ | direct_authenticated_rls | direct_authenticated_rls |
+| 24 | carts | Req | Ph4 | 05 | ❌ | authenticated_direct | ✅ | ❌ | ❌ | ❌ | direct_authenticated_rls | direct_authenticated_rls |
+| 25 | cart_items | Req | Ph4 | 05 | ❌ | authenticated_direct | ✅ | ❌ | ❌ | ❌ | direct_authenticated_rls | direct_authenticated_rls |
+| 26 | order_requests | Req | Ph4 | 05 | ✅ | authenticated_direct | ✅ | ✅ | ❌ | ✅ | direct_authenticated_rls | invoker_rpc |
+| 27 | order_request_items | Req | Ph4 | 05 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ✅ | direct_authenticated_rls | invoker_rpc |
+| 28 | order_revisions | Req | Ph4 | 05 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ | direct_authenticated_rls | direct_authenticated_rls |
+| 29 | order_revision_items | Req | Ph4 | 05 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ | direct_authenticated_rls | direct_authenticated_rls |
+| 30 | sales_orders | Req | Ph4 | 06 | ✅ | authenticated_direct | ✅ | ✅ | ✅ | ✅ | direct_authenticated_rls | definer_rpc |
+| 31 | sales_order_items | Req | Ph4 | 06 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ✅ | direct_authenticated_rls | definer_rpc |
+| 32 | shipments | Req | Ph4 | 06 | ✅ | authenticated_direct | ✅ | ✅ | ❌ | ❌ | direct_authenticated_rls | definer_rpc |
+| 33 | shipment_items | Req | Ph4 | 06 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ | direct_authenticated_rls | definer_rpc |
+| 34 | order_request_status_history | Req | Ph4 | 06 | ❌ | authenticated_direct | ✅ | ❌ | ❌ | ❌ | direct_authenticated_rls | definer_rpc |
+| 35 | sales_order_status_history | Req | Ph4 | 06 | ❌ | authenticated_direct | ✅ | ❌ | ❌ | ❌ | direct_authenticated_rls | definer_rpc |
+| 36 | catalog_imports | Req | Ph3 | 07 | ✅ | operator_direct | ✅ | ❌ | ❌ | ❌ | direct_authenticated_rls | direct_authenticated_rls |
+| 37 | catalog_import_rows | Req | Ph3 | 07 | ❌ | operator_direct | ✅ | ❌ | ❌ | ❌ | direct_authenticated_rls | definer_rpc |
+| 38 | catalog_import_errors | Req | Ph3 | 07 | ❌ | operator_direct | ✅ | ❌ | ❌ | ❌ | direct_authenticated_rls | definer_rpc |
+| 39 | audit_logs | Req | Ph2 | 07 | ✅ | server_only | ✅ | ❌ | ❌ | ❌ | server_route_service_role | server_route_service_role |
+| 40 | rfqs | Req | Ph5 | 08 | ✅ | authenticated_direct | ✅ | ❌ | ❌ | ❌ | direct_authenticated_rls | direct_authenticated_rls |
+| 41 | rfq_items | Req | Ph5 | 08 | ❌ | authenticated_direct | ✅ | ❌ | ❌ | ✅ | direct_authenticated_rls | direct_authenticated_rls |
+| 42 | rfq_attachments | Req | Ph5 | 08 | ❌ | authenticated_direct | ✅ | ❌ | ❌ | ❌ | direct_authenticated_rls | direct_authenticated_rls |
+| 43 | shipment_status_history | Req | Ph4 | 08 | ❌ | authenticated_direct | ✅ | ❌ | ❌ | ❌ | direct_authenticated_rls | definer_rpc |
+| 44 | tax_policies | Req | Ph4 | 08 | ❌ | operator_direct | ✅ | ❌ | ❌ | ❌ | direct_authenticated_rls | direct_authenticated_rls |
+| V1 | sku_search_index (View) | Req | Ph3 | 03 | ❌ | view_only | ✅* | ❌ | ❌ | ❌ | direct_public_rls | no_write |
 
 **합계: 44 테이블 + 1 View = 45 항목**
 
+*V1의 RLS는 SECURITY INVOKER를 통한 기반 테이블 RLS 적용
+
 `api_exposure` 정의:
 
-| 값 | 설명 | RLS |
+| 값 | 설명 | RLS | 테이블 수 |
+|---|---|---|---|
+| `public_read` | anon/authenticated SELECT (active 필터), operator INSERT/UPDATE | ✅ | 10 |
+| `authenticated_direct` | authenticated 사용자 조직 범위 접근 | ✅ | 25 |
+| `operator_direct` | 운영사 권한자만 접근 | ✅ | 7 |
+| `server_only` | 서버 함수/service_role만 접근 | ✅ | 2 |
+| `view_only` | SECURITY INVOKER View | ✅* | 1 |
+
+`write_path` 정의:
+
+| 값 | 설명 | authenticated GRANT |
 |---|---|---|
-| `public_read` | anon/authenticated SELECT 가능 (active 필터), operator INSERT/UPDATE | ✅ 필수 |
-| `authenticated_direct` | authenticated 사용자 조직 범위 접근 | ✅ 필수 |
-| `operator_direct` | 운영사 권한자만 접근 | ✅ 필수 |
-| `server_only` | 서버 함수/service_role만 접근, anon/authenticated GRANT 제거 | ✅ 필수 |
-| `view_only` | View를 통해서만 노출, SECURITY INVOKER | ✅ 간접 |
+| `direct_authenticated_rls` | 인증된 사용자가 RLS 범위에서 직접 쓰기 | SELECT, INSERT, UPDATE |
+| `invoker_rpc` | SECURITY INVOKER RPC 경유 | SELECT, INSERT, UPDATE |
+| `definer_rpc` | SECURITY DEFINER RPC 경유 (서버 함수) | SELECT only |
+| `server_route_service_role` | Server Action/Edge Function 경유 (service_role) | SELECT only 또는 REVOKE ALL |
+| `no_write` | 쓰기 불가 (View) | SELECT only |
 
 ### 2.3 Migration Group 총괄
 
@@ -1230,6 +1242,11 @@ CHECK (backordered_quantity <= accepted_quantity - cancelled_quantity)
 `shipped_quantity`는 저장 컬럼이 아니므로 CHECK 대상이 아님. Application과 DB Function에서 다음을 검증:
 `SUM(shipment_items.shipped_quantity) + cancelled_quantity <= accepted_quantity`
 
+> [!NOTE]
+> `backordered <= accepted - shipped - cancelled` 검증은 shipped_quantity가 저장 컬럼이 아니므로 DB CHECK로 강제할 수 없다.
+> 대신 `fn_record_shipment` 트랜잭션에서 Application 검증으로 강제한다.
+> 기존 CHECK `backordered_quantity <= accepted_quantity - cancelled_quantity`는 shipped=0일 때의 상한으로 유지한다.
+
 ---
 
 #### `shipments`
@@ -1279,6 +1296,25 @@ CHECK (backordered_quantity <= accepted_quantity - cancelled_quantity)
 | shipped_quantity | NUMERIC(18,6) | NOT NULL | 이 출고 건의 수량 |
 | notes | TEXT | | |
 | created_at | timestamptz | | |
+
+#### 출고 트랜잭션 (`fn_record_shipment`)
+
+출고 기록은 다음 단계를 하나의 트랜잭션으로 실행한다:
+
+1. 대상 `sales_order_item`을 `FOR UPDATE`로 잠금
+2. 현재 유효 `shipment_items` 출고수량 합계를 계산
+3. 신규 출고수량을 포함한 최종 출고수량 계산
+4. `shipped(계산) + cancelled <= accepted` 검증
+5. `backordered <= accepted - shipped(계산) - cancelled` 검증
+6. 조건 미충족 시 전체 Rollback
+7. 조건 충족 시:
+   - `shipments` 및 `shipment_items` INSERT
+   - 출고 대상이 backorder 물량이면 `backordered_quantity`를 같은 트랜잭션에서 감소
+   - `shipment_status_history` INSERT
+   - `audit_logs` INSERT
+8. OCC version 확인
+
+**Backorder 정책**: 출고 대상이 backorder 물량을 포함하면, 같은 트랜잭션에서 `backordered_quantity`를 `max(0, backordered - shipped)` 값으로 조정한다. 출고 후 `backordered > open_quantity`가 되는 상태를 허용하지 않는다. (DEC-034)
 
 ---
 

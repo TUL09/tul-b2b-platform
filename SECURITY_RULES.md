@@ -316,6 +316,11 @@
 다음 테이블은 RLS를 활성화하고 공개 SELECT 정책을 생성한다.
 내부 전용 데이터(비공개 상품, 관리자 메모, 비활성 항목)는 공개 SELECT에서 제외한다.
 
+> [!IMPORTANT]
+> public_read 테이블의 write_path는 `direct_authenticated_rls`이다.
+> 운영사 직원이 직접 INSERT/UPDATE하므로 authenticated에 INSERT/UPDATE GRANT가 필요하다.
+> RLS INSERT/UPDATE 정책이 `can_manage_products` capability를 확인한다.
+
 | 테이블 | 공개 SELECT 조건 | INSERT | UPDATE | DELETE |
 |---|---|---|---|---|
 | brands | status = 'active' | Op + can_manage_products | Op + can_manage_products | ❌ (status 비활성화) |
@@ -514,13 +519,19 @@ DATABASE_SCHEMA.md `audit_logs` 테이블 참조.
 
 ### 11.1 테이블 권한
 
-| 테이블 분류 | anon | authenticated | service_role | 비고 |
+| 테이블 분류 | write_path | anon | authenticated | service_role |
 |---|---|---|---|---|
-| **public_read** (brands, categories 등 10개) | SELECT | SELECT | ALL | RLS로 active 필터 |
-| **authenticated_direct** (profiles, orders 등 20개) | ❌ REVOKE ALL | SELECT, INSERT, UPDATE | ALL | RLS로 조직 격리 |
-| **operator_direct** (price_books, imports 등 8개) | ❌ REVOKE ALL | SELECT (RLS 필터) | ALL | 운영사 RLS 정책 |
-| **server_only** (audit_logs, status_history 등 5개) | ❌ REVOKE ALL | ❌ REVOKE ALL | ALL | 서버 함수만 접근 |
-| **view_only** (sku_search_index) | SELECT | SELECT | ALL | SECURITY INVOKER |
+| **public_read** (10) | direct_authenticated_rls | SELECT | SELECT, INSERT, UPDATE | ALL |
+| **authenticated_direct — direct write** (15) | direct_authenticated_rls / invoker_rpc | ❌ REVOKE ALL | SELECT, INSERT, UPDATE | ALL |
+| **authenticated_direct — server write** (10) | definer_rpc / server_route | ❌ REVOKE ALL | SELECT | ALL |
+| **operator_direct — direct write** (4) | direct_authenticated_rls | ❌ REVOKE ALL | SELECT, INSERT, UPDATE | ALL |
+| **operator_direct — server write** (3) | definer_rpc | ❌ REVOKE ALL | SELECT | ALL |
+| **server_only** (2) | server_route_service_role | ❌ REVOKE ALL | ❌ REVOKE ALL | ALL |
+| **view_only** (1) | no_write | SELECT | SELECT | ALL |
+
+> [!IMPORTANT]
+> write_path가 `direct_authenticated_rls` 또는 `invoker_rpc`인 테이블만 authenticated에 INSERT/UPDATE를 GRANT한다.
+> write_path가 `definer_rpc` 또는 `server_route_service_role`인 테이블은 authenticated에 SELECT만 GRANT한다.
 
 ### 11.2 명시적 DELETE 권한
 
@@ -535,9 +546,14 @@ DATABASE_SCHEMA.md `audit_logs` 테이블 참조.
 | 테이블 | SELECT | INSERT | UPDATE | DELETE |
 |---|---|---|---|---|
 | audit_logs | Op Admin (RLS) | service_role only | ❌ 모두 금지 | ❌ 모두 금지 |
-| order_request_status_history | 자사 + 운영사 (RLS) | service_role only | ❌ 모두 금지 | ❌ 모두 금지 |
-| sales_order_status_history | 자사 + 운영사 (RLS) | service_role only | ❌ 모두 금지 | ❌ 모두 금지 |
-| shipment_status_history | 자사 + 운영사 (RLS) | service_role only | ❌ 모두 금지 | ❌ 모두 금지 |
+| order_request_status_history | 자사 + 운영사 (RLS) | definer_rpc only | ❌ 모두 금지 | ❌ 모두 금지 |
+| sales_order_status_history | 자사 + 운영사 (RLS) | definer_rpc only | ❌ 모두 금지 | ❌ 모두 금지 |
+| shipment_status_history | 자사 + 운영사 (RLS) | definer_rpc only | ❌ 모두 금지 | ❌ 모두 금지 |
+
+> [!NOTE]
+> 상태 이력 3개 테이블은 api_exposure = authenticated_direct로 변경되었다 (DEC-032).
+> authenticated는 SELECT GRANT가 있으며 RLS로 자사+운영사 범위로 제한한다.
+> INSERT는 SECURITY DEFINER 함수(상태 전이 트랜잭션)만 수행한다.
 
 ### 11.4 Function 실행 권한
 
@@ -555,27 +571,53 @@ GRANT EXECUTE ON FUNCTION fn_name TO authenticated;
 
 ## 12. Database Function 보안 목록 (예상)
 
-아직 함수를 구현하지 않지만, 고위험 기능의 예상 Function/RPC 목록:
+### 12.1 SECURITY DEFINER 함수
 
-| # | Function 이름 (예상) | 기능 | security_mode | 호출 가능 역할 | search_path | RLS 우회 | EXECUTE 권한 | 관련 테스트 |
+| # | function_name | owner_role | execute_roles | search_path | schema_qualified | RLS bypass | audit | 관련 테스트 |
 |---|---|---|---|---|---|---|---|---|
-| F-01 | `fn_calculate_price` | 거래처별 가격 계산 (4단계 우선순위) | SECURITY INVOKER | authenticated | `SET search_path = public, pg_temp` | ❌ | authenticated | TC-PRC-001~034, TC-RLS-012 |
-| F-02 | `fn_submit_order_request` | 주문 요청 제출 (가격 재계산, 불변식 검증) | SECURITY INVOKER | authenticated | 고정 | ❌ | authenticated | TC-ORD-001, TC-RLS-013 |
-| F-03 | `fn_approve_revision` | 수정안 승인 (만료 확인, 상태 전이) | SECURITY INVOKER | authenticated | 고정 | ❌ | authenticated | TC-ORD-010~013 |
-| F-04 | `fn_create_sales_order` | 확정 주문 생성 (스냅샷, 이중 확정 차단) | SECURITY DEFINER | service_role (Server Action에서 호출) | `SET search_path = public, pg_temp` | ✅ (트랜잭션 내) | service_role | TC-ORD-023, TC-ORD-050~053, TC-RLS-013 |
-| F-05 | `fn_record_shipment` | 출고 수량 반영 (shipped ≤ accepted 검증) | SECURITY DEFINER | service_role | 고정 | ✅ | service_role | TC-ORD-040~043, TC-SHP-003 |
-| F-06 | `fn_apply_import` | Import Apply (STRICT_ATOMIC 트랜잭션) | SECURITY DEFINER | service_role | 고정 | ✅ | service_role | TC-IMP-001~012 |
-| F-07 | `fn_update_prices` | 관리자 가격 변경 (감사로그 기록) | SECURITY INVOKER | authenticated (Op + can_manage_prices) | 고정 | ❌ | authenticated | TC-PRC-030~034, TC-ADM-003 |
+| F-04 | fn_create_sales_order | supabase_admin | service_role | `SET search_path = ''` | ✅ 모든 참조 | ✅ (트랜잭션) | ✅ | TC-ORD-023, TC-SEC-014 |
+| F-05 | fn_record_shipment | supabase_admin | service_role | `SET search_path = ''` | ✅ 모든 참조 | ✅ | ✅ | TC-SHP-003, TC-QTY-001~010 |
+| F-06 | fn_apply_import | supabase_admin | service_role | `SET search_path = ''` | ✅ 모든 참조 | ✅ | ✅ | TC-IMP-001~012 |
 
-### SECURITY DEFINER 사용 조건
+**SECURITY DEFINER 강화 원칙** (DEC-035):
 
-| 조건 | 설명 |
-|---|---|
-| 내부 서비스 로직만 | 클라이언트 직접 호출 금지 (Server Action/Edge Function 경유) |
-| 입력 검증 필수 | 모든 파라미터 유효성 검증 |
-| 고정 search_path | `SET search_path = public, pg_temp` |
-| 감사로그 기록 | audit_logs에 변경 기록 |
-| 코드 리뷰 필수 | PR 리뷰 없이 배포 금지 |
+```sql
+-- 1. 모든 함수의 public 실행권한 제거
+REVOKE EXECUTE ON ALL FUNCTIONS IN SCHEMA public FROM PUBLIC;
+REVOKE EXECUTE ON ALL FUNCTIONS IN SCHEMA public FROM anon;
+REVOKE EXECUTE ON ALL FUNCTIONS IN SCHEMA public FROM authenticated;
+
+-- 2. public 스키마 CREATE 권한 제거
+REVOKE CREATE ON SCHEMA public FROM PUBLIC;
+REVOKE CREATE ON SCHEMA public FROM anon;
+REVOKE CREATE ON SCHEMA public FROM authenticated;
+
+-- 3. DEFINER 함수는 빈 search_path + schema-qualified 참조
+CREATE OR REPLACE FUNCTION fn_create_sales_order(...)
+RETURNS ... SECURITY DEFINER
+SET search_path = ''
+AS $$ ... public.sales_orders ... public.sales_order_items ... $$;
+
+-- 4. 필요한 역할에만 GRANT
+GRANT EXECUTE ON FUNCTION fn_create_sales_order TO service_role;
+```
+
+### 12.2 SECURITY INVOKER 함수
+
+| # | function_name | execute_roles | search_path | RLS bypass | 관련 테스트 |
+|---|---|---|---|---|---|
+| F-01 | fn_calculate_price | authenticated | 고정 | ❌ | TC-PRC-*, TC-RLS-012 |
+| F-02 | fn_submit_order_request | authenticated | 고정 | ❌ | TC-ORD-001, TC-SEC-014 |
+| F-03 | fn_approve_revision | authenticated | 고정 | ❌ | TC-ORD-010~013 |
+| F-07 | fn_update_prices | authenticated (Op + can_manage_prices) | 고정 | ❌ | TC-ADM-003 |
+
+### 12.3 fn_update_prices GRANT/RLS 일관성
+
+`fn_update_prices`는 SECURITY INVOKER이므로:
+- 호출자(authenticated)에게 `price_book_items` 및 `organization_price_overrides` 테이블의 UPDATE GRANT 필요
+- 해당 테이블의 RLS UPDATE 정책이 `can_manage_prices` capability를 확인
+- `GRANT EXECUTE ON FUNCTION fn_update_prices TO authenticated`
+- 이 세 가지가 모두 존재해야 write path가 완성됨
 
 ---
 

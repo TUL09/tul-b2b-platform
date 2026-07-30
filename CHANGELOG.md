@@ -6,6 +6,19 @@
 
 ---
 
+## [Phase 0] 2026-07-30 — Checkpoint B 최종 종결 패치
+
+접근·정합성 수정 (Checkpoint B Final Closure Patch):
+- `DATABASE_SCHEMA.md` — Schema Inventory에 read_path/write_path 컬럼 추가, 상태 이력 3개 테이블 authenticated_direct로 변경, api_exposure 합계 10+25+7+2=44 확정, fn_record_shipment 트랜잭션 문서화, CHECK 보강
+- `SECURITY_RULES.md` — GRANT 매트릭스 write_path 기반 차등 적용, 상태 이력 접근 변경, SECURITY DEFINER search_path='' 강화, fn_update_prices GRANT/RLS 일관성
+- `BUSINESS_RULES.md` — shipped_quantity/open_quantity SoT 명시, 출고 트랜잭션 규칙(6.4), 백오더 정책, CHECK 제약조건 추가
+- `TEST_PLAN.md` — 출고 동시성·백오더 테스트 5개 추가 (160 TC, 116 Critical)
+- `DECISION_LOG.md` — DEC-032~035 추가 (4개)
+- 용어 드리프트 수정: company_price_overrides→organization_price_overrides (BUSINESS_RULES, PRD), NUMERIC(15,0)→NUMERIC(19,4) (INTERNATIONALIZATION)
+- `CHANGELOG.md` — 이력 업데이트
+
+---
+
 ## [Phase 0] 2026-07-24 — Checkpoint B 보안 강화
 
 보안 감사 (Checkpoint B Security Correction):

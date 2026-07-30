@@ -350,6 +350,11 @@ first_needed_phase: Phase 4
 | TC-QTY-003 | cancelled ≤ accepted CHECK 제약조건 검증 | Critical | 4 |
 | TC-QTY-004 | backordered ≤ accepted - cancelled CHECK 제약조건 검증 | Critical | 4 |
 | TC-QTY-005 | 모든 수량 ≥ 0 CHECK 제약조건 검증 | Critical | 4 |
+| TC-QTY-006 | accepted 10, shipped 6일 때 backordered 8 유지 불가 (초과 거부) | Critical | 4 |
+| TC-QTY-007 | accepted 10에 동시 6개 출고 요청 2건 → 하나는 실패 (FOR UPDATE 격리) | Critical | 4 |
+| TC-QTY-008 | cancelled + shipped 합계가 accepted 초과 시 출고 실패 | Critical | 4 |
+| TC-QTY-009 | backordered가 open_quantity 초과 시 실패 | Critical | 4 |
+| TC-QTY-010 | 출고 실패 시 shipment, status history, audit log 모두 Rollback | Critical | 4 |
 
 ---
 
@@ -388,8 +393,8 @@ first_needed_phase: Phase 4
 | 관리자 운영 | 7 | 4 | 2~4 |
 | 출고·상태 | 6 | 5 | 4 |
 | 보안 강화 | 15 | 15 | 2~4 |
-| 수량 정합성 | 5 | 5 | 4 |
-| **합계** | **155** | **111** | |
+| 수량 정합성 | 10 | 10 | 4 |
+| **합계** | **160** | **116** | |
 
 ---
 

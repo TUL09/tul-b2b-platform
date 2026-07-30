@@ -71,7 +71,7 @@
 |---|------|------|
 | 16 | **가격표 (price_books)** | 등급별 가격표 생성·관리. 가격표마다 SKU+UOM별 단가를 설정. |
 | 17 | **거래처 가격등급 (organization_price_books)** | 거래처(조직)에 가격표를 배정. 거래처가 해당 등급의 가격을 적용받음. |
-| 18 | **거래처 개별가격 (company_price_overrides)** | 특정 거래처에 대해 SKU+UOM 단위로 개별 단가를 설정. 가격표보다 우선 적용. |
+| 18 | **거래처 개별가격 (organization_price_overrides)** | 특정 거래처에 대해 SKU+UOM 단위로 개별 단가를 설정. 가격표보다 우선 적용. |
 | 19 | **수량구간 가격 (tiered pricing)** | `min_quantity` / `max_quantity` 기반. 주문 수량에 따라 단가가 달라짐. 상세는 `BUSINESS_RULES.md` 참조. |
 | 20 | **가격 선택 규칙** | 우선순위: 거래처 개별가격 → 가격표 → 기본 B2B가 → 견적문의. 상세는 `BUSINESS_RULES.md` 참조. |
 | 21 | **가격 엑셀 일괄등록** | Price Book Import. `STRICT_ATOMIC` 정책. 상세는 `BUSINESS_RULES.md` 참조. |
@@ -79,7 +79,7 @@
 **가격 선택 우선순위**:
 
 ```
-1순위  거래처 개별가격  (company_price_overrides)
+1순위  거래처 개별가격  (organization_price_overrides)
 2순위  가격표          (price_books)
 3순위  기본 B2B가
 4순위  견적문의        (가격 미등록 시)
