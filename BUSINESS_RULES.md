@@ -108,7 +108,7 @@ MOQ = 10 EA, 증가단위 = 5 EA인 상품:
 
 | 순위 | 가격 소스 | 설명 |
 |---|---|---|
-| 1순위 | 거래처 개별 지정가격 | `company_price_overrides`에서 해당 거래처 + SKU UOM + 수량구간 일치 |
+| 1순위 | 거래처 개별 지정가격 | `organization_price_overrides`에서 해당 거래처 + SKU UOM + 수량구간 일치 |
 | 2순위 | 거래처 배정 가격표 | `organization_price_books`로 배정된 가격표의 SKU UOM + 수량구간 일치 |
 | 3순위 | 기본 B2B 가격표 | 기본 가격표의 SKU UOM + 수량구간 일치 |
 | 4순위 | 견적문의 | 일치하는 가격이 없으면 견적문의 또는 주문 불가 |
@@ -182,7 +182,7 @@ MOQ = 10 EA, 증가단위 = 5 EA인 상품:
 - 당사 매입가격 (supplier_offers)
 - 기본 B2B 판매가 (price_book_items)
 - 가격등급별 판매가 (price_book_items)
-- 거래처별 개별 판매가 (company_price_overrides)
+- 거래처별 개별 판매가 (organization_price_overrides)
 - 부가세
 - 주문 최종금액
 
@@ -411,9 +411,9 @@ stateDiagram-v2
 | `requested_quantity` | 구매자가 처음 요청한 수량 |
 | `accepted_quantity` | 운영사와 구매자가 최종 합의한 수량 |
 | `rejected_quantity` | 확정 전에 공급 불가 또는 구매자 거절로 제외된 수량 |
-| `shipped_quantity` | 실제 출고된 누적 수량 |
+| `shipped_quantity` | **저장하지 않음.** shipment_items의 유효 출고수량 합계로 계산 (DEC-028) |
 | `cancelled_quantity` | 주문 확정 후 취소 승인된 수량 |
-| `open_quantity` | 확정됐지만 아직 출고 또는 취소되지 않은 수량 |
+| `open_quantity` | **저장하지 않음.** `accepted - shipped(계산) - cancelled`로 도출 |
 | `backordered_quantity` | open_quantity 중 재고 부족·입고 대기로 분류된 수량 |
 
 ### 6.2 불변식
@@ -424,10 +424,46 @@ shipped_quantity + cancelled_quantity + open_quantity = accepted_quantity
 backordered_quantity <= open_quantity
 ```
 
+**DB CHECK 제약조건** (sales_order_items):
+
+```
+CHECK (accepted_quantity + rejected_quantity = requested_quantity)
+CHECK (cancelled_quantity <= accepted_quantity)
+CHECK (backordered_quantity <= accepted_quantity - cancelled_quantity)
+CHECK (모든 수량 >= 0)
+```
+
+> [!NOTE]
+> `backordered <= accepted - shipped - cancelled`와 `shipped + cancelled <= accepted`는
+> shipped_quantity가 저장 컬럼이 아니므로 일반 CHECK로 강제할 수 없다.
+> 대신 `fn_record_shipment` 트랜잭션에서 Application 검증으로 강제한다.
+
 ### 6.3 검증
 
 - 수량 계산값은 브라우저 값만 신뢰하지 않고 **서버에서 검증**합니다
 - 수량 변화는 **감사로그와 상태이력**에 기록합니다
+
+### 6.4 출고 트랜잭션 규칙 (DEC-034)
+
+출고 기록은 `fn_record_shipment`에서 단일 트랜잭션으로 실행합니다:
+
+1. 대상 `sales_order_item`을 `FOR UPDATE`로 잠금
+2. 현재 유효 `shipment_items` 출고수량 합계 계산
+3. 신규 출고수량을 포함한 최종 출고수량 계산
+4. `shipped(계산) + cancelled <= accepted` 검증
+5. `backordered <= accepted - shipped(계산) - cancelled` 검증
+6. 조건 미충족 시 **전체 Rollback**
+7. 조건 충족 시:
+   - `shipments` 및 `shipment_items` INSERT
+   - 출고 대상이 backorder 물량이면 `backordered_quantity`를 같은 트랜잭션에서 감소
+   - `shipment_status_history` INSERT
+   - `audit_logs` INSERT
+   - OCC version 확인
+8. 실패 시 shipment, status history, audit log 모두 Rollback
+
+**Backorder 정책**: 출고 후 `backordered > open_quantity`가 되는 상태를 허용하지 않는다.
+출고 대상이 backorder 물량을 포함하면 같은 트랜잭션에서 `backordered_quantity`를
+`max(0, backordered - shipped)` 값으로 조정한다.
 
 ---
 

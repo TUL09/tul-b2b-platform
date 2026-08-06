@@ -71,7 +71,7 @@
 |---|------|------|
 | 16 | **가격표 (price_books)** | 등급별 가격표 생성·관리. 가격표마다 SKU+UOM별 단가를 설정. |
 | 17 | **거래처 가격등급 (organization_price_books)** | 거래처(조직)에 가격표를 배정. 거래처가 해당 등급의 가격을 적용받음. |
-| 18 | **거래처 개별가격 (company_price_overrides)** | 특정 거래처에 대해 SKU+UOM 단위로 개별 단가를 설정. 가격표보다 우선 적용. |
+| 18 | **거래처 개별가격 (organization_price_overrides)** | 특정 거래처에 대해 SKU+UOM 단위로 개별 단가를 설정. 가격표보다 우선 적용. |
 | 19 | **수량구간 가격 (tiered pricing)** | `min_quantity` / `max_quantity` 기반. 주문 수량에 따라 단가가 달라짐. 상세는 `BUSINESS_RULES.md` 참조. |
 | 20 | **가격 선택 규칙** | 우선순위: 거래처 개별가격 → 가격표 → 기본 B2B가 → 견적문의. 상세는 `BUSINESS_RULES.md` 참조. |
 | 21 | **가격 엑셀 일괄등록** | Price Book Import. `STRICT_ATOMIC` 정책. 상세는 `BUSINESS_RULES.md` 참조. |
@@ -79,7 +79,7 @@
 **가격 선택 우선순위**:
 
 ```
-1순위  거래처 개별가격  (company_price_overrides)
+1순위  거래처 개별가격  (organization_price_overrides)
 2순위  가격표          (price_books)
 3순위  기본 B2B가
 4순위  견적문의        (가격 미등록 시)
@@ -108,9 +108,10 @@ graph LR
   subgraph "Order Request"
     OR_DRAFT["draft"] --> OR_SUBMITTED["submitted"]
     OR_SUBMITTED --> OR_REVIEW["under_review"]
-    OR_REVIEW --> OR_REVISED["revised"]
-    OR_REVISED --> OR_APPROVED["customer_approved"]
-    OR_REVIEW --> OR_CONFIRMED["confirmed"]
+    OR_REVIEW --> OR_REVISED["revision_pending"]
+    OR_REVISED --> OR_ACCEPTED["accepted"]
+    OR_REVIEW --> OR_ACCEPTED
+    OR_ACCEPTED --> OR_CONVERTED["converted_to_sales_order"]
     OR_SUBMITTED --> OR_CANCELLED["cancelled"]
   end
 ```
@@ -118,21 +119,21 @@ graph LR
 ```mermaid
 graph LR
   subgraph "Sales Order"
-    SO_CREATED["created"] --> SO_PROCESSING["processing"]
-    SO_PROCESSING --> SO_PARTIAL["partially_fulfilled"]
-    SO_PARTIAL --> SO_FULFILLED["fulfilled"]
-    SO_PROCESSING --> SO_FULFILLED
-    SO_PROCESSING --> SO_CANCELLED["cancelled"]
+    SO_CONFIRMED["confirmed"] --> SO_PROCESSING["processing"]
+    SO_PROCESSING --> SO_PARTIAL["fulfillment_in_progress"]
+    SO_PARTIAL --> SO_COMPLETE["fulfillment_complete"]
+    SO_COMPLETE --> SO_CLOSED["closed"]
+    SO_PROCESSING --> SO_CANCEL_REQ["cancel_requested"]
   end
 ```
 
 ```mermaid
 graph LR
   subgraph "Shipment"
-    SH_PENDING["pending"] --> SH_PICKED["picked"]
-    SH_PICKED --> SH_SHIPPED["shipped"]
-    SH_SHIPPED --> SH_DELIVERED["delivered"]
-    SH_PENDING --> SH_CANCELLED["cancelled"]
+    SH_PREPARING["preparing"] --> SH_DISPATCHED["dispatched"]
+    SH_DISPATCHED --> SH_DELIVERED["delivered"]
+    SH_PREPARING --> SH_CANCELLED["cancelled"]
+    SH_DISPATCHED --> SH_FAILED["failed"]
   end
 ```
 
