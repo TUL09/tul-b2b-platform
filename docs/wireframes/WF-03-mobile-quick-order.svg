@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="1200" viewBox="0 0 390 1200" font-family="Arial, sans-serif">
+  <rect width="390" height="1200" fill="#F4F5F7"/>
+
+  <!-- HEADER -->
+  <rect x="0" y="0" width="390" height="56" fill="#0F2044"/>
+  <text x="16" y="35" font-size="20" font-weight="700" fill="#FFFFFF" letter-spacing="2">TUL</text>
+  <text x="130" y="35" font-size="13" fill="#FFFFFF" font-weight="600">⚡ 빠른 주문</text>
+
+  <!-- Description -->
+  <rect x="0" y="56" width="390" height="40" fill="#1E2A38"/>
+  <text x="16" y="80" font-size="12" fill="#9CA3AF">상품코드·모델명 직접 입력 또는 이전 주문 불러오기</text>
+
+  <!-- IMPORT FROM PREVIOUS ORDER -->
+  <rect x="12" y="108" width="366" height="44" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="16" y="120" font-size="10" fill="#9CA3AF">📋</text>
+  <text x="32" y="134" font-size="13" fill="#4B5563" font-weight="600">이전 주문 불러오기</text>
+  <text x="290" y="134" font-size="12" fill="#E8610A">ORD-0847 ›</text>
+
+  <!-- QUICK ORDER TABLE HEADER -->
+  <rect x="12" y="164" width="366" height="32" rx="4" fill="#1E2A38"/>
+  <text x="20" y="184" font-size="10" fill="#9CA3AF" font-weight="600">#</text>
+  <text x="40" y="184" font-size="10" fill="#9CA3AF" font-weight="600">상품코드 / 모델명</text>
+  <text x="192" y="184" font-size="10" fill="#9CA3AF" font-weight="600">UOM</text>
+  <text x="232" y="184" font-size="10" fill="#9CA3AF" font-weight="600">수량</text>
+  <text x="280" y="184" font-size="10" fill="#9CA3AF" font-weight="600">단가</text>
+  <text x="340" y="184" font-size="10" fill="#9CA3AF" font-weight="600">삭제</text>
+
+  <!-- ROW 1 - Valid -->
+  <rect x="12" y="196" width="366" height="60" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="20" y="230" font-size="12" fill="#9CA3AF">1</text>
+  <rect x="36" y="204" width="144" height="44" rx="4" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="44" y="224" font-size="12" fill="#111827">N-150</text>
+  <text x="44" y="238" font-size="10" fill="#16A34A">■ TTC 니퍼 150mm</text>
+  <!-- UOM selector -->
+  <rect x="188" y="208" width="36" height="32" rx="4" fill="#FFFFFF" stroke="#0F2044" stroke-width="1.5"/>
+  <text x="196" y="228" font-size="12" fill="#0F2044" font-weight="600">EA</text>
+  <!-- Quantity -->
+  <rect x="228" y="208" width="44" height="32" rx="4" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="240" y="228" font-size="13" fill="#111827">20</text>
+  <!-- Price -->
+  <text x="280" y="228" font-size="11" fill="#0F2044" font-weight="600">₩12,800</text>
+  <!-- Delete -->
+  <text x="346" y="228" font-size="16" fill="#9CA3AF">✕</text>
+
+  <!-- ROW 2 - Valid with tiered price -->
+  <rect x="12" y="256" width="366" height="60" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="20" y="290" font-size="12" fill="#9CA3AF">2</text>
+  <rect x="36" y="264" width="144" height="44" rx="4" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="44" y="284" font-size="12" fill="#111827">LB-10</text>
+  <text x="44" y="298" font-size="10" fill="#16A34A">■ OLFA 커터날 LB-10</text>
+  <rect x="188" y="268" width="36" height="32" rx="4" fill="#FFFFFF" stroke="#0F2044" stroke-width="1.5"/>
+  <text x="192" y="288" font-size="11" fill="#0F2044" font-weight="600">PACK</text>
+  <rect x="228" y="268" width="44" height="32" rx="4" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="240" y="288" font-size="13" fill="#111827">10</text>
+  <!-- Tiered price highlight -->
+  <rect x="272" y="268" width="60" height="32" rx="4" fill="#FFF3ED"/>
+  <text x="276" y="282" font-size="9" fill="#E8610A">10개 이상</text>
+  <text x="276" y="294" font-size="11" fill="#E8610A" font-weight="700">₩9,000</text>
+  <text x="340" y="288" font-size="16" fill="#9CA3AF">✕</text>
+
+  <!-- ROW 3 - Error state: product not found -->
+  <rect x="12" y="316" width="366" height="72" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="20" y="356" font-size="12" fill="#9CA3AF">3</text>
+  <rect x="36" y="324" width="144" height="44" rx="4" fill="#FFFFFF" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="44" y="344" font-size="12" fill="#DC2626">UNKNOWN-999</text>
+  <text x="44" y="360" font-size="10" fill="#DC2626">상품을 찾을 수 없습니다</text>
+  <rect x="188" y="328" width="36" height="32" rx="4" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="196" y="348" font-size="12" fill="#9CA3AF">-</text>
+  <rect x="228" y="328" width="44" height="32" rx="4" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="240" y="348" font-size="12" fill="#9CA3AF">-</text>
+  <text x="280" y="348" font-size="11" fill="#9CA3AF">-</text>
+  <text x="346" y="348" font-size="16" fill="#DC2626">✕</text>
+  <!-- Error guidance -->
+  <text x="36" y="380" font-size="10" fill="#DC2626">⚠ 상품코드·모델명을 확인하거나 견적요청을 이용하세요</text>
+
+  <!-- ROW 4 - MOQ error -->
+  <rect x="12" y="388" width="366" height="72" fill="#FFF7ED" stroke="#D97706" stroke-width="1.5"/>
+  <text x="20" y="428" font-size="12" fill="#9CA3AF">4</text>
+  <rect x="36" y="396" width="144" height="44" rx="4" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="44" y="416" font-size="12" fill="#111827">DS-PH2</text>
+  <text x="44" y="430" font-size="10" fill="#16A34A">■ TTC 드라이버 PH#2</text>
+  <rect x="188" y="400" width="36" height="32" rx="4" fill="#FFFFFF" stroke="#0F2044" stroke-width="1.5"/>
+  <text x="196" y="420" font-size="12" fill="#0F2044" font-weight="600">EA</text>
+  <rect x="228" y="400" width="44" height="32" rx="4" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="240" y="420" font-size="13" fill="#DC2626" font-weight="600">3</text>
+  <text x="280" y="420" font-size="11" fill="#9CA3AF">MOQ 10</text>
+  <text x="346" y="420" font-size="16" fill="#9CA3AF">✕</text>
+  <text x="36" y="452" font-size="10" fill="#D97706">▲ MOQ 10 이상 필요 · 10으로 자동 수정</text>
+
+  <!-- ROW 5 - Empty row (add more) -->
+  <rect x="12" y="460" width="366" height="52" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="160" y="490" font-size="12" fill="#9CA3AF">+ 행 추가</text>
+
+  <!-- Add row button -->
+  <rect x="12" y="520" width="174" height="40" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="44" y="544" font-size="12" fill="#4B5563">+ 행 추가</text>
+  <rect x="198" y="520" width="178" height="40" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="222" y="544" font-size="12" fill="#4B5563">📋 엑셀로 붙여넣기</text>
+
+  <!-- AUTOCOMPLETE SUGGESTION DROPDOWN -->
+  <rect x="36" y="484" width="144" height="0" rx="4" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+
+  <!-- ORDER SUMMARY -->
+  <rect x="0" y="572" width="390" height="8" fill="#EAECEF"/>
+  <rect x="12" y="588" width="366" height="148" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="20" y="612" font-size="14" font-weight="700" fill="#111827">주문 요약</text>
+  <text x="20" y="636" font-size="12" fill="#4B5563">유효한 행</text>
+  <text x="340" y="636" font-size="12" fill="#111827" font-weight="600">3행</text>
+  <text x="20" y="656" font-size="12" fill="#4B5563">오류 행</text>
+  <text x="332" y="656" font-size="12" fill="#DC2626" font-weight="600">2행 ⚠</text>
+  <line x1="20" y1="668" x2="370" y2="668" stroke="#EAECEF" stroke-width="1"/>
+  <text x="20" y="688" font-size="12" fill="#4B5563">소계 (VAT 별도)</text>
+  <text x="296" y="688" font-size="14" font-weight="700" fill="#0F2044">₩345,800</text>
+  <text x="20" y="706" font-size="10" fill="#9CA3AF">부가세 10%</text>
+  <text x="316" y="706" font-size="10" fill="#9CA3AF">₩34,580</text>
+  <text x="20" y="724" font-size="13" font-weight="700" fill="#111827">합계</text>
+  <text x="290" y="724" font-size="16" font-weight="700" fill="#0F2044">₩380,380</text>
+
+  <!-- CTA Buttons -->
+  <rect x="12" y="748" width="174" height="52" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="58" y="778" font-size="13" fill="#4B5563">저장</text>
+  <rect x="198" y="748" width="178" height="52" rx="8" fill="#0F2044"/>
+  <text x="240" y="778" font-size="13" fill="#FFFFFF" font-weight="700">주문 요청하기 →</text>
+
+  <!-- Bottom Nav -->
+  <rect x="0" y="1144" width="390" height="56" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="30" y="1168" font-size="18">🏠</text>
+  <text x="24" y="1188" font-size="10" fill="#9CA3AF">홈</text>
+  <text x="108" y="1168" font-size="18">📂</text>
+  <text x="96" y="1188" font-size="10" fill="#9CA3AF">카테고리</text>
+  <rect x="156" y="1140" width="78" height="64" rx="8" fill="#E8610A"/>
+  <text x="186" y="1168" font-size="18">⚡</text>
+  <text x="164" y="1188" font-size="10" fill="#FFFFFF" font-weight="700">빠른주문</text>
+  <text x="264" y="1168" font-size="18">📋</text>
+  <text x="254" y="1188" font-size="10" fill="#9CA3AF">주문내역</text>
+  <text x="342" y="1168" font-size="18">👤</text>
+  <text x="340" y="1188" font-size="10" fill="#9CA3AF">마이</text>
+
+  <text x="12" y="1196" font-size="9" fill="#9CA3AF">WF-03 · 모바일 빠른 주문 · 390px · TUL B2B Platform</text>
+</svg>

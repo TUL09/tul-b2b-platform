@@ -48,3 +48,8 @@
 | 2026-07-30 | DEC-033 | Write Path 분류 | 모든 Release 1 테이블에 write_path 지정: direct_authenticated_rls, invoker_rpc, definer_rpc, server_route_service_role, no_write. GRANT는 write_path에 따라 차등 적용 | GRANT/RLS 모순 해소. 쓰기 경로 불명확 시 권한 과잉 또는 미달 발생 | Schema Inventory, GRANT 매트릭스 |
 | 2026-07-30 | DEC-034 | 백오더 출고 정책 | 출고 대상이 backorder 물량이면 같은 트랜잭션에서 backordered_quantity 감소. 출고 후 backordered > open_quantity 허용 안 함. fn_record_shipment에서 FOR UPDATE + 불변식 검증 | backordered 저장값과 shipped 계산값 간 일관성 유지 | 수량 모델, 출고 |
 | 2026-07-30 | DEC-035 | SECURITY DEFINER search_path | 모든 DEFINER 함수는 SET search_path = '' 사용. 모든 테이블·뷰·함수 참조는 schema-qualified (public.table_name). public 스키마 CREATE 권한을 PUBLIC/anon/authenticated에서 제거 | search_path injection 방지 | 전체 DEFINER 함수 |
+| 2026-08-07 | DEC-036 | 플랫폼명·운영사명·도메인 확정 | 플랫폼명 `TUL`, 운영사 `BaseOn(베이스온)`, 도메인 `tul.co.kr`. OD-001/OD-002/OD-003 해결 | Checkpoint C1 브랜드 정의 | 전체 UI, 문서, 도메인 |
+| 2026-08-07 | DEC-037 | 디자인 콘셉트 확정 | Industrial Intelligence. 색상: Deep Navy (#0F2044), Charcoal (#1E2A38), Orange (#E8610A). 로고 임의 설계 금지. OD-004 부분 해결 | B2B 산업재 신뢰감·전문성 | 전체 디자인 |
+| 2026-08-07 | DEC-038 | 모바일 홈 콘텐츠 우선순위 | 검색 최상단 고정 → 최근주문/재주문 → 빠른재주문 → 진행주문 → 신제품 → 가격경쟁 → 브랜드. 자동 슬라이드 배너 금지 | 주문 효율 최우선, 광고 방해 금지 | 모바일 홈, 콘텐츠 |
+| 2026-08-07 | DEC-039 | 4개 주문상태 독립 표현 | order_status/fulfillment_status/payment_status/tax_invoice_status를 하나의 배지로 합치지 않고 독립 카드로 표시. 색상+아이콘+텍스트 조합 | 상태 혼동 방지, 접근성 | UI, 주문상태 화면 |
+| 2026-08-07 | DEC-040 | Import 오류 구분 표시 | Blocking Error: 빨간배경+⛔+텍스트+행번호. Warning: 주황배경+⚠+텍스트+행번호. 색상만으로 구분하지 않음 (접근성). Blocking Error 존재 시 Commit 버튼 비활성화 | STRICT_ATOMIC 정책 시각화, 접근성 | Admin Import |

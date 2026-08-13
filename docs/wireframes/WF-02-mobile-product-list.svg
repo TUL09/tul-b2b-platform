@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="1400" viewBox="0 0 390 1400" font-family="Arial, sans-serif">
+  <rect width="390" height="1400" fill="#F4F5F7"/>
+
+  <!-- HEADER -->
+  <rect x="0" y="0" width="390" height="56" fill="#0F2044"/>
+  <text x="16" y="35" font-size="20" font-weight="700" fill="#FFFFFF" letter-spacing="2">TUL</text>
+  <text x="200" y="24" font-size="11" fill="#D1D5DB">검색결과 "니퍼 150"</text>
+
+  <!-- SEARCH BAR -->
+  <rect x="12" y="68" width="300" height="44" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="32" y="94" font-size="13" fill="#111827">니퍼 150</text>
+  <text x="20" y="94" font-size="13" fill="#9CA3AF">🔍</text>
+  <rect x="318" y="68" width="60" height="44" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="326" y="94" font-size="12" fill="#4B5563">🔽 필터</text>
+
+  <!-- FILTER CHIPS -->
+  <rect x="12" y="120" width="390" height="40" fill="#FFFFFF"/>
+  <rect x="12" y="128" width="60" height="24" rx="12" fill="#0F2044"/>
+  <text x="24" y="144" font-size="11" fill="#FFFFFF">전체 32</text>
+  <rect x="80" y="128" width="52" height="24" rx="12" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="88" y="144" font-size="11" fill="#4B5563">TTC (18)</text>
+  <rect x="140" y="128" width="64" height="24" rx="12" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="148" y="144" font-size="11" fill="#4B5563">협성 (9)</text>
+  <rect x="212" y="128" width="68" height="24" rx="12" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="220" y="144" font-size="11" fill="#4B5563">대원 (5)</text>
+
+  <!-- SORT BAR -->
+  <rect x="0" y="160" width="390" height="32" fill="#FFFFFF" stroke="#EAECEF" stroke-width="1"/>
+  <text x="12" y="180" font-size="11" fill="#4B5563">32개 결과 · 관련도순 ▼</text>
+
+  <!-- PRODUCT CARD 1 -->
+  <rect x="12" y="200" width="366" height="120" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <!-- Image placeholder -->
+  <rect x="20" y="208" width="64" height="64" rx="4" fill="#EAECEF"/>
+  <text x="35" y="244" font-size="10" fill="#9CA3AF">이미지</text>
+  <!-- Brand badge -->
+  <rect x="92" y="208" width="32" height="16" rx="2" fill="#1E2A38"/>
+  <text x="97" y="220" font-size="8" fill="#FFFFFF" font-weight="700">TTC</text>
+  <!-- Product name -->
+  <text x="92" y="238" font-size="13" font-weight="600" fill="#111827">니퍼 150mm</text>
+  <!-- Model + Spec -->
+  <text x="92" y="254" font-size="11" fill="#9CA3AF">N-150 / 150mm / 탄소강</text>
+  <!-- Stock badge -->
+  <rect x="92" y="262" width="48" height="18" rx="3" fill="#F0FDF4"/>
+  <text x="97" y="275" font-size="10" fill="#16A34A" font-weight="600">■ 재고있음</text>
+  <!-- UOM -->
+  <rect x="148" y="262" width="28" height="18" rx="3" fill="#EFF6FF"/>
+  <text x="153" y="275" font-size="10" fill="#2563EB" font-weight="600">EA</text>
+  <!--납기 -->
+  <text x="184" y="275" font-size="10" fill="#9CA3AF">1~2일</text>
+  <!-- Price -->
+  <text x="20" y="296" font-size="16" font-weight="700" fill="#0F2044">₩12,800</text>
+  <text x="112" y="296" font-size="10" fill="#9CA3AF">/ EA · MOQ 10</text>
+  <!-- Quantity stepper -->
+  <rect x="220" y="285" width="32" height="28" rx="4" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="232" y="303" font-size="16" fill="#4B5563">−</text>
+  <rect x="256" y="285" width="40" height="28" rx="4" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="268" y="303" font-size="13" fill="#111827">10</text>
+  <rect x="300" y="285" width="32" height="28" rx="4" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="312" y="303" font-size="16" fill="#4B5563">+</text>
+  <!-- Add to cart button -->
+  <rect x="336" y="285" width="32" height="28" rx="4" fill="#0F2044"/>
+  <text x="348" y="303" font-size="14" fill="#FFFFFF">🛒</text>
+
+  <!-- PRODUCT CARD 2 -->
+  <rect x="12" y="328" width="366" height="120" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <rect x="20" y="336" width="64" height="64" rx="4" fill="#EAECEF"/>
+  <text x="35" y="372" font-size="10" fill="#9CA3AF">이미지</text>
+  <rect x="92" y="336" width="32" height="16" rx="2" fill="#1E2A38"/>
+  <text x="97" y="348" font-size="8" fill="#FFFFFF" font-weight="700">TTC</text>
+  <text x="92" y="366" font-size="13" font-weight="600" fill="#111827">니퍼 175mm</text>
+  <text x="92" y="382" font-size="11" fill="#9CA3AF">N-175 / 175mm / 탄소강</text>
+  <rect x="92" y="390" width="48" height="18" rx="3" fill="#FFF7ED"/>
+  <text x="97" y="403" font-size="10" fill="#D97706" font-weight="600">▲ 입고예정</text>
+  <text x="148" y="403" font-size="10" fill="#9CA3AF">8/12 입고</text>
+  <rect x="200" y="390" width="28" height="18" rx="3" fill="#EFF6FF"/>
+  <text x="205" y="403" font-size="10" fill="#2563EB" font-weight="600">EA</text>
+  <text x="20" y="424" font-size="16" font-weight="700" fill="#0F2044">₩15,600</text>
+  <text x="112" y="424" font-size="10" fill="#9CA3AF">/ EA · MOQ 10</text>
+  <rect x="220" y="413" width="32" height="28" rx="4" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="232" y="431" font-size="16" fill="#4B5563">−</text>
+  <rect x="256" y="413" width="40" height="28" rx="4" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="268" y="431" font-size="13" fill="#111827">10</text>
+  <rect x="300" y="413" width="32" height="28" rx="4" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="312" y="431" font-size="16" fill="#4B5563">+</text>
+  <rect x="336" y="413" width="32" height="28" rx="4" fill="#9CA3AF"/>
+  <text x="348" y="431" font-size="14" fill="#FFFFFF">🛒</text>
+
+  <!-- PRODUCT CARD 3 - MOQ Error state -->
+  <rect x="12" y="456" width="366" height="140" rx="8" fill="#FFFFFF" stroke="#DC2626" stroke-width="1.5"/>
+  <rect x="20" y="464" width="64" height="64" rx="4" fill="#EAECEF"/>
+  <text x="35" y="500" font-size="10" fill="#9CA3AF">이미지</text>
+  <rect x="92" y="464" width="50" height="16" rx="2" fill="#374151"/>
+  <text x="97" y="476" font-size="8" fill="#FFFFFF" font-weight="700">협성</text>
+  <text x="92" y="494" font-size="13" font-weight="600" fill="#111827">미니 니퍼 115mm</text>
+  <text x="92" y="510" font-size="11" fill="#9CA3AF">HS-MN115 / 115mm</text>
+  <rect x="92" y="518" width="48" height="18" rx="3" fill="#F0FDF4"/>
+  <text x="97" y="531" font-size="10" fill="#16A34A" font-weight="600">■ 재고있음</text>
+  <rect x="148" y="518" width="40" height="18" rx="3" fill="#EFF6FF"/>
+  <text x="153" y="531" font-size="10" fill="#2563EB" font-weight="600">PACK</text>
+  <text x="20" y="552" font-size="16" font-weight="700" fill="#0F2044">₩24,000</text>
+  <text x="120" y="552" font-size="10" fill="#9CA3AF">/ PACK · MOQ 5</text>
+  <!-- Error state stepper -->
+  <rect x="220" y="541" width="32" height="28" rx="4" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="232" y="559" font-size="16" fill="#4B5563">−</text>
+  <rect x="256" y="541" width="40" height="28" rx="4" fill="#FEF2F2" stroke="#DC2626" stroke-width="1.5"/>
+  <text x="268" y="559" font-size="13" fill="#DC2626" font-weight="600">3</text>
+  <rect x="300" y="541" width="32" height="28" rx="4" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="312" y="559" font-size="16" fill="#4B5563">+</text>
+  <rect x="336" y="541" width="32" height="28" rx="4" fill="#D1D5DB"/>
+  <text x="348" y="559" font-size="14" fill="#9CA3AF">🛒</text>
+  <!-- MOQ error message -->
+  <rect x="12" y="576" width="366" height="20" fill="#FEF2F2" rx="3"/>
+  <text x="20" y="590" font-size="11" fill="#DC2626">⚠ MOQ 5 이상 주문 필요 · 최소 5 PACK (₩120,000)</text>
+
+  <!-- PRODUCT CARD 4 - Quote inquiry -->
+  <rect x="12" y="608" width="366" height="120" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <rect x="20" y="616" width="64" height="64" rx="4" fill="#EAECEF"/>
+  <text x="35" y="652" font-size="10" fill="#9CA3AF">이미지</text>
+  <rect x="92" y="616" width="50" height="16" rx="2" fill="#374151"/>
+  <text x="97" y="628" font-size="8" fill="#FFFFFF" font-weight="700">대원</text>
+  <text x="92" y="646" font-size="13" font-weight="600" fill="#111827">절단 니퍼 200mm 특수날</text>
+  <text x="92" y="662" font-size="11" fill="#9CA3AF">DW-CN200 / 200mm / 특수강</text>
+  <rect x="92" y="670" width="52" height="18" rx="3" fill="#F3F4F6"/>
+  <text x="98" y="683" font-size="10" fill="#6B7280" font-weight="600">견적문의</text>
+  <text x="20" y="700" font-size="14" fill="#9CA3AF" font-style="italic">가격 문의 필요</text>
+  <rect x="220" y="692" width="148" height="28" rx="4" fill="#FFFFFF" stroke="#0F2044" stroke-width="1"/>
+  <text x="252" y="710" font-size="11" fill="#0F2044" font-weight="600">견적 요청 →</text>
+
+  <!-- Load more -->
+  <rect x="12" y="740" width="366" height="44" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="150" y="766" font-size="13" fill="#4B5563">더 보기 (24개 더)</text>
+
+  <!-- Bottom Nav -->
+  <rect x="0" y="1344" width="390" height="56" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="30" y="1368" font-size="18">🏠</text>
+  <text x="24" y="1388" font-size="10" fill="#9CA3AF">홈</text>
+  <text x="108" y="1368" font-size="18">📂</text>
+  <text x="96" y="1388" font-size="10" fill="#9CA3AF">카테고리</text>
+  <rect x="156" y="1340" width="78" height="64" rx="8" fill="#0F2044"/>
+  <text x="186" y="1368" font-size="18">⚡</text>
+  <text x="164" y="1388" font-size="10" fill="#FFFFFF" font-weight="600">빠른주문</text>
+  <text x="264" y="1368" font-size="18">📋</text>
+  <text x="254" y="1388" font-size="10" fill="#9CA3AF">주문내역</text>
+  <text x="342" y="1368" font-size="18">👤</text>
+  <text x="340" y="1388" font-size="10" fill="#9CA3AF">마이</text>
+
+  <text x="12" y="1398" font-size="9" fill="#9CA3AF">WF-02 · 모바일 상품목록 · 390px · TUL B2B Platform</text>
+</svg>

@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="960" viewBox="0 0 1440 960" font-family="Arial, sans-serif">
+  <rect width="1440" height="960" fill="#F4F5F7"/>
+
+  <!-- HEADER -->
+  <rect x="0" y="0" width="1440" height="56" fill="#0F2044"/>
+  <text x="24" y="35" font-size="22" font-weight="700" fill="#FFFFFF" letter-spacing="3">TUL</text>
+  <rect x="200" y="12" width="600" height="32" rx="6" fill="#1E2A38" stroke="#374151" stroke-width="1"/>
+  <text x="220" y="32" font-size="13" fill="#6B7280">🔍  상품명, 모델명, 상품코드 검색</text>
+  <rect x="1340" y="12" width="80" height="32" rx="6" fill="#E8610A"/>
+  <text x="1348" y="32" font-size="13" fill="#FFFFFF" font-weight="600">🛒 장바구니 3</text>
+
+  <!-- BREADCRUMB -->
+  <text x="24" y="76" font-size="12" fill="#9CA3AF">홈 › 절삭공구 › 니퍼 › TTC 니퍼 150mm</text>
+
+  <!-- ===== LEFT: PRODUCT IMAGES ===== -->
+  <!-- Main image -->
+  <rect x="24" y="92" width="420" height="360" rx="8" fill="#EAECEF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="180" y="276" font-size="14" fill="#9CA3AF">[ 상품 이미지 ]</text>
+  <!-- Thumbnail row -->
+  <rect x="24" y="460" width="88" height="72" rx="4" fill="#EAECEF" stroke="#0F2044" stroke-width="2"/>
+  <text x="44" y="500" font-size="10" fill="#9CA3AF">이미지1</text>
+  <rect x="120" y="460" width="88" height="72" rx="4" fill="#EAECEF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="140" y="500" font-size="10" fill="#9CA3AF">이미지2</text>
+  <rect x="216" y="460" width="88" height="72" rx="4" fill="#EAECEF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="236" y="500" font-size="10" fill="#9CA3AF">이미지3</text>
+  <rect x="312" y="460" width="88" height="72" rx="4" fill="#EAECEF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="332" y="500" font-size="10" fill="#9CA3AF">카탈로그</text>
+
+  <!-- Document links -->
+  <rect x="24" y="540" width="200" height="36" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="40" y="562" font-size="12" fill="#4B5563">📄 기술사양서 다운로드</text>
+  <rect x="232" y="540" width="200" height="36" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="252" y="562" font-size="12" fill="#4B5563">📋 카탈로그 다운로드</text>
+
+  <!-- ===== RIGHT: PRODUCT INFO ===== -->
+  <!-- Brand badge -->
+  <rect x="464" y="92" width="56" height="24" rx="4" fill="#1E2A38"/>
+  <text x="474" y="108" font-size="11" fill="#FFFFFF" font-weight="700">TTC</text>
+  <!-- Product name -->
+  <text x="464" y="144" font-size="24" font-weight="700" fill="#111827">니퍼 150mm 일반형</text>
+  <text x="464" y="168" font-size="15" fill="#9CA3AF" font-family="monospace">N-150</text>
+  <!-- Stock + Lead time badges -->
+  <rect x="464" y="180" width="88" height="24" rx="4" fill="#F0FDF4"/>
+  <text x="472" y="196" font-size="11" fill="#16A34A" font-weight="600">■ 재고있음</text>
+  <text x="560" y="196" font-size="11" fill="#9CA3AF">예상 납기: 1~2일</text>
+
+  <!-- Divider -->
+  <line x1="464" y1="216" x2="1024" y2="216" stroke="#EAECEF" stroke-width="1"/>
+
+  <!-- UOM SELECTOR -->
+  <text x="464" y="244" font-size="13" font-weight="600" fill="#111827">판매단위 (UOM)</text>
+  <!-- UOM buttons -->
+  <rect x="464" y="252" width="80" height="40" rx="6" fill="#0F2044" stroke="#0F2044" stroke-width="2"/>
+  <text x="490" y="270" font-size="13" fill="#FFFFFF" font-weight="700">EA</text>
+  <text x="490" y="284" font-size="10" fill="#9CA3AF">낱개</text>
+  <rect x="552" y="252" width="80" height="40" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="572" y="270" font-size="13" fill="#4B5563">PACK</text>
+  <text x="566" y="284" font-size="10" fill="#9CA3AF">10개 묶음</text>
+  <rect x="640" y="252" width="80" height="40" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="664" y="270" font-size="13" fill="#4B5563">BOX</text>
+  <text x="654" y="284" font-size="10" fill="#9CA3AF">100개 박스</text>
+
+  <!-- TIERED PRICING TABLE -->
+  <text x="464" y="316" font-size="13" font-weight="600" fill="#111827">수량구간 가격 (EA 기준)</text>
+  <rect x="464" y="324" width="400" height="28" rx="4" fill="#1E2A38"/>
+  <text x="476" y="342" font-size="11" fill="#9CA3AF" font-weight="600">수량 구간</text>
+  <text x="620" y="342" font-size="11" fill="#9CA3AF" font-weight="600">단가</text>
+  <text x="720" y="342" font-size="11" fill="#9CA3AF" font-weight="600">적용 가격표</text>
+
+  <rect x="464" y="352" width="400" height="32" fill="#FFF3ED" stroke="#E8610A" stroke-width="1"/>
+  <text x="476" y="372" font-size="12" fill="#E8610A" font-weight="700">1 ~ 9 EA  ← 현재 수량 구간</text>
+  <text x="620" y="372" font-size="14" fill="#E8610A" font-weight="700">₩12,800</text>
+  <text x="720" y="372" font-size="11" fill="#E8610A">B등급 가격표</text>
+  <rect x="464" y="384" width="400" height="28" fill="#FFFFFF" stroke="#EAECEF" stroke-width="1"/>
+  <text x="476" y="402" font-size="12" fill="#4B5563">10 ~ 49 EA</text>
+  <text x="620" y="402" font-size="13" fill="#0F2044" font-weight="600">₩11,500</text>
+  <text x="720" y="402" font-size="11" fill="#9CA3AF">B등급 가격표</text>
+  <rect x="464" y="412" width="400" height="28" fill="#FFFFFF" stroke="#EAECEF" stroke-width="1"/>
+  <text x="476" y="430" font-size="12" fill="#4B5563">50 EA 이상</text>
+  <text x="620" y="430" font-size="13" fill="#0F2044" font-weight="600">₩10,200</text>
+  <text x="720" y="430" font-size="11" fill="#9CA3AF">B등급 가격표</text>
+
+  <!-- MOQ info -->
+  <rect x="464" y="448" width="400" height="28" rx="4" fill="#EFF6FF"/>
+  <text x="476" y="466" font-size="12" fill="#2563EB">ℹ 최소주문수량(MOQ): 1 EA · 주문 증가단위: 1 EA</text>
+
+  <!-- Quantity + Price summary -->
+  <text x="464" y="500" font-size="13" font-weight="600" fill="#111827">수량</text>
+  <rect x="464" y="508" width="40" height="44" rx="6" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="480" y="534" font-size="20" fill="#4B5563">−</text>
+  <rect x="512" y="508" width="64" height="44" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1.5"/>
+  <text x="532" y="534" font-size="18" fill="#111827" font-weight="600">5</text>
+  <rect x="584" y="508" width="40" height="44" rx="6" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="600" y="534" font-size="20" fill="#4B5563">+</text>
+  <!-- Price display -->
+  <text x="644" y="524" font-size="12" fill="#9CA3AF">5 × ₩12,800</text>
+  <text x="644" y="544" font-size="20" font-weight="700" fill="#0F2044">₩64,000</text>
+  <text x="780" y="536" font-size="11" fill="#9CA3AF">(VAT 별도)</text>
+
+  <!-- Add to cart CTA -->
+  <rect x="464" y="568" width="380" height="52" rx="8" fill="#0F2044"/>
+  <text x="596" y="600" font-size="16" fill="#FFFFFF" font-weight="700">🛒  장바구니에 담기</text>
+  <rect x="852" y="568" width="172" height="52" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="890" y="600" font-size="14" fill="#4B5563">견적 요청 →</text>
+
+  <!-- Divider -->
+  <line x1="464" y1="636" x2="1024" y2="636" stroke="#EAECEF" stroke-width="1"/>
+
+  <!-- Key features -->
+  <text x="464" y="660" font-size="13" font-weight="600" fill="#111827">핵심 특징</text>
+  <text x="464" y="680" font-size="12" fill="#4B5563">• 탄소강 소재로 내구성 우수, 날카로운 절삭면</text>
+  <text x="464" y="696" font-size="12" fill="#4B5563">• 인체공학적 그립 손잡이, 작업 피로 감소</text>
+  <text x="464" y="712" font-size="12" fill="#4B5563">• KS 인증, 전문가용 수공구 기준 적합</text>
+
+  <!-- Spec table -->
+  <text x="464" y="740" font-size="13" font-weight="600" fill="#111827">기술 사양</text>
+  <rect x="464" y="748" width="560" height="28" fill="#F4F5F7"/>
+  <text x="472" y="766" font-size="11" fill="#9CA3AF" font-weight="600">항목</text>
+  <text x="660" y="766" font-size="11" fill="#9CA3AF" font-weight="600">사양</text>
+  <rect x="464" y="776" width="560" height="24" fill="#FFFFFF" stroke="#EAECEF" stroke-width="1"/>
+  <text x="472" y="792" font-size="12" fill="#4B5563">전장</text>
+  <text x="660" y="792" font-size="12" fill="#111827">150mm</text>
+  <rect x="464" y="800" width="560" height="24" fill="#F4F5F7"/>
+  <text x="472" y="816" font-size="12" fill="#4B5563">소재</text>
+  <text x="660" y="816" font-size="12" fill="#111827">탄소강 (Carbon Steel)</text>
+  <rect x="464" y="824" width="560" height="24" fill="#FFFFFF" stroke="#EAECEF" stroke-width="1"/>
+  <text x="472" y="840" font-size="12" fill="#4B5563">무게</text>
+  <text x="660" y="840" font-size="12" fill="#111827">120g</text>
+
+  <!-- Related products -->
+  <text x="464" y="874" font-size="13" font-weight="600" fill="#111827">관련 소모품 · 대체상품</text>
+  <rect x="464" y="882" width="132" height="60" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="476" y="900" font-size="10" fill="#9CA3AF">[ 이미지 ]</text>
+  <text x="476" y="920" font-size="11" fill="#111827" font-weight="600">니퍼 175mm</text>
+  <text x="476" y="934" font-size="10" fill="#E8610A">대체상품</text>
+  <rect x="604" y="882" width="132" height="60" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="616" y="900" font-size="10" fill="#9CA3AF">[ 이미지 ]</text>
+  <text x="616" y="920" font-size="11" fill="#111827" font-weight="600">절단 오일</text>
+  <text x="616" y="934" font-size="10" fill="#4B5563">소모품</text>
+
+  <text x="24" y="950" font-size="10" fill="#9CA3AF">WF-05 · PC 상품상세 · 1440px · TUL B2B Platform</text>
+</svg>
