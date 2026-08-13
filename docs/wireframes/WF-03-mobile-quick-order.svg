@@ -37,8 +37,9 @@
   <!-- Quantity -->
   <rect x="228" y="208" width="44" height="32" rx="4" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
   <text x="240" y="228" font-size="13" fill="#111827">20</text>
-  <!-- Price -->
-  <text x="280" y="228" font-size="11" fill="#0F2044" font-weight="600">₩12,800</text>
+  <!-- Price: N-150 qty=20 → tier 2 → ₩11,500 -->
+  <text x="280" y="228" font-size="11" fill="#E8610A" font-weight="600">₩11,500</text>
+  <text x="280" y="242" font-size="8" fill="#9CA3AF">10개이상 구간</text>
   <!-- Delete -->
   <text x="346" y="228" font-size="16" fill="#9CA3AF">✕</text>
 
@@ -85,7 +86,10 @@
   <text x="240" y="420" font-size="13" fill="#DC2626" font-weight="600">3</text>
   <text x="280" y="420" font-size="11" fill="#9CA3AF">MOQ 10</text>
   <text x="346" y="420" font-size="16" fill="#9CA3AF">✕</text>
-  <text x="36" y="452" font-size="10" fill="#D97706">▲ MOQ 10 이상 필요 · 10으로 자동 수정</text>
+  <text x="36" y="452" font-size="10" fill="#B45309">▲ MOQ 10 이상 필요 (현재 3개 입력)</text>
+  <!-- MOQ fix CTA -->
+  <rect x="36" y="458" width="100" height="28" rx="4" fill="#FFFFFF" stroke="#D97706" stroke-width="1.5"/>
+  <text x="46" y="476" font-size="11" fill="#B45309" font-weight="600">10으로 맞추기</text>
 
   <!-- ROW 5 - Empty row (add more) -->
   <rect x="12" y="460" width="366" height="52" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1" stroke-dasharray="6,3"/>
@@ -111,7 +115,8 @@
   <line x1="20" y1="668" x2="370" y2="668" stroke="#EAECEF" stroke-width="1"/>
   <text x="20" y="688" font-size="12" fill="#4B5563">소계 (VAT 별도)</text>
   <text x="296" y="688" font-size="14" font-weight="700" fill="#0F2044">₩345,800</text>
-  <text x="20" y="706" font-size="10" fill="#9CA3AF">부가세 10%</text>
+  <!-- VAT: policy pending -->
+  <text x="20" y="706" font-size="10" fill="#9CA3AF">부가세 (DEMO - tax_exclusive 예시)</text>
   <text x="316" y="706" font-size="10" fill="#9CA3AF">₩34,580</text>
   <text x="20" y="724" font-size="13" font-weight="700" fill="#111827">합계</text>
   <text x="290" y="724" font-size="16" font-weight="700" fill="#0F2044">₩380,380</text>
@@ -119,22 +124,31 @@
   <!-- CTA Buttons -->
   <rect x="12" y="748" width="174" height="52" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
   <text x="58" y="778" font-size="13" fill="#4B5563">저장</text>
-  <rect x="198" y="748" width="178" height="52" rx="8" fill="#0F2044"/>
-  <text x="240" y="778" font-size="13" fill="#FFFFFF" font-weight="700">주문 요청하기 →</text>
+  <!-- CTA: disabled when error rows exist -->
+  <rect x="198" y="748" width="178" height="52" rx="8" fill="#9CA3AF"/>
+  <text x="214" y="768" font-size="11" fill="#FFFFFF" font-weight="700">오류 2건 해결 후</text>
+  <text x="218" y="784" font-size="11" fill="#FFFFFF" font-weight="700">주문 요청 가능</text>
 
   <!-- Bottom Nav -->
   <rect x="0" y="1144" width="390" height="56" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
-  <text x="30" y="1168" font-size="18">🏠</text>
-  <text x="24" y="1188" font-size="10" fill="#9CA3AF">홈</text>
-  <text x="108" y="1168" font-size="18">📂</text>
+  <!-- [Home icon] text substitute for emoji -->
+  <rect x="8" y="1148" width="60" height="40" rx="4" fill="#EFF6FF"/>
+  <text x="20" y="1168" font-size="11" fill="#0F2044" font-weight="600">[홈]</text>
+  <text x="20" y="1186" font-size="10" fill="#0F2044">홈</text>
+  <!-- [Category] -->
+  <text x="96" y="1170" font-size="11" fill="#9CA3AF">[카테고리]</text>
   <text x="96" y="1188" font-size="10" fill="#9CA3AF">카테고리</text>
-  <rect x="156" y="1140" width="78" height="64" rx="8" fill="#E8610A"/>
-  <text x="186" y="1168" font-size="18">⚡</text>
-  <text x="164" y="1188" font-size="10" fill="#FFFFFF" font-weight="700">빠른주문</text>
-  <text x="264" y="1168" font-size="18">📋</text>
+  <!-- Quick order: active -->
+  <rect x="156" y="1140" width="78" height="64" rx="8" fill="#C2410C"/>
+  <text x="170" y="1166" font-size="11" fill="#FFFFFF" font-weight="700">[빠른주문]</text>
+  <text x="168" y="1184" font-size="10" fill="#FFFFFF" font-weight="700">빠른주문</text>
+  <!-- [Orders] -->
+  <text x="252" y="1170" font-size="11" fill="#9CA3AF">[주문내역]</text>
   <text x="254" y="1188" font-size="10" fill="#9CA3AF">주문내역</text>
-  <text x="342" y="1168" font-size="18">👤</text>
-  <text x="340" y="1188" font-size="10" fill="#9CA3AF">마이</text>
+  <!-- [My] -->
+  <text x="336" y="1170" font-size="11" fill="#9CA3AF">[마이]</text>
+  <text x="336" y="1188" font-size="10" fill="#9CA3AF">마이</text>
 
-  <text x="12" y="1196" font-size="9" fill="#9CA3AF">WF-03 · 모바일 빠른 주문 · 390px · TUL B2B Platform</text>
+  <text x="12" y="1196" font-size="9" fill="#9CA3AF">WF-03 · 모바일 빠른 주문 · 390px · TUL B2B Platform · DEMO DATA</text>
+
 </svg>

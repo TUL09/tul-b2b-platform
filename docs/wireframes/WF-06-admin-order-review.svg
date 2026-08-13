@@ -25,6 +25,7 @@
   <!-- MAIN CONTENT AREA -->
   <!-- Page title + Order info -->
   <text x="224" y="88" font-size="20" font-weight="700" fill="#111827">주문 요청 검토</text>
+  <!-- Status: admin screen can show internal code as reference -->
   <rect x="224" y="92" width="120" height="24" rx="4" fill="#EFF6FF"/>
   <text x="232" y="108" font-size="11" fill="#2563EB" font-weight="600">■ 검토중 (under_review)</text>
   <text x="224" y="120" font-size="13" fill="#9CA3AF">주문요청 #ORD-2026-0847 · 2026-08-05 요청</text>
@@ -39,7 +40,8 @@
   <text x="236" y="156" font-size="13" font-weight="600" fill="#111827">거래처 정보</text>
   <text x="236" y="176" font-size="12" fill="#4B5563">회사명: ㈜한국철강자재</text>
   <text x="236" y="192" font-size="12" fill="#4B5563">담당자: 김민수 (010-1234-5678)</text>
-  <text x="560" y="176" font-size="12" fill="#4B5563">가격등급: B등급</text>
+  <!-- admin sees internal grade; buyer-facing screens hide this -->
+  <text x="560" y="176" font-size="12" fill="#4B5563">가격등급: B등급 (관리자전용)</text>
   <text x="560" y="192" font-size="12" fill="#4B5563">배송방식: 택배</text>
   <text x="736" y="176" font-size="12" fill="#4B5563">요청 배송지: 서울시 강남구 ...</text>
 
@@ -64,19 +66,19 @@
   <text x="500" y="318" font-size="12" fill="#111827">EA</text>
   <text x="560" y="318" font-size="12" fill="#111827">20</text>
   <text x="640" y="318" font-size="12" fill="#9CA3AF">₩12,000</text>
-  <!-- Applied price with source info -->
-  <text x="740" y="310" font-size="13" font-weight="700" fill="#0F2044">₩12,800</text>
-  <rect x="740" y="316" width="120" height="18" rx="3" fill="#EFF6FF"/>
-  <text x="746" y="328" font-size="10" fill="#2563EB">B등급 가격표 · 1~9EA</text>
+  <!-- Applied price: qty 20 → tier 2 → ₩11,500 (admin can see source) -->
+  <text x="740" y="310" font-size="13" font-weight="700" fill="#E8610A">₩11,500</text>
+  <rect x="740" y="316" width="130" height="18" rx="3" fill="#EFF6FF"/>
+  <text x="746" y="328" font-size="10" fill="#2563EB">거래처 적용가 · 10~49EA구간</text>
   <!-- Stock -->
   <text x="920" y="310" font-size="12" fill="#16A34A">■ 재고있음</text>
   <text x="920" y="326" font-size="11" fill="#9CA3AF">1~2일</text>
   <!-- Accepted qty (editable) -->
   <rect x="1040" y="296" width="80" height="32" rx="4" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
   <text x="1068" y="316" font-size="13" fill="#111827">20</text>
-  <!-- Line status -->
+  <!-- Line status: Korean label + code for admin -->
   <rect x="1140" y="298" width="80" height="24" rx="4" fill="#F0FDF4"/>
-  <text x="1148" y="314" font-size="11" fill="#16A34A" font-weight="600">accepted</text>
+  <text x="1148" y="314" font-size="11" fill="#16A34A" font-weight="600">수락 (accepted)</text>
   <!-- Change reason -->
   <text x="1280" y="318" font-size="12" fill="#9CA3AF">-</text>
 
@@ -95,53 +97,54 @@
   <rect x="1040" y="356" width="80" height="32" rx="4" fill="#FFFFFF" stroke="#D97706" stroke-width="1.5"/>
   <text x="1068" y="376" font-size="13" fill="#D97706" font-weight="700">10</text>
   <rect x="1140" y="358" width="80" height="24" rx="4" fill="#F0FDF4"/>
-  <text x="1148" y="374" font-size="11" fill="#16A34A" font-weight="600">accepted</text>
+  <text x="1148" y="374" font-size="11" fill="#16A34A" font-weight="600">수락 (accepted)</text>
   <text x="1280" y="370" font-size="11" fill="#D97706">수량구간</text>
   <text x="1280" y="384" font-size="11" fill="#D97706">가격 적용</text>
   <text x="1244" y="398" font-size="9" fill="#D97706">▲ 요청가 → 시스템 가격 자동 보정</text>
 
-  <!-- Item Row 3 - Partially rejected / backordered -->
-  <rect x="224" y="416" width="1200" height="72" fill="#FEF2F2" stroke="#DC2626" stroke-width="1"/>
+  <!-- Item Row 3: DS-PH2, qty=50, FULL accept + partial backorder -->
+  <!-- accepted=50, backordered=20 (within accepted), immediate=30 -->
+  <rect x="224" y="416" width="1200" height="80" fill="#FFF7ED" stroke="#D97706" stroke-width="1"/>
   <text x="232" y="438" font-size="13" font-weight="600" fill="#111827">TTC 드라이버 PH#2</text>
-  <text x="232" y="454" font-size="11" fill="#9CA3AF" font-family="monospace">DS-PH2</text>
+  <text x="232" y="454" font-size="11" fill="#4B5563" font-family="monospace">DS-PH2</text>
   <text x="500" y="446" font-size="12" fill="#111827">EA</text>
   <text x="560" y="446" font-size="12" fill="#111827">50</text>
   <text x="640" y="446" font-size="12" fill="#9CA3AF">₩5,800</text>
   <text x="740" y="438" font-size="13" font-weight="700" fill="#0F2044">₩5,800</text>
   <rect x="740" y="444" width="80" height="18" rx="3" fill="#EFF6FF"/>
-  <text x="746" y="456" font-size="10" fill="#2563EB">기본 B2B가</text>
-  <text x="920" y="438" font-size="12" fill="#D97706">■ 재고 30</text>
-  <text x="920" y="454" font-size="11" fill="#9CA3AF">나머지 ~14일</text>
-  <!-- Partial: accepted 30, backordered 20 -->
-  <rect x="1040" y="428" width="80" height="24" rx="4" fill="#FFFFFF" stroke="#DC2626" stroke-width="1.5"/>
-  <text x="1052" y="444" font-size="11" fill="#DC2626" font-weight="700">30 수락</text>
-  <rect x="1040" y="456" width="80" height="24" rx="4" fill="#FFF7ED" stroke="#D97706" stroke-width="1"/>
-  <text x="1048" y="472" font-size="11" fill="#D97706">20 백오더</text>
-  <rect x="1140" y="430" width="88" height="24" rx="4" fill="#FEF2F2"/>
-  <text x="1146" y="446" font-size="11" fill="#DC2626" font-weight="600">partial</text>
-  <rect x="1140" y="458" width="88" height="24" rx="4" fill="#FFF7ED"/>
-  <text x="1148" y="474" font-size="11" fill="#D97706" font-weight="600">backordered</text>
-  <!-- Change reason input -->
+  <text x="746" y="456" font-size="10" fill="#2563EB">거래처 적용가</text>
+  <text x="920" y="438" font-size="12" fill="#D97706">▲ 입고예정</text>
+  <text x="920" y="454" font-size="11" fill="#4B5563">즉시 30 / ~14일</text>
+  <!-- accepted=50 total (backorder within accepted) -->
+  <rect x="1040" y="428" width="120" height="24" rx="4" fill="#FFFFFF" stroke="#D97706" stroke-width="1.5"/>
+  <text x="1048" y="444" font-size="11" fill="#D97706" font-weight="700">확정 50 전체수락</text>
+  <text x="1040" y="460" font-size="9" fill="#4B5563">즉시 30 / 백오더 20</text>
+  <!-- Status badges -->
+  <rect x="1140" y="430" width="100" height="24" rx="4" fill="#FFF7ED" stroke="#D97706"/>
+  <text x="1148" y="446" font-size="11" fill="#B45309" font-weight="600">백오더포함 (backordered)</text>
+  <!-- Change reason -->
   <rect x="1280" y="428" width="136" height="56" rx="4" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
-  <text x="1288" y="448" font-size="11" fill="#9CA3AF">재고 부족, 30개</text>
-  <text x="1288" y="464" font-size="11" fill="#9CA3AF">즉시 출고 가능.</text>
-  <text x="1288" y="480" font-size="11" fill="#9CA3AF">20개 백오더</text>
+  <text x="1288" y="448" font-size="11" fill="#9CA3AF">재고 30 즉시,</text>
+  <text x="1288" y="464" font-size="11" fill="#9CA3AF">20개 입고대기</text>
+  <text x="1288" y="480" font-size="11" fill="#9CA3AF">(백오더)</text>
 
   <!-- REVISION COMPARISON PANEL -->
   <text x="224" y="514" font-size="14" font-weight="700" fill="#111827">수정안 발행 (변경 내용 비교)</text>
   <rect x="224" y="522" width="1200" height="100" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
-  <!-- Before -->
+  <!-- Before: original request -->
   <rect x="236" y="530" width="580" height="84" rx="6" fill="#FEF2F2"/>
   <text x="248" y="550" font-size="12" font-weight="600" fill="#DC2626">원본 (구매자 요청)</text>
   <text x="248" y="568" font-size="12" fill="#4B5563">DS-PH2 · EA · 50개 · @₩5,800 = ₩290,000</text>
   <text x="248" y="586" font-size="12" fill="#4B5563">N-150 · EA · 20개 · @₩12,000 = ₩240,000</text>
-  <text x="248" y="604" font-size="13" font-weight="700" fill="#DC2626">합계 ₩530,000 (VAT 별도)</text>
-  <!-- After -->
+  <text x="248" y="604" font-size="11" fill="#9CA3AF">변경 품목 소계: ₩530,000 (DEMO)</text>
+  <!-- After: full accept + backorder semantics -->
   <rect x="832" y="530" width="580" height="84" rx="6" fill="#F0FDF4"/>
   <text x="844" y="550" font-size="12" font-weight="600" fill="#16A34A">수정안 (운영사 검토 후)</text>
-  <text x="844" y="568" font-size="12" fill="#4B5563">DS-PH2 · EA · 30 수락 + 20 백오더</text>
-  <text x="844" y="586" font-size="12" fill="#4B5563">N-150 · EA · 20개 · @₩12,800 = ₩256,000</text>
-  <text x="844" y="604" font-size="13" font-weight="700" fill="#16A34A">합계 ₩430,000 (VAT 별도)</text>
+  <!-- DS-PH2: accepted=50, immediate=30, backordered=20 -->
+  <text x="844" y="568" font-size="12" fill="#4B5563">DS-PH2 · EA · 확정 50 (즉시 30 / 백오더 20)</text>
+  <text x="844" y="586" font-size="12" fill="#4B5563">N-150 · EA · 20개 · @₩11,500 = ₩230,000</text>
+  <!-- 수정된 품목 소계 (not 전체 합계) -->
+  <text x="844" y="604" font-size="11" fill="#9CA3AF">변경 품목 소계: ₩520,000 (VAT 대기 수량 포함 | DEMO)</text>
 
   <!-- CUSTOMER APPROVAL FLAG -->
   <rect x="224" y="636" width="1200" height="48" rx="8" fill="#FFF7ED" stroke="#D97706" stroke-width="1"/>
@@ -169,10 +172,10 @@
   <!-- Approve without revision -->
   <rect x="520" y="968" width="200" height="40" rx="6" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.5"/>
   <text x="540" y="992" font-size="13" fill="#16A34A" font-weight="600">변경 없이 확정</text>
-  <!-- Issue revision (primary CTA) -->
-  <rect x="1180" y="960" width="240" height="56" rx="8" fill="#E8610A"/>
+  <!-- Issue revision (primary CTA): orange-action for AA -->
+  <rect x="1180" y="960" width="240" height="56" rx="8" fill="#C2410C"/>
   <text x="1220" y="985" font-size="15" fill="#FFFFFF" font-weight="700">수정안 발행 →</text>
   <text x="1228" y="1002" font-size="10" fill="#FFF3ED">구매자 재승인 요청 포함</text>
 
-  <text x="24" y="1072" font-size="10" fill="#9CA3AF">WF-06 · 관리자 주문검토 · 1440px · TUL B2B Platform</text>
+  <text x="24" y="1072" font-size="10" fill="#9CA3AF">WF-06 · 관리자 주문검토 · 1440px · TUL B2B Platform · DEMO DATA</text>
 </svg>

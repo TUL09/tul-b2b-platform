@@ -71,8 +71,9 @@
   <text x="92" y="366" font-size="13" font-weight="600" fill="#111827">니퍼 175mm</text>
   <text x="92" y="382" font-size="11" fill="#9CA3AF">N-175 / 175mm / 탄소강</text>
   <rect x="92" y="390" width="48" height="18" rx="3" fill="#FFF7ED"/>
-  <text x="97" y="403" font-size="10" fill="#D97706" font-weight="600">▲ 입고예정</text>
-  <text x="148" y="403" font-size="10" fill="#9CA3AF">8/12 입고</text>
+  <!-- 입고예정 OD-024 미확정 임시 표시: 관리자 확인 후 주문접수 -->
+  <text x="97" y="403" font-size="10" fill="#D97706" font-weight="600">▲ 입고예정 · 관리자 확인 후 주문</text>
+  <text x="230" y="403" font-size="10" fill="#9CA3AF">(8/12 입고 예상)</text>
   <rect x="200" y="390" width="28" height="18" rx="3" fill="#EFF6FF"/>
   <text x="205" y="403" font-size="10" fill="#2563EB" font-weight="600">EA</text>
   <text x="20" y="424" font-size="16" font-weight="700" fill="#0F2044">₩15,600</text>
@@ -83,8 +84,9 @@
   <text x="268" y="431" font-size="13" fill="#111827">10</text>
   <rect x="300" y="413" width="32" height="28" rx="4" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
   <text x="312" y="431" font-size="16" fill="#4B5563">+</text>
+  <!-- 장바구니 버튼: 이모지 제거 -->
   <rect x="336" y="413" width="32" height="28" rx="4" fill="#9CA3AF"/>
-  <text x="348" y="431" font-size="14" fill="#FFFFFF">🛒</text>
+  <text x="341" y="431" font-size="10" fill="#FFFFFF" font-weight="600">[담기]</text>
 
   <!-- PRODUCT CARD 3 - MOQ Error state -->
   <rect x="12" y="456" width="366" height="140" rx="8" fill="#FFFFFF" stroke="#DC2626" stroke-width="1.5"/>
@@ -132,18 +134,23 @@
   <text x="150" y="766" font-size="13" fill="#4B5563">더 보기 (24개 더)</text>
 
   <!-- Bottom Nav -->
-  <rect x="0" y="1344" width="390" height="56" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
-  <text x="30" y="1368" font-size="18">🏠</text>
-  <text x="24" y="1388" font-size="10" fill="#9CA3AF">홈</text>
-  <text x="108" y="1368" font-size="18">📂</text>
-  <text x="96" y="1388" font-size="10" fill="#9CA3AF">카테고리</text>
-  <rect x="156" y="1340" width="78" height="64" rx="8" fill="#0F2044"/>
-  <text x="186" y="1368" font-size="18">⚡</text>
-  <text x="164" y="1388" font-size="10" fill="#FFFFFF" font-weight="600">빠른주문</text>
-  <text x="264" y="1368" font-size="18">📋</text>
-  <text x="254" y="1388" font-size="10" fill="#9CA3AF">주문내역</text>
-  <text x="342" y="1368" font-size="18">👤</text>
-  <text x="340" y="1388" font-size="10" fill="#9CA3AF">마이</text>
+  <!-- Bottom Nav: 카테고리 탭 활성 -->
+  <text x="20" y="1366" font-size="11" fill="#9CA3AF">[홈]</text>
+  <text x="24" y="1386" font-size="10" fill="#9CA3AF">홈</text>
+  <!-- Category: active -->
+  <rect x="78" y="1344" width="78" height="56" fill="#EFF6FF"/>
+  <text x="96" y="1366" font-size="11" fill="#0F2044" font-weight="700">[카테고리]</text>
+  <text x="96" y="1386" font-size="10" fill="#0F2044" font-weight="600">카테고리</text>
+  <!-- Quick order -->
+  <rect x="156" y="1340" width="78" height="64" rx="8" fill="#1E2A38"/>
+  <text x="168" y="1366" font-size="11" fill="#FFFFFF">[빠른주문]</text>
+  <text x="164" y="1386" font-size="10" fill="#9CA3AF" font-weight="600">빠른주문</text>
+  <!-- Orders -->
+  <text x="252" y="1366" font-size="11" fill="#9CA3AF">[주문내역]</text>
+  <text x="254" y="1386" font-size="10" fill="#9CA3AF">주문내역</text>
+  <!-- My -->
+  <text x="336" y="1366" font-size="11" fill="#9CA3AF">[마이]</text>
+  <text x="336" y="1386" font-size="10" fill="#9CA3AF">마이</text>
 
-  <text x="12" y="1398" font-size="9" fill="#9CA3AF">WF-02 · 모바일 상품목록 · 390px · TUL B2B Platform</text>
+  <text x="12" y="1398" font-size="9" fill="#9CA3AF">WF-02 · 모바일 상품목록 · 390px · TUL B2B Platform · DEMO DATA</text>
 </svg>

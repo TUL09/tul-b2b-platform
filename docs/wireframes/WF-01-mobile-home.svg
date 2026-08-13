@@ -159,22 +159,22 @@
   <rect x="0" y="1544" width="390" height="56" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
   <!-- Home tab (active) -->
   <rect x="0" y="1544" width="78" height="56" fill="#EFF6FF"/>
-  <text x="30" y="1568" font-size="18">🏠</text>
-  <text x="24" y="1588" font-size="10" fill="#0F2044" font-weight="600">홈</text>
+  <text x="24" y="1566" font-size="11" fill="#0F2044" font-weight="700">[홈]</text>
+  <text x="24" y="1586" font-size="10" fill="#0F2044" font-weight="600">홈</text>
   <!-- Category tab -->
-  <text x="108" y="1568" font-size="18">📂</text>
-  <text x="96" y="1588" font-size="10" fill="#9CA3AF">카테고리</text>
-  <!-- Quick order tab (emphasized) -->
-  <rect x="156" y="1540" width="78" height="64" rx="8" fill="#0F2044"/>
-  <text x="186" y="1568" font-size="18">⚡</text>
-  <text x="164" y="1588" font-size="10" fill="#FFFFFF" font-weight="600">빠른주문</text>
+  <text x="96" y="1568" font-size="11" fill="#9CA3AF">[카테고리]</text>
+  <text x="96" y="1586" font-size="10" fill="#9CA3AF">카테고리</text>
+  <!-- Quick order tab (emphasized, not active) -->
+  <rect x="156" y="1540" width="78" height="64" rx="8" fill="#1E2A38"/>
+  <text x="168" y="1566" font-size="11" fill="#FFFFFF">[빠른주문]</text>
+  <text x="164" y="1586" font-size="10" fill="#9CA3AF" font-weight="600">빠른주문</text>
   <!-- Orders tab -->
-  <text x="264" y="1568" font-size="18">📋</text>
-  <text x="254" y="1588" font-size="10" fill="#9CA3AF">주문내역</text>
+  <text x="252" y="1568" font-size="11" fill="#9CA3AF">[주문내역]</text>
+  <text x="254" y="1586" font-size="10" fill="#9CA3AF">주문내역</text>
   <!-- My tab -->
-  <text x="342" y="1568" font-size="18">👤</text>
-  <text x="340" y="1588" font-size="10" fill="#9CA3AF">마이</text>
+  <text x="336" y="1568" font-size="11" fill="#9CA3AF">[마이]</text>
+  <text x="336" y="1586" font-size="10" fill="#9CA3AF">마이</text>
 
   <!-- Status bar annotation -->
-  <text x="0" y="1595" font-size="9" fill="#9CA3AF" x="12">WF-01 · 모바일 거래처 홈 · 390px · TUL B2B Platform</text>
+  <text x="12" y="1595" font-size="9" fill="#9CA3AF">WF-01 · 모바일 거래처 홈 · 390px · TUL B2B Platform · DEMO DATA</text>
 </svg>

@@ -172,16 +172,18 @@
   <text x="800" y="330" font-size="14" font-weight="700" fill="#0F2044">₩9,200</text>
   <text x="900" y="326" font-size="11" fill="#D97706">8/12 입고</text>
   <text x="900" y="340" font-size="10" fill="#9CA3AF">~10일</text>
+  <!-- 입고예정 OD-024 미확정 임시 표시: 관리자 확인 후 주문 접수 -->
   <rect x="972" y="318" width="68" height="22" rx="3" fill="#FFF7ED"/>
-  <text x="978" y="333" font-size="10" fill="#D97706" font-weight="600">▲ 입고예정</text>
+  <text x="976" y="333" font-size="10" fill="#D97706" font-weight="600">▲ 입고예정</text>
   <rect x="1052" y="315" width="28" height="28" rx="4" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
   <text x="1062" y="333" font-size="16" fill="#4B5563">−</text>
   <rect x="1084" y="315" width="48" height="28" rx="4" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
   <text x="1098" y="333" font-size="13" fill="#111827">10</text>
   <rect x="1136" y="315" width="28" height="28" rx="4" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
   <text x="1146" y="333" font-size="16" fill="#4B5563">+</text>
-  <rect x="1176" y="311" width="236" height="36" rx="6" fill="#D97706"/>
-  <text x="1220" y="333" font-size="12" fill="#FFFFFF" font-weight="600">🛒 장바구니 추가 (입고예정)</text>
+  <!-- 입고예정 OD-024 임시 표시 -->
+  <rect x="1176" y="311" width="252" height="36" rx="6" fill="#D97706"/>
+  <text x="1196" y="333" font-size="12" fill="#FFFFFF" font-weight="600">[담기] 장바구니 추가 (입고후 출고)</text>
 
   <!-- ROW 4 - Quote inquiry only -->
   <rect x="260" y="356" width="1164" height="52" fill="#FFFFFF" stroke="#EAECEF" stroke-width="1"/>
@@ -222,5 +224,5 @@
   <rect x="1388" y="499" width="28" height="24" rx="4" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
   <text x="1396" y="515" font-size="11" fill="#4B5563">›</text>
 
-  <text x="24" y="890" font-size="10" fill="#9CA3AF">WF-04 · PC 상품목록 · 1440px · TUL B2B Platform</text>
+  <text x="24" y="890" font-size="10" fill="#9CA3AF">WF-04 · PC 상품목록 · 1440px · TUL B2B Platform · DEMO DATA</text>
 </svg>
