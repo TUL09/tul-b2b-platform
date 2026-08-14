@@ -6,6 +6,59 @@
 
 ---
 
+## [Phase 0] 2026-08-13 — Checkpoint C1 Correction Pass
+
+문서 정합성 수정 (기능 추가 없음):
+
+**CONTENT_SYSTEM.md**:
+- §7 자산권리: `content_owner`, `review_due_at` 필드 추가
+- §11 사실 주장 검증 필드 (Claim Verification) 신설: `claim_source`, `claim_verified_by`, `claim_verified_at`, `claim_expiry_at`, 금지 표현 목록
+- §12 렌더링 시 결합 원칙 신설: 가격/재고 실시간 조회 분리 원칙
+- §13 금지사항: '근거 없는 주장 금지', 'DEMO 데이터 명시' 추가
+
+**WIREFRAME_INDEX.md**:
+- "Cross-Screen Demo Data Matrix" 섹션 신설 (SKU 마스터, 수량구간 가격, 주문 DEMO, 품목 수량 모델, 금액 정합성, 탭 활성 규칙, 입고예정 통일 정책)
+- 검증 체크리스트 확장: DEMO 표시, 내부코드 비노출, accepted/backorder 의미 정합, CTA 비활성, 44px, VAT 미확정 항목 추가
+
+**docs/wireframes/*.svg (8개 전체)**:
+- WF-01: 하단탭 이모지→텍스트, DEMO 표시 추가
+- WF-02: 입고예정 문구 OD-024 정책 통일, 장바구니 이모지→텍스트, 카테고리 탭 활성, DEMO 표시
+- WF-03: N-150 수량 20 → 구간2 ₩11,500 수정, MOQ '자동수정' 제거 → '10으로 맞추기' CTA, 주문 CTA 비활성 (오류 시), VAT 단정 제거, 빠른주문 탭 활성, DEMO 표시
+- WF-04: 입고예정 문구 통일, 장바구니 이모지→텍스트, DEMO 표시
+- WF-05: '거래처 적용가'로 내부 가격표명 제거, 이모지 제거, DEMO 표시
+- WF-06: N-150 단가 구간2 ₩11,500 수정, DS-PH2 accepted/backorder 의미 정합 (전체수락+일부백오더), 가격표명 '거래처 적용가'로 수정, 수정안 비교 금액 정합, CTA AA 색상, DEMO 표시
+- WF-07: `brand_id`→`brand_code`, 버튼 기술용어 제거, DEMO 표시
+- WF-08: 구매자 화면 내부코드 제거, DS-PH2 accepted/backorder 의미 정합, 금액 수정 (₩520,000), VAT 표현 수정, 주문내역 탭 활성, AA CTA 색상, DEMO 표시
+
+---
+
+## [Phase 0] 2026-08-07 — Checkpoint C1 디자인·콘텐츠 시스템
+
+
+Checkpoint C1 신규 문서 3개:
+- `DESIGN_SYSTEM.md` — Industrial Intelligence 디자인 시스템 SSOT: 색상 토큰(20종), 타이포그래피, 반응형 기준(390/1440px), 스페이싱(4px 단위), 18개 핵심 컴포넌트(검색바/UOM/가격표/수량단계/수정안비교/Import오류 등), 4개 주문상태 독립 표현 원칙, 접근성 규칙
+- `CONTENT_SYSTEM.md` — 콘텐츠 유형 8종(신제품브리핑/브랜드스포트라이트/가격경쟁/기획전/연관상품/카탈로그/브랜드이야기/공지), 상태 7단계(draft→archived), 콘텐츠 타깃, 자산 권리 관리, 성과 측정 지표, 금지사항
+- `WIREFRAME_INDEX.md` — 8개 핵심 화면 인덱스, 검증 체크리스트
+
+와이어프레임 8개 (`docs/wireframes/`):
+- `WF-01-mobile-home.svg` — 모바일 거래처 홈 (390px, 검색우선, 재주문)
+- `WF-02-mobile-product-list.svg` — 모바일 상품목록 (인라인장바구니, MOQ오류)
+- `WF-03-mobile-quick-order.svg` — 모바일 빠른주문 (다행입력, 이전주문불러오기)
+- `WF-04-pc-product-list.svg` — PC 상품목록 (좌측필터, 컴팩트표, 다중선택)
+- `WF-05-pc-product-detail.svg` — PC 상품상세 (UOM선택, 수량구간강조, 소계)
+- `WF-06-admin-order-review.svg` — 관리자 주문검토 (원본↔수정안, 부분확정)
+- `WF-07-admin-import.svg` — 관리자 Import (Blocking Error/Warning, STRICT_ATOMIC)
+- `WF-08-buyer-order-status.svg` — 구매자 주문상태 (4개 상태 독립, 타임라인)
+
+운영 문서 갱신:
+- `DECISION_LOG.md` — DEC-036~040 추가 (5개)
+- `OPEN_DECISIONS.md` — OD-018 해결, OD-023 추가
+- `CHANGELOG.md` — 이력 업데이트
+
+브랜치: `docs/checkpoint-c1-design-content`
+
+---
+
 ## [Phase 0] 2026-07-30 — Checkpoint B 최종 종결 패치
 
 접근·정합성 수정 (Checkpoint B Final Closure Patch):

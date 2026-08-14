@@ -13,10 +13,10 @@
 
 | ID | 항목 | 설명 | 임시 처리 | 결정 필요 시점 | 영향 범위 |
 |---|---|---|---|---|---|
-| OD-001 | 운영사명 | 실제 운영사 명칭 | `[운영사명]` placeholder | Phase 1 | 전체 UI, 문서 |
-| OD-002 | 플랫폼명 | B2B몰 이름 | `[플랫폼명]` placeholder | Phase 1 | 전체 UI, 도메인 |
-| OD-003 | 도메인 | 서비스 URL | 미정 | Phase 2 | DNS, 배포 |
-| OD-004 | 로고·브랜드 색상 | 브랜드 아이덴티티 | Industrial Intelligence 컨셉 임시 적용 | Phase 1 | 디자인 |
+| ~~OD-001~~ | ~~운영사명~~ | ~~실제 운영사 명칭~~ | **✅ 해결 2026-08-07** BaseOn(베이스온) · DEC-036 | - | - |
+| ~~OD-002~~ | ~~플랫폼명~~ | ~~B2B몰 이름~~ | **✅ 해결 2026-08-07** TUL · DEC-036 | - | - |
+| ~~OD-003~~ | ~~도메인~~ | ~~서비스 URL~~ | **✅ 해결 2026-08-07** tul.co.kr · DEC-036 | - | - |
+| OD-004 | 로고·브랜드 색상 | 브랜드 아이덴티티 | Industrial Intelligence 컨셉 확정(DEC-037). 로고 임의 설계 금지. 실제 로고 파일은 Phase 1 시작 전 제공 필요 | Phase 1 착수 전 | 디자인 |
 | OD-005 | VAT 계산기준 | 품목 행별 vs 주문 합계 계산 | `tax_calculation_basis` 시스템 설정으로 설계 | Phase 4 | 가격, 주문, 세금계산서 |
 | OD-006 | VAT 절사·반올림 | floor / round / ceil | `tax_rounding_mode` 시스템 설정으로 설계 | Phase 4 | 가격, 주문, 세금계산서 |
 | OD-007 | VAT 포함가격 역산 | 세금 포함가에서 공급가 역산 방식 | 미정 | Phase 4 | 가격 계산 |
@@ -30,9 +30,12 @@
 | OD-015 | UOM 운영단위 목록 | EA, PACK, BOX 외 실제 사용 단위 | EA, PACK, SET, BOX 기본 제공 | Phase 3 | 상품, 가격, 주문 |
 | OD-016 | 수량구간 가격 적용 범위 | 초기 수량구간 할인을 적용할 상품 범위 | 전체 구조 준비, 초기 적용 범위는 운영 판단 | Phase 4 | 가격 |
 | OD-017 | 이카운트 연동 범위 | 재고, 거래명세서, 세금계산서, 입출고 중 어디까지 | MVP 제외, ecount_item_code 필드만 준비 | Phase 7 이후 | 재고, 정산 |
-| OD-018 | GitHub 저장소 | 비공개 저장소 URL 및 인증정보 | 로컬 Git까지만 초기화, 저장소 미연결 | 즉시 | 형상관리 |
+| ~~OD-018~~ | ~~GitHub 저장소~~ | ~~비공개 저장소 URL 및 인증정보~~ | **✅ 해결** https://github.com/TUL09/tul-b2b-platform.git · TUL09 계정 · push 완료 | - | - |
 | OD-019 | Stage 3+ 세금계산서 발행 주체 | 공급업체 직접 발행 vs 운영사 일괄 발행 | Stage 1~2는 운영사, 이후 결정 필요 | Phase 8 이전 | 정산, 법률 |
 | OD-020 | 감사로그 보관기간 | 영구 보관 vs 기간 보관 후 아카이브 | 영구 append-only로 설계, 파티셔닝 미정 | Phase 6 | 보안, 운영 |
 | OD-021 | 개인정보처리방침 | 법적 고지 문구, 동의 절차 | 법률 검토 후 확정 | Phase 2 | 인증, 법률 |
 | OD-022 | 검색 인덱스 갱신 전략 | Materialized View refresh vs 실시간 vs 주기 | MVP에서 결정 | Phase 3 | 검색 성능 |
+| OD-023 | 실제 로고 파일 | TUL 로고 최종 SVG/PNG | DESIGN_SYSTEM.md에 색상 확정, 로고 임의 설계 금지 | Phase 1 착수 전 | 전체 UI |
+| OD-024 | 입고예정 상품 주문 가능 여부 | `available_to_order` 상태 상품에 대해 예약주문을 허용할지, 허용 시 관리자 확인 절차가 필요한지 | 임시: 버튼 활성화 + "입고예정 · 관리자 확인 후 주문접수" 문구. WF-02(모바일)·WF-04(PC)·DESIGN_SYSTEM.md §7.e 동일 적용 | Phase 3 착수 전 | 주문, UX, BUSINESS_RULES |
+
 

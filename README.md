@@ -63,6 +63,7 @@ Phase 0에서 작성하는 프로젝트 문서:
 - `TEST_PLAN.md` — 테스트 계획
 - `DESIGN_SYSTEM.md` — 디자인 시스템 (SSOT)
 - `CONTENT_SYSTEM.md` — 콘텐츠 관리 구조
+- `WIREFRAME_INDEX.md` — 핵심 화면 와이어프레임 인덱스 (8개 화면)
 - `AGENTS.md` — AI 에이전트 작업 규칙
 - `DECISION_LOG.md` — 확정된 결정 기록 (SSOT)
 - `OPEN_DECISIONS.md` — 미결정 사항 (SSOT)

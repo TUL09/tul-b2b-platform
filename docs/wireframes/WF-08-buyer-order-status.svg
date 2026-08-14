@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="1600" viewBox="0 0 390 1600" font-family="Arial, sans-serif">
+  <rect width="390" height="1600" fill="#F4F5F7"/>
+
+  <!-- HEADER -->
+  <rect x="0" y="0" width="390" height="56" fill="#0F2044"/>
+  <text x="16" y="20" font-size="11" fill="#9CA3AF">← 주문 내역</text>
+  <text x="100" y="35" font-size="15" font-weight="600" fill="#FFFFFF">주문 상태 조회</text>
+
+  <!-- ORDER ID + DATE -->
+  <rect x="0" y="56" width="390" height="52" fill="#1E2A38"/>
+  <text x="16" y="76" font-size="11" fill="#9CA3AF">주문요청번호</text>
+  <text x="16" y="95" font-size="14" font-weight="700" fill="#FFFFFF">#ORD-2026-0847</text>
+  <text x="260" y="76" font-size="11" fill="#9CA3AF">요청일</text>
+  <text x="260" y="95" font-size="12" fill="#D1D5DB">2026-08-05</text>
+
+  <!-- ===== 4개 독립 상태 카드 ===== -->
+  <text x="16" y="130" font-size="13" font-weight="600" fill="#111827">주문 상태</text>
+
+  <!-- Status Grid: 2x2 -->
+  <!-- Order Status -->
+  <rect x="12" y="140" width="175" height="68" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="20" y="158" font-size="10" fill="#9CA3AF">주문 상태</text>
+  <rect x="20" y="164" width="100" height="24" rx="4" fill="#FFF7ED"/>
+  <text x="26" y="180" font-size="11" fill="#B45309" font-weight="700">▲ 수정안 확인 필요</text>
+  <!-- no internal code in buyer view -->
+
+  <!-- Fulfillment Status -->
+  <rect x="200" y="140" width="175" height="68" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="208" y="158" font-size="10" fill="#9CA3AF">이행 상태</text>
+  <rect x="208" y="164" width="68" height="24" rx="4" fill="#F3F4F6"/>
+  <text x="214" y="180" font-size="11" fill="#6B7280" font-weight="700">● 미시작</text>
+  <!-- no not_started code in buyer view -->
+
+  <!-- Payment Status -->
+  <rect x="12" y="216" width="175" height="68" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="20" y="234" font-size="10" fill="#9CA3AF">결제 상태</text>
+  <rect x="20" y="240" width="68" height="24" rx="4" fill="#F3F4F6"/>
+  <text x="28" y="256" font-size="11" fill="#6B7280" font-weight="700">● 결제 미발생</text>
+
+  <!-- Tax Invoice Status -->
+  <rect x="200" y="216" width="175" height="68" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="208" y="234" font-size="10" fill="#9CA3AF">세금계산서</text>
+  <rect x="208" y="240" width="76" height="24" rx="4" fill="#F3F4F6"/>
+  <text x="214" y="256" font-size="11" fill="#6B7280" font-weight="700">● 미발행</text>
+  <!-- no not_issued code in buyer view -->
+
+  <!-- ===== 수정안 확인 요청 (CTA) ===== -->
+  <rect x="12" y="296" width="366" height="72" rx="8" fill="#FFF7ED" stroke="#E8610A" stroke-width="2"/>
+  <text x="20" y="320" font-size="13" font-weight="700" fill="#E8610A">▲ 수정안 확인이 필요합니다</text>
+  <text x="20" y="340" font-size="11" fill="#4B5563">운영사가 수량·납기를 일부 조정했습니다.</text>
+  <text x="20" y="356" font-size="11" fill="#9CA3AF">응답 기한: 2026-08-08 18:00</text>
+  <!-- CTA: use orange-action for AA compliance -->
+  <rect x="200" y="308" width="168" height="44" rx="6" fill="#C2410C"/>
+  <text x="228" y="335" font-size="13" fill="#FFFFFF" font-weight="700">수정안 확인 →</text>
+
+  <!-- ===== ORDER TIMELINE ===== -->
+  <text x="16" y="394" font-size="13" font-weight="600" fill="#111827">진행 이력</text>
+
+  <!-- Timeline vertical -->
+  <line x1="40" y1="408" x2="40" y2="780" stroke="#D1D5DB" stroke-width="2"/>
+
+  <!-- Step 1: 주문요청 -->
+  <circle cx="40" cy="420" r="10" fill="#16A34A"/>
+  <text x="34" y="424" font-size="9" fill="#FFFFFF" font-weight="700">✓</text>
+  <text x="60" y="418" font-size="12" font-weight="600" fill="#111827">주문 요청 접수</text>
+  <text x="60" y="434" font-size="11" fill="#9CA3AF">2026-08-05 14:22</text>
+  <rect x="60" y="440" width="80" height="18" rx="3" fill="#F0FDF4"/>
+  <text x="66" y="453" font-size="10" fill="#16A34A">제출됨</text>
+
+  <!-- Step 2: 운영사 검토 중 -->
+  <circle cx="40" cy="490" r="10" fill="#16A34A"/>
+  <text x="34" y="494" font-size="9" fill="#FFFFFF" font-weight="700">✓</text>
+  <text x="60" y="488" font-size="12" font-weight="600" fill="#111827">운영사 검토 중</text>
+  <text x="60" y="504" font-size="11" fill="#9CA3AF">2026-08-05 15:40</text>
+  <rect x="60" y="510" width="88" height="18" rx="3" fill="#EFF6FF"/>
+  <text x="66" y="523" font-size="10" fill="#2563EB">검토중</text>
+
+  <!-- Step 3: 수정안 발행 (current) -->
+  <circle cx="40" cy="560" r="12" fill="#E8610A"/>
+  <text x="34" y="565" font-size="9" fill="#FFFFFF" font-weight="700">●</text>
+  <rect x="60" y="546" width="298" height="56" rx="6" fill="#FFF7ED" stroke="#E8610A" stroke-width="1.5"/>
+  <text x="72" y="564" font-size="12" font-weight="700" fill="#E8610A">수정안 발행됨</text>
+  <text x="72" y="580" font-size="11" fill="#4B5563">DS-PH2: 50→30 (백오더 20)</text>
+  <text x="72" y="594" font-size="11" fill="#4B5563">응답 기한: 2026-08-08</text>
+  <rect x="60" y="604" width="124" height="20" rx="3" fill="#FFF7ED"/>
+  <text x="66" y="618" font-size="10" fill="#B45309" font-weight="600">수정안 확인 필요</text>
+
+  <!-- Step 4: 구매자 승인 (pending) -->
+  <circle cx="40" cy="660" r="10" fill="#D1D5DB"/>
+  <text x="36" y="664" font-size="11" fill="#FFFFFF">4</text>
+  <text x="60" y="660" font-size="12" fill="#9CA3AF">구매자 승인 대기</text>
+  <text x="60" y="676" font-size="11" fill="#9CA3AF">-</text>
+
+  <!-- Step 5: 확정 주문 (pending) -->
+  <circle cx="40" cy="720" r="10" fill="#D1D5DB"/>
+  <text x="36" y="724" font-size="11" fill="#FFFFFF">5</text>
+  <text x="60" y="720" font-size="12" fill="#9CA3AF">확정 주문 생성</text>
+  <text x="60" y="736" font-size="11" fill="#9CA3AF">-</text>
+
+  <!-- Step 6: 출고 (pending) -->
+  <circle cx="40" cy="780" r="10" fill="#D1D5DB"/>
+  <text x="36" y="784" font-size="11" fill="#FFFFFF">6</text>
+  <text x="60" y="780" font-size="12" fill="#9CA3AF">출고 · 배송</text>
+  <text x="60" y="796" font-size="11" fill="#9CA3AF">-</text>
+
+  <!-- ===== ORDER ITEMS SUMMARY ===== -->
+  <rect x="0" y="816" width="390" height="8" fill="#EAECEF"/>
+  <text x="16" y="844" font-size="13" font-weight="600" fill="#111827">주문 품목</text>
+
+  <!-- Item 1 -->
+  <rect x="12" y="852" width="366" height="64" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <rect x="20" y="860" width="40" height="40" rx="4" fill="#EAECEF"/>
+  <text x="28" y="884" font-size="10" fill="#9CA3AF">IMG</text>
+  <text x="70" y="872" font-size="12" font-weight="600" fill="#111827">TTC 니퍼 150mm</text>
+  <text x="70" y="888" font-size="11" fill="#9CA3AF">N-150 · EA · 20개</text>
+  <rect x="70" y="896" width="80" height="16" rx="3" fill="#F0FDF4"/>
+  <!-- N-150: accepted=20, no backorder -->
+  <text x="76" y="908" font-size="10" fill="#16A34A">확정 20개</text>
+  <!-- N-150: 20 x 11,500 = 230,000 -->
+  <text x="296" y="876" font-size="13" font-weight="700" fill="#0F2044">₩230,000</text>
+
+  <!-- Item 2 - Partial -->
+  <rect x="12" y="924" width="366" height="76" rx="8" fill="#FFFBF0" stroke="#D97706" stroke-width="1"/>
+  <rect x="20" y="932" width="40" height="40" rx="4" fill="#EAECEF"/>
+  <text x="28" y="956" font-size="10" fill="#9CA3AF">IMG</text>
+  <!-- DS-PH2: accepted=50 total; immediate=30, backordered=20 within accepted -->
+  <text x="70" y="944" font-size="12" font-weight="600" fill="#111827">TTC 드라이버 PH#2</text>
+  <text x="70" y="960" font-size="11" fill="#4B5563">DS-PH2 · EA · 요청 50개</text>
+  <!-- accepted=50, within: immediate=30, backordered=20 -->
+  <rect x="70" y="968" width="76" height="16" rx="3" fill="#F0FDF4"/>
+  <text x="76" y="980" font-size="10" fill="#16A34A">확정 50 (인수)</text>
+  <rect x="152" y="968" width="64" height="16" rx="3" fill="#FFF3ED"/>
+  <text x="156" y="980" font-size="10" fill="#B45309">즉시 30</text>
+  <rect x="220" y="968" width="64" height="16" rx="3" fill="#FFF7ED"/>
+  <text x="224" y="980" font-size="10" fill="#D97706">백오더 20</text>
+  <text x="70" y="994" font-size="10" fill="#B45309">▲ 수정안 발행 · 입고 후 추가 출고</text>
+  <!-- price: accepted 50 × 5,800 = 290,000 (not partial) -->
+  <text x="296" y="952" font-size="13" font-weight="700" fill="#0F2044">₩290,000</text>
+
+  <!-- Subtotal -->
+  <rect x="12" y="1008" width="366" height="52" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <!-- amount: N-150(20x11500=230,000) + DS-PH2(50x5800=290,000) = 520,000 -->
+  <text x="20" y="1030" font-size="12" fill="#4B5563">확정 주문 소계 (VAT 별도 예시)</text>
+  <text x="272" y="1030" font-size="14" font-weight="700" fill="#0F2044">₩520,000</text>
+  <text x="20" y="1050" font-size="11" fill="#9CA3AF">부가세 (DEMO 세금표시 예시 / tax_exclusive)</text>
+  <text x="312" y="1050" font-size="11" fill="#9CA3AF">₩52,000</text>
+
+  <!-- Bottom CTA for revision -->
+  <!-- Bottom CTA: orange-action for AA -->
+  <rect x="12" y="1068" width="366" height="52" rx="8" fill="#C2410C"/>
+  <text x="100" y="1099" font-size="15" fill="#FFFFFF" font-weight="700">수정안 확인 및 응답 →</text>
+
+  <!-- Bottom Nav -->
+  <!-- Nav: 주문내역 active -->
+  <text x="20" y="1568" font-size="11" fill="#9CA3AF">[홈]</text>
+  <text x="20" y="1586" font-size="10" fill="#9CA3AF">홈</text>
+  <text x="98" y="1568" font-size="11" fill="#9CA3AF">[카테고리]</text>
+  <text x="96" y="1586" font-size="10" fill="#9CA3AF">카테고리</text>
+  <!-- Quick order center -->
+  <rect x="156" y="1540" width="78" height="64" rx="8" fill="#1E2A38"/>
+  <text x="168" y="1566" font-size="11" fill="#FFFFFF">[빠른주문]</text>
+  <text x="164" y="1584" font-size="10" fill="#9CA3AF" font-weight="600">빠른주문</text>
+  <!-- 주문내역 active -->
+  <rect x="234" y="1540" width="78" height="64" rx="8" fill="#0F2044"/>
+  <text x="250" y="1566" font-size="11" fill="#E8610A" font-weight="700">[주문내역]</text>
+  <text x="244" y="1584" font-size="10" fill="#E8610A" font-weight="700">주문내역</text>
+  <!-- My -->
+  <text x="336" y="1568" font-size="11" fill="#9CA3AF">[마이]</text>
+  <text x="336" y="1586" font-size="10" fill="#9CA3AF">마이</text>
+
+  <text x="12" y="1598" font-size="9" fill="#9CA3AF">WF-08 · 구매자 주문상태 조회 · 모바일 · TUL B2B Platform · DEMO DATA</text>
+</svg>
