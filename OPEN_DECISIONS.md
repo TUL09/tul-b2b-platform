@@ -36,4 +36,6 @@
 | OD-021 | 개인정보처리방침 | 법적 고지 문구, 동의 절차 | 법률 검토 후 확정 | Phase 2 | 인증, 법률 |
 | OD-022 | 검색 인덱스 갱신 전략 | Materialized View refresh vs 실시간 vs 주기 | MVP에서 결정 | Phase 3 | 검색 성능 |
 | OD-023 | 실제 로고 파일 | TUL 로고 최종 SVG/PNG | DESIGN_SYSTEM.md에 색상 확정, 로고 임의 설계 금지 | Phase 1 착수 전 | 전체 UI |
+| OD-024 | 입고예정 상품 주문 가능 여부 | `available_to_order` 상태 상품에 대해 예약주문을 허용할지, 허용 시 관리자 확인 절차가 필요한지 | 임시: 버튼 활성화 + "입고예정 · 관리자 확인 후 주문접수" 문구. WF-02(모바일)·WF-04(PC)·DESIGN_SYSTEM.md §7.e 동일 적용 | Phase 3 착수 전 | 주문, UX, BUSINESS_RULES |
+
 
