@@ -3,10 +3,10 @@
 주요 업무 흐름을 Mermaid 다이어그램으로 정의합니다.
 
 > **SSOT 참조**
-> - 가격·주문·출고 상세 규칙 → [BUSINESS_RULES.md](file:///C:/Projects/b2b-tool-platform/BUSINESS_RULES.md)
-> - 역할·권한 → [USER_ROLES.md](file:///C:/Projects/b2b-tool-platform/USER_ROLES.md)
+> - 가격·주문·출고 상세 규칙 → [BUSINESS_RULES.md](BUSINESS_RULES.md)
+> - 역할·권한 → [USER_ROLES.md](USER_ROLES.md)
 > - DB 스키마 → DATABASE_SCHEMA.md
-> - 미확정 사항 → [OPEN_DECISIONS.md](file:///C:/Projects/b2b-tool-platform/OPEN_DECISIONS.md)
+> - 미확정 사항 → [OPEN_DECISIONS.md](OPEN_DECISIONS.md)
 
 ---
 

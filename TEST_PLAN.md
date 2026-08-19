@@ -3,10 +3,10 @@
 이 문서는 **구현 이후 통과해야 할 검증 기준의 SSOT**입니다. 이번 Checkpoint에서는 테스트 코드를 작성하거나 실행하지 않습니다.
 
 > **SSOT 참조**
-> - 가격·주문 규칙 → [BUSINESS_RULES.md](file:///C:/Projects/b2b-tool-platform/BUSINESS_RULES.md)
-> - DB 스키마 → [DATABASE_SCHEMA.md](file:///C:/Projects/b2b-tool-platform/DATABASE_SCHEMA.md)
-> - 보안 → [SECURITY_RULES.md](file:///C:/Projects/b2b-tool-platform/SECURITY_RULES.md)
-> - Import → [DATA_IMPORT_SPEC.md](file:///C:/Projects/b2b-tool-platform/DATA_IMPORT_SPEC.md)
+> - 가격·주문 규칙 → [BUSINESS_RULES.md](BUSINESS_RULES.md)
+> - DB 스키마 → [DATABASE_SCHEMA.md](DATABASE_SCHEMA.md)
+> - 보안 → [SECURITY_RULES.md](SECURITY_RULES.md)
+> - Import → [DATA_IMPORT_SPEC.md](DATA_IMPORT_SPEC.md)
 
 ---
 
@@ -358,6 +358,19 @@ first_needed_phase: Phase 4
 
 ---
 
+## 10-G. Content Claim·Renderer 테스트 Handoff
+
+| ID | 테스트 | 우선순위 | Phase | PRD |
+|---|---|---|---|---|
+| TC-CNT-001 | `unverified`, `review_required`, `rejected`, `expired` Claim이 Public·Buyer에서 미노출 | Critical | 5 | PRD-57 |
+| TC-CNT-002 | `review_due_at` 경과 또는 `source_reference`·`content_owner` 누락 시 게시 차단 | Critical | 5 | PRD-57 |
+| TC-CNT-003 | 현재 Surface가 `allowed_surfaces`에 없으면 Claim 미노출 | Critical | 5 | PRD-57 |
+| TC-CNT-004 | 관리자 Preview에 차단 Claim의 상태·사유가 표시되고 Public 결과에는 미포함 | Critical | 5 | PRD-57 |
+| TC-CNT-005 | Admin Preview와 Public·Buyer가 동일 Content Record·Claim gate·CTA·status mapping 사용 | High | 5 | PRD-57 |
+| TC-CNT-006 | mobile·desktop 및 Surface variant 변경이 visibility rule을 우회하지 않음 | High | 5 | PRD-57 |
+
+---
+
 ## 11. 성능 기준 (Provisional)
 
 초기 1,000 SKU, 시험 거래처 3~5곳 규모 기준. Phase 6 측정 후 조정.
@@ -394,7 +407,8 @@ first_needed_phase: Phase 4
 | 출고·상태 | 6 | 5 | 4 |
 | 보안 강화 | 15 | 15 | 2~4 |
 | 수량 정합성 | 10 | 10 | 4 |
-| **합계** | **160** | **116** | |
+| Content Claim·Renderer | 6 | 4 | 5 |
+| **합계** | **166** | **120** | |
 
 ---
 

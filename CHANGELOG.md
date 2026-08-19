@@ -6,6 +6,23 @@
 
 ---
 
+## [Phase 0] 2026-08-19 — Checkpoint C1 Final Fix Pass
+
+C1 최종 감사 결함 보정 (애플리케이션 코드·DB Migration 변경 없음):
+
+- N-150 DEMO Master를 `MOQ 1`, 증가단위 1, 10~49 EA `₩11,500`으로 통일하고 WF-02·03·04·06·08을 동기화
+- Order 0847을 N-150, LB-10, DS-PH2 세 품목으로 통일하고 변경 품목 소계 `₩520,000`, 주문 전체 수정 후 소계 `₩610,000`을 구분
+- DS-PH2의 확정 50 안에 즉시 출고 30과 잔여 수량 후출고 20이 포함되는 의미로 보정
+- WF-07 Apply 전 Blocking Error를 "전체 미반영"으로 수정하고 Apply 중 실패의 "전체 롤백"과 분리
+- OD-024 canonical 임시 문구와 VAT 미확정 경계를 구매자 화면에 통일
+- Claim 단위 계약, Publication Gate, 공통 Content Renderer·Variant 계약 및 Phase 5 DB/Test/Roadmap Handoff 추가
+- 흰색 CTA는 `#C2410C`, 중요 메타데이터는 AA 통과 토큰으로 보정하고 Tab·오류·Disabled 상태의 비색상 단서 명시
+- WF-01~08의 OS·Font 의존 이모지 제거 완료: 검증 기준 잔존 0건
+- Markdown의 Windows 전용 절대 링크 33개를 저장소 상대 링크로 변경
+- `TRACEABILITY_MATRIX.md`, `PROJECT_STATUS.md`, C1 최종 검증 문서 추가
+
+---
+
 ## [Phase 0] 2026-08-13 — Checkpoint C1 Correction Pass
 
 문서 정합성 수정 (기능 추가 없음):

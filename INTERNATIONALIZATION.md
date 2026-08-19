@@ -3,9 +3,9 @@
 이 문서는 **국제화(i18n) 구조의 SSOT**입니다. 미래 확장에 대비하되 국내 MVP를 복잡하게 만들지 않습니다.
 
 > **SSOT 참조**
-> - DB 스키마 → [DATABASE_SCHEMA.md](file:///C:/Projects/b2b-tool-platform/DATABASE_SCHEMA.md)
-> - 가격·통화 → [BUSINESS_RULES.md](file:///C:/Projects/b2b-tool-platform/BUSINESS_RULES.md)
-> - 해외 확장 → [ROADMAP.md](file:///C:/Projects/b2b-tool-platform/ROADMAP.md) Phase 12
+> - DB 스키마 → [DATABASE_SCHEMA.md](DATABASE_SCHEMA.md)
+> - 가격·통화 → [BUSINESS_RULES.md](BUSINESS_RULES.md)
+> - 해외 확장 → [ROADMAP.md](ROADMAP.md) Phase 12
 
 ---
 

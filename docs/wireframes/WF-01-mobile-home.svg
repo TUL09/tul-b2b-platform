@@ -5,20 +5,20 @@
   <!-- ===== HEADER ===== -->
   <rect x="0" y="0" width="390" height="56" fill="#0F2044"/>
   <text x="16" y="35" font-size="20" font-weight="700" fill="#FFFFFF" letter-spacing="2">TUL</text>
-  <text x="60" y="35" font-size="10" fill="#E8610A" font-weight="600">B2B</text>
+  <text x="60" y="35" font-size="10" fill="#C2410C" font-weight="600">B2B</text>
   <!-- Notification icon -->
   <rect x="330" y="16" width="24" height="24" rx="4" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-  <text x="336" y="32" font-size="12" fill="#FFFFFF">🔔</text>
+  <text x="334" y="32" font-size="9" fill="#FFFFFF">알림</text>
   <!-- Cart icon -->
   <rect x="358" y="16" width="24" height="24" rx="4" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
-  <text x="364" y="32" font-size="12" fill="#FFFFFF">🛒</text>
-  <circle cx="380" cy="16" r="7" fill="#E8610A"/>
+  <text x="362" y="32" font-size="9" fill="#FFFFFF">담기</text>
+  <circle cx="380" cy="16" r="7" fill="#C2410C"/>
   <text x="377" y="20" font-size="8" fill="#FFFFFF" font-weight="700">3</text>
 
   <!-- ===== GLOBAL SEARCH ===== -->
   <rect x="12" y="68" width="366" height="48" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
-  <text x="40" y="97" font-size="13" fill="#9CA3AF">상품명, 모델명, 상품코드 검색</text>
-  <text x="20" y="97" font-size="14" fill="#9CA3AF">🔍</text>
+  <text x="40" y="97" font-size="13" fill="#4B5563">상품명, 모델명, 상품코드 검색</text>
+  <text x="16" y="97" font-size="9" fill="#4B5563">[검색]</text>
   <rect x="342" y="80" width="28" height="28" rx="4" fill="#F4F5F7"/>
   <text x="349" y="98" font-size="10" fill="#4B5563">바코드</text>
 
@@ -27,16 +27,16 @@
 
   <!-- ===== 최근 주문 섹션 ===== -->
   <text x="16" y="156" font-size="15" font-weight="600" fill="#111827">최근 주문 상품</text>
-  <text x="330" y="156" font-size="12" fill="#E8610A">더보기 ›</text>
+  <text x="330" y="156" font-size="12" fill="#C2410C">더보기 ›</text>
 
   <!-- Recent order card 1 -->
   <rect x="16" y="164" width="170" height="96" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
   <rect x="24" y="172" width="36" height="36" rx="4" fill="#EAECEF"/>
-  <text x="34" y="194" font-size="10" fill="#9CA3AF">IMG</text>
+  <text x="34" y="194" font-size="10" fill="#4B5563">IMG</text>
   <rect x="68" y="172" width="44" height="14" rx="2" fill="#1E2A38"/>
   <text x="72" y="183" font-size="8" fill="#FFFFFF">TTC</text>
   <text x="68" y="194" font-size="11" font-weight="600" fill="#111827">니퍼 150mm</text>
-  <text x="68" y="207" font-size="10" fill="#9CA3AF">N-150 / EA</text>
+  <text x="68" y="207" font-size="10" fill="#4B5563">N-150 / EA</text>
   <text x="24" y="228" font-size="13" font-weight="700" fill="#0F2044">₩12,800</text>
   <rect x="132" y="218" width="44" height="28" rx="4" fill="#0F2044"/>
   <text x="148" y="236" font-size="11" fill="#FFFFFF">재주문</text>
@@ -44,11 +44,11 @@
   <!-- Recent order card 2 -->
   <rect x="198" y="164" width="170" height="96" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
   <rect x="206" y="172" width="36" height="36" rx="4" fill="#EAECEF"/>
-  <text x="216" y="194" font-size="10" fill="#9CA3AF">IMG</text>
+  <text x="216" y="194" font-size="10" fill="#4B5563">IMG</text>
   <rect x="250" y="172" width="50" height="14" rx="2" fill="#374151"/>
   <text x="254" y="183" font-size="8" fill="#FFFFFF">OLFA</text>
   <text x="250" y="194" font-size="11" font-weight="600" fill="#111827">커터날 L형</text>
-  <text x="250" y="207" font-size="10" fill="#9CA3AF">LB-10 / PACK</text>
+  <text x="250" y="207" font-size="10" fill="#4B5563">LB-10 / PACK</text>
   <text x="206" y="228" font-size="13" font-weight="700" fill="#0F2044">₩8,500</text>
   <rect x="314" y="218" width="44" height="28" rx="4" fill="#0F2044"/>
   <text x="330" y="236" font-size="11" fill="#FFFFFF">재주문</text>
@@ -57,22 +57,22 @@
 
   <!-- ===== 빠른 재주문 ===== -->
   <text x="16" y="300" font-size="15" font-weight="600" fill="#111827">빠른 재주문</text>
-  <text x="316" y="300" font-size="12" fill="#E8610A">주문내역 ›</text>
+  <text x="316" y="300" font-size="12" fill="#C2410C">주문내역 ›</text>
 
   <!-- Quick reorder list -->
   <rect x="16" y="308" width="358" height="56" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
   <rect x="24" y="320" width="32" height="32" rx="4" fill="#EAECEF"/>
-  <text x="32" y="340" font-size="10" fill="#9CA3AF">IMG</text>
+  <text x="32" y="340" font-size="10" fill="#4B5563">IMG</text>
   <text x="66" y="332" font-size="12" font-weight="600" fill="#111827">TTC 드라이버 세트 PH#2</text>
-  <text x="66" y="348" font-size="11" fill="#9CA3AF">DS-PH2 · EA · 최근 20개</text>
+  <text x="66" y="348" font-size="11" fill="#4B5563">DS-PH2 · EA · 최근 20개</text>
   <rect x="292" y="316" width="72" height="32" rx="4" fill="#0F2044"/>
   <text x="300" y="336" font-size="10" fill="#FFFFFF" font-weight="600">20개 재주문</text>
 
   <rect x="16" y="372" width="358" height="56" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
   <rect x="24" y="384" width="32" height="32" rx="4" fill="#EAECEF"/>
-  <text x="32" y="404" font-size="10" fill="#9CA3AF">IMG</text>
+  <text x="32" y="404" font-size="10" fill="#4B5563">IMG</text>
   <text x="66" y="396" font-size="12" font-weight="600" fill="#111827">협성 줄자 5.5m</text>
-  <text x="66" y="412" font-size="11" fill="#9CA3AF">HS-55 · EA · 최근 10개</text>
+  <text x="66" y="412" font-size="11" fill="#4B5563">HS-55 · EA · 최근 10개</text>
   <rect x="292" y="380" width="72" height="32" rx="4" fill="#0F2044"/>
   <text x="300" y="400" font-size="10" fill="#FFFFFF" font-weight="600">10개 재주문</text>
 
@@ -80,40 +80,40 @@
 
   <!-- ===== 진행 중인 주문 ===== -->
   <text x="16" y="468" font-size="15" font-weight="600" fill="#111827">진행 중인 주문</text>
-  <text x="320" y="468" font-size="12" fill="#E8610A">전체 보기 ›</text>
+  <text x="320" y="468" font-size="12" fill="#C2410C">전체 보기 ›</text>
 
   <rect x="16" y="476" width="358" height="80" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
   <!-- Status badges -->
   <rect x="24" y="484" width="64" height="20" rx="10" fill="#EFF6FF"/>
-  <text x="34" y="498" font-size="10" fill="#2563EB" font-weight="600">■ 검토중</text>
+  <text x="34" y="498" font-size="10" fill="#2563EB" font-weight="600">검토중</text>
   <text x="24" y="522" font-size="12" font-weight="600" fill="#111827">주문요청 #ORD-2026-0847</text>
   <text x="24" y="538" font-size="11" fill="#4B5563">3개 품목 · 주문 전체 소계 ₩610,000 · DEMO</text>
-  <text x="280" y="522" font-size="11" fill="#E8610A" font-weight="600">상세 보기 ›</text>
+  <text x="280" y="522" font-size="11" fill="#C2410C" font-weight="600">상세 보기 ›</text>
 
   <rect x="16" y="564" width="358" height="80" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
   <rect x="24" y="572" width="64" height="20" rx="10" fill="#FFF7ED"/>
-  <text x="28" y="586" font-size="10" fill="#D97706" font-weight="600">▲ 수정안 확인</text>
+  <text x="28" y="586" font-size="10" fill="#B45309" font-weight="600">[주의] 수정안 확인</text>
   <text x="24" y="610" font-size="12" font-weight="600" fill="#111827">주문요청 #ORD-2026-0831</text>
-  <text x="24" y="626" font-size="11" fill="#9CA3AF">5개 품목 · ₩520,000 · 수정 응답 필요</text>
-  <rect x="280" y="606" width="80" height="28" rx="4" fill="#E8610A"/>
+  <text x="24" y="626" font-size="11" fill="#4B5563">5개 품목 · ₩520,000 · 수정 응답 필요</text>
+  <rect x="280" y="606" width="80" height="28" rx="4" fill="#C2410C"/>
   <text x="293" y="624" font-size="10" fill="#FFFFFF" font-weight="600">수정안 확인</text>
 
   <rect x="0" y="656" width="390" height="8" fill="#EAECEF"/>
 
   <!-- ===== 신제품 브리핑 ===== -->
-  <text x="16" y="684" font-size="15" font-weight="600" fill="#111827">🆕 신제품 브리핑</text>
-  <text x="316" y="684" font-size="12" fill="#E8610A">전체 ›</text>
+  <text x="16" y="684" font-size="15" font-weight="600" fill="#111827">신제품 브리핑</text>
+  <text x="316" y="684" font-size="12" fill="#C2410C">전체 ›</text>
 
   <rect x="16" y="692" width="358" height="120" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
   <!-- New product badge -->
-  <rect x="24" y="700" width="36" height="16" rx="3" fill="#E8610A"/>
+  <rect x="24" y="700" width="36" height="16" rx="3" fill="#C2410C"/>
   <text x="28" y="712" font-size="9" fill="#FFFFFF" font-weight="700">신제품</text>
   <rect x="24" y="720" width="80" height="64" rx="4" fill="#EAECEF"/>
-  <text x="45" y="756" font-size="10" fill="#9CA3AF">상품이미지</text>
+  <text x="45" y="756" font-size="10" fill="#4B5563">상품이미지</text>
   <text x="116" y="716" font-size="13" font-weight="700" fill="#111827">대원 토크렌치 3/8" 72T</text>
-  <text x="116" y="732" font-size="11" fill="#9CA3AF">DW-TQ38 · 1/4"~3/8" 연결</text>
+  <text x="116" y="732" font-size="11" fill="#4B5563">DW-TQ38 · 1/4"~3/8" 연결</text>
   <text x="116" y="748" font-size="11" fill="#4B5563">정밀 토크 제어 · 내구성 강화</text>
-  <text x="116" y="764" font-size="11" fill="#9CA3AF">KRW · EA · MOQ 1</text>
+  <text x="116" y="764" font-size="11" fill="#4B5563">KRW · EA · MOQ 1</text>
   <rect x="24" y="796" width="160" height="32" rx="4" fill="#FFFFFF" stroke="#0F2044" stroke-width="1"/>
   <text x="72" y="816" font-size="11" fill="#0F2044" font-weight="600">자세히 보기</text>
   <rect x="194" y="796" width="152" height="32" rx="4" fill="#0F2044"/>
@@ -122,59 +122,59 @@
   <rect x="0" y="824" width="390" height="8" fill="#EAECEF"/>
 
   <!-- ===== 이달의 가격 경쟁 상품 ===== -->
-  <text x="16" y="852" font-size="15" font-weight="600" fill="#111827">💰 이달의 가격 경쟁 상품</text>
+  <text x="16" y="852" font-size="15" font-weight="600" fill="#111827">이달의 가격 경쟁 상품</text>
 
   <rect x="16" y="860" width="170" height="112" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
   <rect x="24" y="868" width="152" height="60" rx="4" fill="#EAECEF"/>
-  <text x="75" y="902" font-size="10" fill="#9CA3AF">상품이미지</text>
+  <text x="75" y="902" font-size="10" fill="#4B5563">상품이미지</text>
   <text x="24" y="944" font-size="11" font-weight="600" fill="#111827">OLFA 커터 L-1</text>
-  <text x="24" y="958" font-size="10" fill="#9CA3AF">EA · MOQ 10</text>
+  <text x="24" y="958" font-size="10" fill="#4B5563">EA · MOQ 10</text>
   <text x="24" y="972" font-size="13" font-weight="700" fill="#0F2044">₩3,200</text>
 
   <rect x="198" y="860" width="170" height="112" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
   <rect x="206" y="868" width="152" height="60" rx="4" fill="#EAECEF"/>
-  <text x="257" y="902" font-size="10" fill="#9CA3AF">상품이미지</text>
+  <text x="257" y="902" font-size="10" fill="#4B5563">상품이미지</text>
   <text x="206" y="944" font-size="11" font-weight="600" fill="#111827">TTC 줄자 7.5m</text>
-  <text x="206" y="958" font-size="10" fill="#9CA3AF">EA · MOQ 6</text>
+  <text x="206" y="958" font-size="10" fill="#4B5563">EA · MOQ 6</text>
   <text x="206" y="972" font-size="13" font-weight="700" fill="#0F2044">₩8,900</text>
 
   <rect x="0" y="984" width="390" height="8" fill="#EAECEF"/>
 
   <!-- ===== 브랜드 스포트라이트 ===== -->
-  <text x="16" y="1012" font-size="15" font-weight="600" fill="#111827">🏷️ 브랜드 스포트라이트</text>
+  <text x="16" y="1012" font-size="15" font-weight="600" fill="#111827">브랜드 스포트라이트</text>
 
   <rect x="16" y="1020" width="358" height="148" rx="8" fill="#1E2A38"/>
   <rect x="24" y="1028" width="60" height="60" rx="8" fill="#EAECEF"/>
-  <text x="36" y="1062" font-size="10" fill="#9CA3AF">로고</text>
+  <text x="36" y="1062" font-size="10" fill="#4B5563">로고</text>
   <text x="96" y="1048" font-size="16" font-weight="700" fill="#FFFFFF">TTC</text>
-  <text x="96" y="1064" font-size="11" fill="#9CA3AF">독립 공구 브랜드 · 수공구 전문</text>
-  <text x="24" y="1108" font-size="11" fill="#D1D5DB">50년 이상의 공구 제조 경험을 바탕으로</text>
-  <text x="24" y="1124" font-size="11" fill="#D1D5DB">전문가용 수공구를 생산하는 국내 브랜드</text>
+  <text x="96" y="1064" font-size="11" fill="#D1D5DB">독립 공구 브랜드 · 수공구 전문</text>
+  <text x="24" y="1108" font-size="11" fill="#D1D5DB">브랜드 제공 자료를 검토한 뒤 공개하는</text>
+  <text x="24" y="1124" font-size="11" fill="#D1D5DB">DEMO 브랜드 소개 영역입니다</text>
   <rect x="24" y="1140" width="100" height="20" rx="3" fill="#EAECEF" opacity="0.3"/>
   <text x="30" y="1154" font-size="10" fill="#FFFFFF">니퍼 · 드라이버 · 렌치</text>
-  <rect x="256" y="1140" width="108" height="20" rx="4" fill="#E8610A"/>
+  <rect x="256" y="1140" width="108" height="20" rx="4" fill="#C2410C"/>
   <text x="278" y="1154" font-size="10" fill="#FFFFFF" font-weight="600">브랜드 보기 ›</text>
 
   <!-- ===== BOTTOM NAVIGATION ===== -->
   <rect x="0" y="1544" width="390" height="56" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
   <!-- Home tab (active) -->
-  <rect x="0" y="1544" width="78" height="56" fill="#EFF6FF"/>
+  <rect x="0" y="1544" width="78" height="56" fill="#EFF6FF" aria-current="page"/>
   <text x="24" y="1566" font-size="11" fill="#0F2044" font-weight="700">[홈]</text>
   <text x="24" y="1586" font-size="10" fill="#0F2044" font-weight="600">홈</text>
   <!-- Category tab -->
-  <text x="96" y="1568" font-size="11" fill="#9CA3AF">[카테고리]</text>
-  <text x="96" y="1586" font-size="10" fill="#9CA3AF">카테고리</text>
+  <text x="96" y="1568" font-size="11" fill="#4B5563">[카테고리]</text>
+  <text x="96" y="1586" font-size="10" fill="#4B5563">카테고리</text>
   <!-- Quick order tab (emphasized, not active) -->
   <rect x="156" y="1540" width="78" height="64" rx="8" fill="#1E2A38"/>
   <text x="168" y="1566" font-size="11" fill="#FFFFFF">[빠른주문]</text>
-  <text x="164" y="1586" font-size="10" fill="#9CA3AF" font-weight="600">빠른주문</text>
+  <text x="164" y="1586" font-size="10" fill="#D1D5DB" font-weight="600">빠른주문</text>
   <!-- Orders tab -->
-  <text x="252" y="1568" font-size="11" fill="#9CA3AF">[주문내역]</text>
-  <text x="254" y="1586" font-size="10" fill="#9CA3AF">주문내역</text>
+  <text x="252" y="1568" font-size="11" fill="#4B5563">[주문내역]</text>
+  <text x="254" y="1586" font-size="10" fill="#4B5563">주문내역</text>
   <!-- My tab -->
-  <text x="336" y="1568" font-size="11" fill="#9CA3AF">[마이]</text>
-  <text x="336" y="1586" font-size="10" fill="#9CA3AF">마이</text>
+  <text x="336" y="1568" font-size="11" fill="#4B5563">[마이]</text>
+  <text x="336" y="1586" font-size="10" fill="#4B5563">마이</text>
 
   <!-- Status bar annotation -->
-  <text x="12" y="1595" font-size="9" fill="#9CA3AF">WF-01 · 모바일 거래처 홈 · 390px · TUL B2B Platform · DEMO DATA</text>
+  <text x="12" y="1595" font-size="9" fill="#4B5563">WF-01 · 모바일 거래처 홈 · 390px · TUL B2B Platform · DEMO DATA</text>
 </svg>

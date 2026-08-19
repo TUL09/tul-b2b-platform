@@ -3,9 +3,9 @@
 이 문서는 **인증, 권한, RLS, 파일 접근, 감사정책의 Single Source of Truth(SSOT)**입니다.
 
 > **SSOT 참조**
-> - 역할·권한 → [USER_ROLES.md](file:///C:/Projects/b2b-tool-platform/USER_ROLES.md)
-> - DB 스키마 → [DATABASE_SCHEMA.md](file:///C:/Projects/b2b-tool-platform/DATABASE_SCHEMA.md)
-> - 가격·주문 규칙 → [BUSINESS_RULES.md](file:///C:/Projects/b2b-tool-platform/BUSINESS_RULES.md)
+> - 역할·권한 → [USER_ROLES.md](USER_ROLES.md)
+> - DB 스키마 → [DATABASE_SCHEMA.md](DATABASE_SCHEMA.md)
+> - 가격·주문 규칙 → [BUSINESS_RULES.md](BUSINESS_RULES.md)
 
 ---
 

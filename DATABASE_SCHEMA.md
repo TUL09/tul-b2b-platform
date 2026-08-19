@@ -3,11 +3,11 @@
 이 문서는 **테이블, 컬럼, 관계, 데이터형, 제약조건, 인덱스, 삭제정책, RLS 적용대상의 Single Source of Truth(SSOT)**입니다.
 
 > **SSOT 참조**
-> - 가격·주문·출고 규칙 → [BUSINESS_RULES.md](file:///C:/Projects/b2b-tool-platform/BUSINESS_RULES.md)
-> - 기능 범위 → [PRODUCT_REQUIREMENTS.md](file:///C:/Projects/b2b-tool-platform/PRODUCT_REQUIREMENTS.md)
-> - 보안·권한 → [SECURITY_RULES.md](file:///C:/Projects/b2b-tool-platform/SECURITY_RULES.md)
-> - Import 사양 → [DATA_IMPORT_SPEC.md](file:///C:/Projects/b2b-tool-platform/DATA_IMPORT_SPEC.md)
-> - 확정 결정 → [DECISION_LOG.md](file:///C:/Projects/b2b-tool-platform/DECISION_LOG.md)
+> - 가격·주문·출고 규칙 → [BUSINESS_RULES.md](BUSINESS_RULES.md)
+> - 기능 범위 → [PRODUCT_REQUIREMENTS.md](PRODUCT_REQUIREMENTS.md)
+> - 보안·권한 → [SECURITY_RULES.md](SECURITY_RULES.md)
+> - Import 사양 → [DATA_IMPORT_SPEC.md](DATA_IMPORT_SPEC.md)
+> - 확정 결정 → [DECISION_LOG.md](DECISION_LOG.md)
 
 ---
 
@@ -1608,6 +1608,18 @@ UNIQUE(code, version)
 | `order_request_approvals` | 내부 승인 이력 | MG-OPT | Phase 6 |
 | `external_item_mappings` | 외부코드 매핑 | MG-OPT | Phase 4 |
 | `price_change_history` | 가격변경 이력 | MG-OPT | Phase 4 |
+
+### 4.1 Content 논리 구조 Handoff
+
+Checkpoint C1에서는 Migration이나 물리 테이블을 추가하지 않는다. Phase 5 설계·구현 시 기존 `brand_stories`, `promotions`, `promotion_items`를 아래 논리 레코드에 매핑할지, 정규화 테이블로 대체할지 별도 승인한다. 따라서 아래 이름은 현재 67개 테이블 Inventory에 포함되지 않는다.
+
+| 논리 레코드 | 책임 | 핵심 계약 | first_needed_phase |
+|---|---|---|---|
+| `content_record` | 콘텐츠 본문, 상태, 기간, owner, CTA | Public·Buyer·Admin Preview가 동일 record/version 사용 | Phase 5 |
+| `content_claim` | Claim 문구, 출처, 검증, 기한, 허용 Surface | `CONTENT_SYSTEM.md` §11 Publication Gate 적용 | Phase 5 |
+| `content_placement` | Surface와 variant별 배치 | visibility rule을 변경하지 않고 레이아웃만 선택 | Phase 5 |
+
+물리 구조 확정 시 `content_claim`은 하나의 `content_record`에 여러 개 연결될 수 있어야 하며, Claim 검증 이력과 게시 철회가 감사 가능해야 한다. 구체 컬럼·RLS·Migration Group은 Phase 5 승인 범위에서 결정한다.
 
 ---
 

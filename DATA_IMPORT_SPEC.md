@@ -3,9 +3,9 @@
 이 문서는 **상품, 가격, 공급조건 데이터 업로드 규칙의 기술 사양 SSOT**입니다.
 
 > **SSOT 참조**
-> - DB 스키마 → [DATABASE_SCHEMA.md](file:///C:/Projects/b2b-tool-platform/DATABASE_SCHEMA.md)
-> - Import 정책(STRICT_ATOMIC) → [BUSINESS_RULES.md](file:///C:/Projects/b2b-tool-platform/BUSINESS_RULES.md)
-> - 보안 → [SECURITY_RULES.md](file:///C:/Projects/b2b-tool-platform/SECURITY_RULES.md)
+> - DB 스키마 → [DATABASE_SCHEMA.md](DATABASE_SCHEMA.md)
+> - Import 정책(STRICT_ATOMIC) → [BUSINESS_RULES.md](BUSINESS_RULES.md)
+> - 보안 → [SECURITY_RULES.md](SECURITY_RULES.md)
 
 ---
 

@@ -125,16 +125,47 @@
 ## 10. 관리자 콘텐츠 워크플로
 `콘텐츠 작성(Draft)` → `검토(Review)` → `승인(Approve)` → `스케줄링(Schedule)` → `발행(Publish)` → `만료(Expire)` → `아카이브(Archive)`
 
-## 11. 사실 주장 검증 필드 (Claim Verification)
+## 11. 사실 주장 단위 계약 (Claim Verification)
 
-콘텐츠에 사실 주장을 포함할 때는 아래 필드를 반드시 기록해야 합니다.
+콘텐츠 본문과 사실 주장을 분리한다. 제조경력, 인증, 성능, 비교우위처럼 외부 검증이 필요한 문장마다 독립 Claim Record를 두며, 콘텐츠 전체가 승인되었더라도 개별 Claim의 게시 조건을 다시 평가한다.
 
-| 필드 | 설명 |
-|---|---|
-| **claim_source** | 주장의 출처 (예: 브랜드 공식 자료, 자체 테스트, 인증서 번호) |
-| **claim_verified_by** | 검증한 담당자 또는 기관 |
-| **claim_verified_at** | 검증 완료 일자 |
-| **claim_expiry_at** | 주장의 유효 만료 일자 (기한이 지나면 재검증 필요) |
+| 필드 | 필수 | 설명 |
+|---|---|---|
+| `claim_id` | 필수 | Claim의 불변 식별자 |
+| `claim_text` | 필수 | 공개 후보 문장. 출처 문구를 임의로 확대 해석하지 않음 |
+| `claim_type` | 필수 | `certification`, `performance`, `history`, `comparison`, `distribution`, `other` |
+| `source_reference` | 필수 | 인증서, 공식 자료 또는 검증 결과의 추적 가능한 참조 |
+| `verification_status` | 필수 | Claim 검증 상태 |
+| `verified_by` | 검증 시 필수 | 검증 담당자 또는 기관 |
+| `verified_at` | 검증 시 필수 | 검증 완료 시각 |
+| `content_owner` | 필수 | 작성·갱신·철회 책임자 |
+| `review_due_at` | 공개 시 필수 | 재검토 기한. 이 시각이 지나면 자동 공개 차단 |
+| `allowed_surfaces` | 필수 | Claim을 허용한 Surface 목록 |
+| `publication_status` | 필수 | `draft`, `review_pending`, `approved`, `published`, `withdrawn` |
+| `rejection_or_expiry_reason` | 조건부 | 거절·만료·철회 사유 |
+
+### 11.1 Verification Status
+
+| 상태 | 의미 | Public·Buyer 노출 |
+|---|---|---|
+| `unverified` | 아직 근거를 검토하지 않음 | 금지 |
+| `review_required` | 근거 보강 또는 재검토 필요 | 금지 |
+| `verified` | 담당자가 근거와 문구를 검증함 | 게시 게이트 충족 시 허용 |
+| `rejected` | 근거 부족 또는 표현 부적합 | 금지 |
+| `expired` | 재검토 기한 경과 또는 근거 만료 | 금지 |
+
+### 11.2 Publication Gate
+
+Claim은 아래 조건을 **모두** 만족할 때만 Public·Buyer Surface에 노출한다.
+
+1. `verification_status = verified`
+2. `review_due_at`이 현재 시각보다 뒤에 있음
+3. 현재 Surface가 `allowed_surfaces`에 포함됨
+4. `source_reference`가 존재함
+5. `content_owner`가 존재함
+6. `publication_status`가 `approved` 또는 `published`임
+
+하나라도 충족하지 않으면 Public·Buyer renderer는 해당 Claim을 생략한다. 관리자 Preview에서는 검증되지 않은 Claim을 볼 수 있지만 상태·차단 사유를 함께 표시하며, Preview 결과를 공개 화면으로 복사하지 않는다.
 
 **근거 없이 사용 금지 표현**:
 - 업계 1위, 국내 1위, 시장 점유율 1위
@@ -144,11 +175,30 @@
 - 국내 최초
 - 제조경력 ○○년 (검증된 출처 없이)
 
-근거가 있는 경우: claim_source에 출처를, claim_verified_at에 검증일을 기록한 후 게시 승인 절차를 통해서만 공개합니다.
+근거가 있는 경우에도 Publication Gate를 모두 통과한 뒤에만 공개합니다.
 
 ---
 
-## 12. 렌더링 시 결합 원칙 (Rendering-time Composition)
+## 12. 공통 Content Renderer 계약
+
+관리자 Preview와 Public·Buyer 화면은 별도 마크업으로 콘텐츠를 복제하지 않는다. 하나의 공통 renderer가 아래 입력과 판정 결과를 사용한다.
+
+| 계약 항목 | 공통 규칙 |
+|---|---|
+| Content Record | 동일한 콘텐츠 레코드와 버전을 사용 |
+| Claim 검증결과 | §11 Publication Gate의 동일한 판정 함수를 사용 |
+| CTA 계약 | 동일한 label, target, permission, enabled 조건을 사용 |
+| Status mapping | 내부 상태를 Surface별 승인된 사용자 문구로 변환 |
+| Visibility rule | 인증, 조직, 권리, 기간, Claim gate를 같은 순서로 평가 |
+| Variant | 데이터·검증을 바꾸지 않고 레이아웃만 변경 |
+
+Surface variant는 `publicHero`, `publicCompact`, `buyerDiscover`, `adminPreview`를 사용하고, viewport variant는 `mobile`, `desktop`을 사용한다. Variant가 Claim 문구, 검증 상태, CTA 목적지 또는 공개 여부를 덮어쓸 수 없다. `adminPreview`만 차단된 Claim과 사유를 관리용으로 표시할 수 있다.
+
+구현 시 `DATABASE_SCHEMA.md`의 Content 논리 구조, `TEST_PLAN.md`의 `TC-CNT-*`, `TRACEABILITY_MATRIX.md`, `ROADMAP.md` Phase 5를 함께 적용한다.
+
+---
+
+## 13. 렌더링 시 결합 원칙 (Rendering-time Composition)
 
 프로모션 콘텐츠에 가격과 재고 숫자를 직접 복사 저장하지 않습니다.
 
@@ -165,10 +215,10 @@
 
 ---
 
-## 13. 금지사항 (Don'ts)
+## 14. 금지사항 (Don'ts)
 - **과도한 할인율 표현 금지**: "-50%! 지금 바로!" 등 신뢰를 떨어뜨리는 소매형 광고 문구 사용 절대 불가.
 - **가격 미확인 노출 금지**: 로그인하지 않았거나 승인되지 않은 거래처에게 단가 노출 금지.
 - **권한 미확인 에셋 사용 금지**: 저작권 및 사용 권한이 불분명한 이미지, 로고, 자료 업로드 금지.
 - **대형 배너 금지**: 전체 화면을 차지하거나 사용자의 통제를 벗어나는 자동 슬라이드 배너 사용 금지.
-- **근거 없는 주장 금지**: claim_source·claim_verified_by·claim_verified_at 없이 사실 주장 게시 금지.
+- **근거 없는 주장 금지**: §11 Publication Gate를 통과하지 않은 사실 주장 게시 금지.
 - **와이어프레임 DEMO 데이터**: 모든 와이어프레임/목업의 가격·수량·주문번호·브랜드 정보는 DEMO/SAMPLE임을 명시.

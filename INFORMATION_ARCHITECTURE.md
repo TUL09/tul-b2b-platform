@@ -3,10 +3,10 @@
 사이트맵, 화면 계층, 내비게이션 구조를 정의합니다.
 
 > **SSOT 참조**
-> - 기능 범위 → [PRODUCT_REQUIREMENTS.md](file:///C:/Projects/b2b-tool-platform/PRODUCT_REQUIREMENTS.md)
-> - 가격·주문 규칙 → [BUSINESS_RULES.md](file:///C:/Projects/b2b-tool-platform/BUSINESS_RULES.md)
-> - 역할·권한 → [USER_ROLES.md](file:///C:/Projects/b2b-tool-platform/USER_ROLES.md)
-> - 업무 흐름 → [USER_FLOWS.md](file:///C:/Projects/b2b-tool-platform/USER_FLOWS.md)
+> - 기능 범위 → [PRODUCT_REQUIREMENTS.md](PRODUCT_REQUIREMENTS.md)
+> - 가격·주문 규칙 → [BUSINESS_RULES.md](BUSINESS_RULES.md)
+> - 역할·권한 → [USER_ROLES.md](USER_ROLES.md)
+> - 업무 흐름 → [USER_FLOWS.md](USER_FLOWS.md)
 > - 디자인 → DESIGN_SYSTEM.md (Checkpoint C)
 
 ---

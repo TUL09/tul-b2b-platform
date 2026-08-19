@@ -2,12 +2,12 @@
 
 > **SSOT**: 이 문서는 **개발 순서(Development Phases)**의 Single Source of Truth입니다.
 >
-> - 기능 상세 → [PRODUCT_REQUIREMENTS.md](file:///C:/Projects/b2b-tool-platform/PRODUCT_REQUIREMENTS.md)
-> - 가격·주문 규칙 → [BUSINESS_RULES.md](file:///C:/Projects/b2b-tool-platform/BUSINESS_RULES.md)
-> - DB 스키마 → [DATABASE_SCHEMA.md](file:///C:/Projects/b2b-tool-platform/DATABASE_SCHEMA.md)
-> - 테스트 → [TEST_PLAN.md](file:///C:/Projects/b2b-tool-platform/TEST_PLAN.md)
-> - 미확정 사항 → [OPEN_DECISIONS.md](file:///C:/Projects/b2b-tool-platform/OPEN_DECISIONS.md)
-> - 확정 결정 → [DECISION_LOG.md](file:///C:/Projects/b2b-tool-platform/DECISION_LOG.md)
+> - 기능 상세 → [PRODUCT_REQUIREMENTS.md](PRODUCT_REQUIREMENTS.md)
+> - 가격·주문 규칙 → [BUSINESS_RULES.md](BUSINESS_RULES.md)
+> - DB 스키마 → [DATABASE_SCHEMA.md](DATABASE_SCHEMA.md)
+> - 테스트 → [TEST_PLAN.md](TEST_PLAN.md)
+> - 미확정 사항 → [OPEN_DECISIONS.md](OPEN_DECISIONS.md)
+> - 확정 결정 → [DECISION_LOG.md](DECISION_LOG.md)
 
 ---
 
@@ -203,12 +203,16 @@ flowchart LR
 - [ ] 상품 관리 (등록, 수정, 가격 변경)
 - [ ] 거래처 관리 (승인, 등급 변경)
 - [ ] RFQ(견적 요청) 기능 — 비표준 상품/대량 주문 견적
-- [ ] 콘텐츠 관리 (공지사항, 배너)
+- [ ] 콘텐츠 관리 (공지사항, 신제품, 브랜드 소개)
+- [ ] Claim 단위 검증·만료·게시 차단과 관리자 Preview
+- [ ] Public·Buyer·Admin Preview 공통 renderer 및 Surface variant
 - [ ] 핵심 200개 상품 등록
 
 **완료조건**
 - 관리자가 주문·상품·거래처를 관리할 수 있음
 - RFQ 요청 → 견적 응답 흐름 동작
+- 검증되지 않았거나 만료된 Claim의 Public·Buyer 노출 0건
+- Admin Preview와 실제 Surface가 동일 Content Record·Claim gate·CTA·visibility rule을 사용
 - 핵심 200개 상품 등록 완료
 - Customer Pilot 착수 준비 완료
 
@@ -573,7 +577,7 @@ flowchart TD
 | `migration_group` | 함께 생성되어야 하는 테이블 그룹 | `auth`, `catalog`, `order` |
 
 > [!NOTE]
-> 테이블 상세 정의, 컬럼, 관계는 [DATABASE_SCHEMA.md](file:///C:/Projects/b2b-tool-platform/DATABASE_SCHEMA.md)를 참조하세요.
+> 테이블 상세 정의, 컬럼, 관계는 [DATABASE_SCHEMA.md](DATABASE_SCHEMA.md)를 참조하세요.
 
 ---
 
@@ -617,7 +621,7 @@ Phase 6(Customer Pilot)에서 측정할 지표입니다.
 
 > [!NOTE]
 > 성과지표 측정 방법 및 대시보드 구현은 Phase 5(관리자 운영)에서 준비합니다.
-> 기능 상세는 [PRODUCT_REQUIREMENTS.md](file:///C:/Projects/b2b-tool-platform/PRODUCT_REQUIREMENTS.md)를 참조하세요.
+> 기능 상세는 [PRODUCT_REQUIREMENTS.md](PRODUCT_REQUIREMENTS.md)를 참조하세요.
 
 ---
 

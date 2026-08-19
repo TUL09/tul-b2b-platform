@@ -74,17 +74,17 @@
 
 | 전경 | 배경 | 대비비(추정) | 판정 | 용도 |
 |---|---|---|---|---|
-| #FFFFFF | #0F2044 navy | ~12:1 | Pass | 헤더 텍스트 |
-| #FFFFFF | #C2410C orange-action | ~4.6:1 | Pass | CTA 버튼 텍스트 |
-| #FFFFFF | #1E2A38 charcoal | ~11:1 | Pass | 사이드바 텍스트 |
-| #111827 | #FFFFFF | ~19:1 | Pass | 본문 텍스트 |
-| #4B5563 | #FFFFFF | ~7:1 | Pass | 보조 텍스트 |
-| #6B7280 | #FFFFFF | ~4.6:1 | Pass | text-muted |
-| #9CA3AF | #FFFFFF | ~2.9:1 | FAIL AA | 장식 전용만 허용 |
-| #15803D | #F0FDF4 | ~5.1:1 | Pass | 성공 텍스트 |
-| #B45309 | #FFF7ED | ~4.5:1 | Pass | 경고 텍스트 |
-| #B91C1C | #FEF2F2 | ~5.0:1 | Pass | 오류 텍스트 |
-| #FFFFFF | #E8610A orange-accent | ~3.0:1 | FAIL AA | 텍스트 조합 금지 |
+| #FFFFFF | #0F2044 navy | 16.03:1 | Pass | 헤더 텍스트 |
+| #FFFFFF | #C2410C orange-action | 5.18:1 | Pass | CTA 버튼 텍스트 |
+| #FFFFFF | #1E2A38 charcoal | 14.55:1 | Pass | 사이드바 텍스트 |
+| #111827 | #FFFFFF | 17.74:1 | Pass | 본문 텍스트 |
+| #4B5563 | #FFFFFF | 7.56:1 | Pass | 중요 메타데이터·보조 텍스트 |
+| #6B7280 | #FFFFFF | 4.83:1 | Pass | 덜 중요한 보조 정보 |
+| #9CA3AF | #FFFFFF | 2.54:1 | FAIL AA | 비활성·장식 전용만 허용 |
+| #15803D | #F0FDF4 | 4.79:1 | Pass | 성공 텍스트 |
+| #B45309 | #FFF7ED | 4.73:1 | Pass | 경고 텍스트 |
+| #B91C1C | #FEF2F2 | 5.91:1 | Pass | 오류 텍스트 |
+| #FFFFFF | #E8610A orange-accent | 3.42:1 | FAIL AA | 일반 텍스트 조합 금지 |
 
 대비비는 추정값. 구현 전 https://webaim.org/resources/contrastchecker/ 등으로 재검증 필요.
 
@@ -216,7 +216,7 @@ backordered_quantity는 accepted_quantity 중 미출고 수량.
 | 처리 방식 | UI 표시 |
 |---|---|
 | 전체 수락, 즉시출고 | 확정 N개 |
-| 전체 수락 + 일부 백오더 | 확정 N개 · 즉시출고 X개 · 백오더 Y개 |
+| 전체 수락 + 일부 백오더 | 확정 N개 · 즉시 출고 X개 · 잔여 수량 후출고 Y개 |
 | 일부 수락 + 나머지 거절 | 확정 X개 · 거절 Y개 |
 
 ### k) Quick Order Row
@@ -229,17 +229,22 @@ backordered_quantity는 accepted_quantity 중 미출고 수량.
 - 전체 합계 표시 시: 모든 품목 포함
 
 ### m) Import Error Display
-- ⛔ Blocking Error: 빨간 배경 + 아이콘 + 텍스트 + 행번호 + "수정 필요"
-- ⚠ Warning: 주황 배경 + 아이콘 + 텍스트 + 행번호
+- Blocking Error: 빨간 배경 + `circle-x` 아이콘 + 텍스트 + 행번호 + "수정 필요"
+- Warning: 주황 배경 + `triangle-alert` 아이콘 + "진행 가능" 텍스트 + 행번호
 - 오류 필드명: brand_code / supplier_code / price_book_code (UUID 금지)
 - 버튼: "최종 반영" / "반영 취소"
 - Blocking Error 있으면 최종 반영 비활성
+
+### n) Content Renderer
+- `CONTENT_SYSTEM.md` §12의 공통 renderer 계약을 사용한다.
+- `publicHero`, `publicCompact`, `buyerDiscover`, `adminPreview`는 동일 Content Record와 Claim gate 결과를 공유한다.
+- `mobile`, `desktop` variant는 배치만 바꾸며 문구·CTA·status mapping·visibility rule을 복제하거나 재정의하지 않는다.
 
 ---
 
 ## 8. 아이콘 정책
 
-생산 코드에 Emoji 아이콘 사용 금지 (와이어프레임에서는 의미 전달용으로만 허용).
+생산 코드와 와이어프레임 모두 Emoji 아이콘을 사용하지 않는다. 와이어프레임은 Lucide icon name 또는 `[검색]`, `[장바구니]` 같은 중립 placeholder를 사용한다.
 
 | 항목 | 정책 |
 |---|---|
@@ -256,6 +261,12 @@ backordered_quantity는 accepted_quantity 중 미출고 수량.
 - Focus Ring: 2px solid #C2410C + 2px offset
 - 명도비: 위 §2 대비 조합표 참조. 일반 단정 사용 금지.
 - 색상 + 아이콘 + 텍스트 조합 (색각 이상자 배려)
+- 주요 CTA: 흰색 텍스트에는 `tul-orange-action` 또는 그보다 높은 대비의 배경만 사용한다.
+- 중요 메타데이터: 모델명·규격·납기·주문번호·상태설명은 밝은 배경에서 `text-secondary` 이상을 사용한다. `text-disabled` 사용 금지.
+- 활성 Tab: 채움 또는 밑줄, 위치, `aria-current` 중 하나 이상의 비색상 표지를 색상과 함께 제공한다.
+- Disabled CTA: 비활성 색상, 인접 상태문구, 실제 `disabled` 또는 `aria-disabled=true`를 함께 제공한다.
+- 입력 오류: 오류 텍스트에 고유 ID를 부여하고 입력의 `aria-invalid=true`, `aria-describedby`로 연결한다.
+- CTA 문구: "확인", "적용"만 단독 사용하지 않고 "수정안 확인", "최종 반영"처럼 목적이 분명한 동사를 사용한다.
 - 44px 터치 타겟 필수 목록:
 
 | 요소 | 최소 |
