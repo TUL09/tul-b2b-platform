@@ -118,7 +118,7 @@
   <!-- IMPORT BLOCKED NOTICE -->
   <rect x="220" y="452" width="1204" height="56" rx="8" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
   <text x="232" y="476" font-size="14" font-weight="700" fill="#DC2626">⛔  Blocking Error가 있어 Import를 진행할 수 없습니다</text>
-  <text x="232" y="496" font-size="12" fill="#DC2626">STRICT_ATOMIC 정책: 1건이라도 오류가 있으면 전체 롤백. 엑셀 파일을 수정 후 재업로드하세요.</text>
+  <text x="232" y="496" font-size="12" fill="#DC2626">STRICT_ATOMIC 정책: 1건이라도 오류가 있으면 전체 미반영. 엑셀 파일을 수정 후 재업로드하세요.</text>
 
   <!-- WARNING PREVIEW (collapsed) -->
   <rect x="220" y="520" width="1204" height="48" rx="8" fill="#FFF7ED" stroke="#D97706" stroke-width="1"/>

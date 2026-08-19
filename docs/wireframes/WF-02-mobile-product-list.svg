@@ -49,8 +49,8 @@
   <!--납기 -->
   <text x="184" y="275" font-size="10" fill="#9CA3AF">1~2일</text>
   <!-- Price -->
-  <text x="20" y="296" font-size="16" font-weight="700" fill="#0F2044">₩12,800</text>
-  <text x="112" y="296" font-size="10" fill="#9CA3AF">/ EA · MOQ 10</text>
+  <text x="20" y="296" font-size="16" font-weight="700" fill="#0F2044">₩11,500</text>
+  <text x="112" y="296" font-size="10" fill="#4B5563">/ EA · MOQ 1 · 10~49 구간</text>
   <!-- Quantity stepper -->
   <rect x="220" y="285" width="32" height="28" rx="4" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
   <text x="232" y="303" font-size="16" fill="#4B5563">−</text>
@@ -72,10 +72,7 @@
   <text x="92" y="382" font-size="11" fill="#9CA3AF">N-175 / 175mm / 탄소강</text>
   <rect x="92" y="390" width="48" height="18" rx="3" fill="#FFF7ED"/>
   <!-- 입고예정 OD-024 미확정 임시 표시: 관리자 확인 후 주문접수 -->
-  <text x="97" y="403" font-size="10" fill="#D97706" font-weight="600">▲ 입고예정 · 관리자 확인 후 주문</text>
-  <text x="230" y="403" font-size="10" fill="#9CA3AF">(8/12 입고 예상)</text>
-  <rect x="200" y="390" width="28" height="18" rx="3" fill="#EFF6FF"/>
-  <text x="205" y="403" font-size="10" fill="#2563EB" font-weight="600">EA</text>
+  <text x="97" y="403" font-size="9" fill="#B45309" font-weight="600">▲ 입고예정 · 관리자 확인 후 주문접수</text>
   <text x="20" y="424" font-size="16" font-weight="700" fill="#0F2044">₩15,600</text>
   <text x="112" y="424" font-size="10" fill="#9CA3AF">/ EA · MOQ 10</text>
   <rect x="220" y="413" width="32" height="28" rx="4" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
@@ -85,7 +82,7 @@
   <rect x="300" y="413" width="32" height="28" rx="4" fill="#F4F5F7" stroke="#D1D5DB" stroke-width="1"/>
   <text x="312" y="431" font-size="16" fill="#4B5563">+</text>
   <!-- 장바구니 버튼: 이모지 제거 -->
-  <rect x="336" y="413" width="32" height="28" rx="4" fill="#9CA3AF"/>
+  <rect x="336" y="413" width="32" height="28" rx="4" fill="#0F2044"/>
   <text x="341" y="431" font-size="10" fill="#FFFFFF" font-weight="600">[담기]</text>
 
   <!-- PRODUCT CARD 3 - MOQ Error state -->

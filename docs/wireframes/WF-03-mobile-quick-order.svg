@@ -39,7 +39,7 @@
   <text x="240" y="228" font-size="13" fill="#111827">20</text>
   <!-- Price: N-150 qty=20 → tier 2 → ₩11,500 -->
   <text x="280" y="228" font-size="11" fill="#E8610A" font-weight="600">₩11,500</text>
-  <text x="280" y="242" font-size="8" fill="#9CA3AF">10개이상 구간</text>
+  <text x="280" y="242" font-size="8" fill="#4B5563">10~49 구간</text>
   <!-- Delete -->
   <text x="346" y="228" font-size="16" fill="#9CA3AF">✕</text>
 
@@ -109,17 +109,16 @@
   <rect x="12" y="588" width="366" height="148" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
   <text x="20" y="612" font-size="14" font-weight="700" fill="#111827">주문 요약</text>
   <text x="20" y="636" font-size="12" fill="#4B5563">유효한 행</text>
-  <text x="340" y="636" font-size="12" fill="#111827" font-weight="600">3행</text>
+  <text x="340" y="636" font-size="12" fill="#111827" font-weight="600">2행</text>
   <text x="20" y="656" font-size="12" fill="#4B5563">오류 행</text>
   <text x="332" y="656" font-size="12" fill="#DC2626" font-weight="600">2행 ⚠</text>
   <line x1="20" y1="668" x2="370" y2="668" stroke="#EAECEF" stroke-width="1"/>
-  <text x="20" y="688" font-size="12" fill="#4B5563">소계 (VAT 별도)</text>
-  <text x="296" y="688" font-size="14" font-weight="700" fill="#0F2044">₩345,800</text>
+  <text x="20" y="688" font-size="12" fill="#4B5563">유효 행 주문 소계 (DEMO)</text>
+  <text x="296" y="688" font-size="14" font-weight="700" fill="#0F2044">₩320,000</text>
   <!-- VAT: policy pending -->
-  <text x="20" y="706" font-size="10" fill="#9CA3AF">부가세 (DEMO - tax_exclusive 예시)</text>
-  <text x="316" y="706" font-size="10" fill="#9CA3AF">₩34,580</text>
-  <text x="20" y="724" font-size="13" font-weight="700" fill="#111827">합계</text>
-  <text x="290" y="724" font-size="16" font-weight="700" fill="#0F2044">₩380,380</text>
+  <text x="20" y="706" font-size="10" fill="#4B5563">DEMO VAT 예시 · 정책 확정 전</text>
+  <text x="20" y="724" font-size="13" font-weight="700" fill="#111827">최종 세액 포함 금액</text>
+  <text x="278" y="724" font-size="12" font-weight="600" fill="#4B5563">정책 확정 후 계산</text>
 
   <!-- CTA Buttons -->
   <rect x="12" y="748" width="174" height="52" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>

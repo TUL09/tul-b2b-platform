@@ -82,8 +82,8 @@
   <!-- Change reason -->
   <text x="1280" y="318" font-size="12" fill="#9CA3AF">-</text>
 
-  <!-- Item Row 2 - Price changed by admin -->
-  <rect x="224" y="344" width="1200" height="72" fill="#FFFBF0" stroke="#D97706" stroke-width="1"/>
+  <!-- Item Row 2 - Unchanged order line -->
+  <rect x="224" y="344" width="1200" height="72" fill="#FFFFFF" stroke="#EAECEF" stroke-width="1"/>
   <text x="232" y="366" font-size="13" font-weight="600" fill="#111827">OLFA 커터날 LB-10</text>
   <text x="232" y="382" font-size="11" fill="#9CA3AF" font-family="monospace">LB-10</text>
   <text x="500" y="374" font-size="12" fill="#111827">PACK</text>
@@ -94,13 +94,11 @@
   <text x="746" y="384" font-size="10" fill="#E8610A">10구간 적용 ▲</text>
   <text x="920" y="366" font-size="12" fill="#16A34A">■ 재고있음</text>
   <text x="920" y="382" font-size="11" fill="#9CA3AF">즉시</text>
-  <rect x="1040" y="356" width="80" height="32" rx="4" fill="#FFFFFF" stroke="#D97706" stroke-width="1.5"/>
-  <text x="1068" y="376" font-size="13" fill="#D97706" font-weight="700">10</text>
+  <rect x="1040" y="356" width="80" height="32" rx="4" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="1068" y="376" font-size="13" fill="#111827">10</text>
   <rect x="1140" y="358" width="80" height="24" rx="4" fill="#F0FDF4"/>
   <text x="1148" y="374" font-size="11" fill="#16A34A" font-weight="600">수락 (accepted)</text>
-  <text x="1280" y="370" font-size="11" fill="#D97706">수량구간</text>
-  <text x="1280" y="384" font-size="11" fill="#D97706">가격 적용</text>
-  <text x="1244" y="398" font-size="9" fill="#D97706">▲ 요청가 → 시스템 가격 자동 보정</text>
+  <text x="1280" y="376" font-size="11" fill="#4B5563">변경 없음</text>
 
   <!-- Item Row 3: DS-PH2, qty=50, FULL accept + partial backorder -->
   <!-- accepted=50, backordered=20 (within accepted), immediate=30 -->
@@ -118,7 +116,7 @@
   <!-- accepted=50 total (backorder within accepted) -->
   <rect x="1040" y="428" width="120" height="24" rx="4" fill="#FFFFFF" stroke="#D97706" stroke-width="1.5"/>
   <text x="1048" y="444" font-size="11" fill="#D97706" font-weight="700">확정 50 전체수락</text>
-  <text x="1040" y="460" font-size="9" fill="#4B5563">즉시 30 / 백오더 20</text>
+  <text x="1040" y="460" font-size="9" fill="#4B5563">즉시 출고 30 / 잔여 후출고 20</text>
   <!-- Status badges -->
   <rect x="1140" y="430" width="100" height="24" rx="4" fill="#FFF7ED" stroke="#D97706"/>
   <text x="1148" y="446" font-size="11" fill="#B45309" font-weight="600">백오더포함 (backordered)</text>
@@ -136,15 +134,15 @@
   <text x="248" y="550" font-size="12" font-weight="600" fill="#DC2626">원본 (구매자 요청)</text>
   <text x="248" y="568" font-size="12" fill="#4B5563">DS-PH2 · EA · 50개 · @₩5,800 = ₩290,000</text>
   <text x="248" y="586" font-size="12" fill="#4B5563">N-150 · EA · 20개 · @₩12,000 = ₩240,000</text>
-  <text x="248" y="604" font-size="11" fill="#9CA3AF">변경 품목 소계: ₩530,000 (DEMO)</text>
+  <text x="248" y="604" font-size="11" fill="#4B5563">변경 품목 소계: ₩530,000 · 주문 전체 소계: ₩620,000</text>
   <!-- After: full accept + backorder semantics -->
   <rect x="832" y="530" width="580" height="84" rx="6" fill="#F0FDF4"/>
   <text x="844" y="550" font-size="12" font-weight="600" fill="#16A34A">수정안 (운영사 검토 후)</text>
   <!-- DS-PH2: accepted=50, immediate=30, backordered=20 -->
-  <text x="844" y="568" font-size="12" fill="#4B5563">DS-PH2 · EA · 확정 50 (즉시 30 / 백오더 20)</text>
+  <text x="844" y="568" font-size="12" fill="#4B5563">DS-PH2 · EA · 확정 50 (즉시 출고 30 / 잔여 후출고 20)</text>
   <text x="844" y="586" font-size="12" fill="#4B5563">N-150 · EA · 20개 · @₩11,500 = ₩230,000</text>
   <!-- 수정된 품목 소계 (not 전체 합계) -->
-  <text x="844" y="604" font-size="11" fill="#9CA3AF">변경 품목 소계: ₩520,000 (VAT 대기 수량 포함 | DEMO)</text>
+  <text x="844" y="604" font-size="11" fill="#4B5563">변경 품목 소계: ₩520,000 · 주문 전체 소계: ₩610,000</text>
 
   <!-- CUSTOMER APPROVAL FLAG -->
   <rect x="224" y="636" width="1200" height="48" rx="8" fill="#FFF7ED" stroke="#D97706" stroke-width="1"/>
@@ -156,7 +154,7 @@
   <!-- CHANGE REASON + EXPIRY -->
   <text x="224" y="710" font-size="13" font-weight="600" fill="#111827">변경 사유</text>
   <rect x="224" y="718" width="700" height="48" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
-  <text x="236" y="748" font-size="13" fill="#9CA3AF">재고 부족으로 DS-PH2 30개만 즉시 출고, 20개 백오더. N-150 시스템 가격 자동 적용.</text>
+  <text x="236" y="748" font-size="13" fill="#4B5563">DS-PH2 확정 50개 중 30개 즉시 출고, 잔여 20개 후출고. N-150 구간 가격 적용.</text>
   <text x="940" y="730" font-size="12" fill="#4B5563">응답 기한</text>
   <rect x="940" y="738" width="140" height="32" rx="6" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
   <text x="956" y="758" font-size="12" fill="#111827">2026-08-08</text>

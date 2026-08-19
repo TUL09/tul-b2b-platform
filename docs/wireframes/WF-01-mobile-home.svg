@@ -87,7 +87,7 @@
   <rect x="24" y="484" width="64" height="20" rx="10" fill="#EFF6FF"/>
   <text x="34" y="498" font-size="10" fill="#2563EB" font-weight="600">■ 검토중</text>
   <text x="24" y="522" font-size="12" font-weight="600" fill="#111827">주문요청 #ORD-2026-0847</text>
-  <text x="24" y="538" font-size="11" fill="#9CA3AF">3개 품목 · ₩284,000 · 2026-08-05 요청</text>
+  <text x="24" y="538" font-size="11" fill="#4B5563">3개 품목 · 주문 전체 소계 ₩610,000 · DEMO</text>
   <text x="280" y="522" font-size="11" fill="#E8610A" font-weight="600">상세 보기 ›</text>
 
   <rect x="16" y="564" width="358" height="80" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
