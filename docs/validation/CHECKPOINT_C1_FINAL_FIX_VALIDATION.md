@@ -1,6 +1,7 @@
 # Checkpoint C1 Final Fix Validation
 
 - 검증일: 2026-08-19
+- 접근성 미세 보정 재검증일: 2026-08-20
 - Branch: `docs/checkpoint-c1-final-fixes`
 - Base: `f4950833d34e3fd25f95a4e9deba412da7965882`
 - 범위: 문서·SVG 정적 검증. 애플리케이션 코드, DB Migration, Hosted DB 변경 없음.
@@ -22,6 +23,8 @@
 | UUID `brand_id` 입력 요구 | PASS | SVG 0 |
 | Apply 전 `전체 롤백` | PASS | WF-07 0, `전체 미반영` 사용 |
 | 고정 VAT 표현 | PASS | 구매자 SVG의 `VAT 별도/포함`, 고정 절사·반올림 0 |
+| WF-07 Disabled Action 의미 | PASS | `role="button"` 2, `aria-disabled="true"` 2, `aria-label` 2, 상태문구 `aria-describedby` 2 |
+| 전체 `aria-disabled="true"` | PASS | WF-02 1, WF-03 1, WF-07 2, 합계 4 |
 | `git diff --check` | PASS | whitespace error 0 |
 
 중복 ID는 정의 SSOT별로 검사했다. 다른 문서에서 ID를 참조하는 것은 중복 정의로 계산하지 않았다. Emoji 검사는 `docs/wireframes/*.svg`의 OS·Font 의존 pictograph를 대상으로 한다.
@@ -94,7 +97,10 @@ WCAG 2.x 상대휘도 공식으로 실제 토큰 조합을 계산했다.
 - 흰색 텍스트가 있는 `#E8610A`, `#D97706` 배경: 0
 - 밝은 Surface의 중요 Metadata에 `#9CA3AF`: 0 (`fill="#9CA3AF"` 자체 0)
 - 활성 Tab: 채움 영역 + 굵기 + `aria-current="page"` 사용
-- Disabled CTA: 회색 상태 + 오류 해결 문구 + `aria-disabled="true"` 사용
+- WF-07 Dry Run: `role="button"`, `aria-disabled="true"`, `aria-label="Dry Run, 현재 비활성화됨"` 적용. `aria-describedby`로 "오류 해결 후 활성화" 상태문구와 연결
+- WF-07 최종 반영: `role="button"`, `aria-disabled="true"`, `aria-label="최종 반영, 현재 비활성화됨"` 적용. `aria-describedby`로 "Dry Run 후 활성화" 상태문구와 연결
+- 두 WF-07 비활성 Action에는 `tabindex="0"` 및 실행 Event가 없으며 활성 Tab 순서에 추가되지 않음
+- 구현 Handoff: native HTML `button`과 `disabled`를 우선하고, `aria-disabled` 사용 시 Pointer·Keyboard Event와 Server Command에서도 실행을 차단
 - 입력 오류: 인접 오류 문구 + `aria-invalid` + `aria-describedby` 연결
 - CTA: 목적이 드러나는 동사형 문구 사용
 

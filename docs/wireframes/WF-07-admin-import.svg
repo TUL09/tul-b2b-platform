@@ -128,10 +128,16 @@
   <!-- ACTIONS (disabled until errors resolved) -->
   <rect x="220" y="580" width="1204" height="60" rx="8" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
   <text x="232" y="606" font-size="13" font-weight="600" fill="#111827">조치</text>
-  <rect x="232" y="614" width="200" height="16" rx="2" fill="#4B5563" opacity="0.3"/>
-  <text x="244" y="626" font-size="11" fill="#4B5563">Dry Run (오류 해결 후 활성화)</text>
-  <rect x="444" y="614" width="200" height="16" rx="2" fill="#4B5563" opacity="0.3"/>
-  <text x="456" y="626" font-size="11" fill="#4B5563">최종 반영 (Dry Run 후 활성화)</text>
+  <g role="group" aria-label="Import 실행 작업">
+    <g role="button" aria-disabled="true" aria-label="Dry Run, 현재 비활성화됨" aria-describedby="wf07-dry-run-disabled-reason">
+      <rect x="232" y="614" width="200" height="16" rx="2" fill="#4B5563" opacity="0.3"/>
+      <text id="wf07-dry-run-disabled-reason" x="244" y="626" font-size="11" fill="#4B5563">Dry Run (오류 해결 후 활성화)</text>
+    </g>
+    <g role="button" aria-disabled="true" aria-label="최종 반영, 현재 비활성화됨" aria-describedby="wf07-apply-disabled-reason">
+      <rect x="444" y="614" width="200" height="16" rx="2" fill="#4B5563" opacity="0.3"/>
+      <text id="wf07-apply-disabled-reason" x="456" y="626" font-size="11" fill="#4B5563">최종 반영 (Dry Run 후 활성화)</text>
+    </g>
+  </g>
 
   <!-- Dry Run success state (State B annotation - separate from State A above) -->
   <rect x="220" y="652" width="1204" height="128" rx="8" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.5" stroke-dasharray="6,3"/>

@@ -264,7 +264,7 @@ backordered_quantity는 accepted_quantity 중 미출고 수량.
 - 주요 CTA: 흰색 텍스트에는 `tul-orange-action` 또는 그보다 높은 대비의 배경만 사용한다.
 - 중요 메타데이터: 모델명·규격·납기·주문번호·상태설명은 밝은 배경에서 `text-secondary` 이상을 사용한다. `text-disabled` 사용 금지.
 - 활성 Tab: 채움 또는 밑줄, 위치, `aria-current` 중 하나 이상의 비색상 표지를 색상과 함께 제공한다.
-- Disabled CTA: 비활성 색상, 인접 상태문구, 실제 `disabled` 또는 `aria-disabled=true`를 함께 제공한다.
+- Disabled CTA: 비활성 색상과 인접 상태문구를 함께 제공하고 색상만으로 상태를 전달하지 않는다. 실제 웹 구현은 native HTML `button`의 `disabled`를 우선한다. `aria-disabled=true`를 사용하면 `aria-describedby`로 이유를 연결하고 Pointer·Keyboard Event와 Server Command에서 실행을 모두 차단한다.
 - 입력 오류: 오류 텍스트에 고유 ID를 부여하고 입력의 `aria-invalid=true`, `aria-describedby`로 연결한다.
 - CTA 문구: "확인", "적용"만 단독 사용하지 않고 "수정안 확인", "최종 반영"처럼 목적이 분명한 동사를 사용한다.
 - 44px 터치 타겟 필수 목록:

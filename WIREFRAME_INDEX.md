@@ -33,7 +33,7 @@ docs/wireframes/
 |---|---|---|---|---|---|
 | WF-01 | 모바일 거래처 홈 | 구매자 | 390px | [WF-01-mobile-home.svg](docs/wireframes/WF-01-mobile-home.svg) | 검색 최상단, 대형배너 없음, 3탭이내 재주문 |
 | WF-02 | 모바일 상품목록 | 구매자 | 390px | [WF-02-mobile-product-list.svg](docs/wireframes/WF-02-mobile-product-list.svg) | 인라인 장바구니, 가로스크롤 없음, MOQ 오류 인라인 |
-| WF-03 | 모바일 빠른 주문 | 구매자 | 390px | [WF-03-mobile-quick-order.svg](docs/wireframes/WF-03-mobile-quick-order.svg) | 다행 주문, 코드 직접입력, 이전주문 불러오기 |
+| WF-03 | 모바일 빠른 주문 | 구매자 | 390px | [WF-03-mobile-quick-order.svg](docs/wireframes/WF-03-mobile-quick-order.svg) | 다중 행 주문, 코드 직접입력, 이전주문 불러오기 |
 | WF-04 | PC 상품목록 | 구매자 | 1440px | [WF-04-pc-product-list.svg](docs/wireframes/WF-04-pc-product-list.svg) | 좌측필터, 컴팩트표, 다중선택 일괄추가 |
 | WF-05 | PC 상품상세 | 구매자 | 1440px | [WF-05-pc-product-detail.svg](docs/wireframes/WF-05-pc-product-detail.svg) | UOM선택, 수량구간 현재구간 강조, 매입가 미표시 |
 | WF-06 | 관리자 주문검토 | 운영사 | 1440px | [WF-06-admin-order-review.svg](docs/wireframes/WF-06-admin-order-review.svg) | 원본↔수정안 비교, 부분확정/백오더, 가격근거 |
