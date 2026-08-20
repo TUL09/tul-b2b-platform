@@ -1,6 +1,16 @@
 # 독립 공구 브랜드 연합형 B2B 유통 웹앱
 
-> **현재 단계**: Development Phase 0 (사업 및 시스템 설계)
+> **현재 단계**: Development Phase 0 완료 (사업 및 시스템 설계) — Phase 1 착수 전 최종감사 대기 중
+> **GitHub**: https://github.com/TUL09/tul-b2b-platform (Private)
+
+## 승인된 Checkpoint
+
+| Checkpoint | 내용 | 태그 |
+|---|---|---|
+| Checkpoint A | 핵심 사업·데이터 설계 문서 | phase0-checkpoint-a-approved |
+| Checkpoint B | 보안 강화 및 스키마 정합성 | phase0-checkpoint-b-approved |
+| Checkpoint C1 | 디자인 시스템, 콘텐츠 시스템, 8개 와이어프레임 | phase0-checkpoint-c1-approved |
+| Checkpoint C2 | API 경계 설계, 배포·운영 가이드 | (최종감사 후 승인 예정) |
 
 ## 프로젝트 개요
 
@@ -27,13 +37,17 @@
 
 ```
 b2b-tool-platform/
-├── docs/                    # 프로젝트 문서 (Phase 0에서 작성)
-├── src/                     # 애플리케이션 소스 (Phase 1부터)
-├── supabase/                # Supabase 설정 및 migration
-├── .env.example             # 환경변수 예제
+├── docs/
+│   └── wireframes/          # 핵심 화면 SVG 와이어프레임 (8개)
+├── src/                     # 애플리케이션 소스 (Phase 1부터 작성)
+├── supabase/
+│   └── migrations/          # DB Migration 파일 (Phase 2부터 작성)
+├── .env.example             # 환경변수 키 이름 (값 없음)
 ├── .gitignore
 └── README.md
 ```
+
+> 현재 src/와 supabase/migrations/는 비어 있습니다. Phase 1 착수 후 채워집니다.
 
 ## 환경 설정
 
@@ -64,11 +78,33 @@ Phase 0에서 작성하는 프로젝트 문서:
 - `DESIGN_SYSTEM.md` — 디자인 시스템 (SSOT)
 - `CONTENT_SYSTEM.md` — 콘텐츠 관리 구조
 - `WIREFRAME_INDEX.md` — 핵심 화면 와이어프레임 인덱스 (8개 화면)
+- `API_SPEC.md` — API 경계 설계 (SSOT)
+- `DEPLOYMENT_GUIDE.md` — 배포·환경·CI·Migration 가이드 (SSOT)
 - `AGENTS.md` — AI 에이전트 작업 규칙
 - `DECISION_LOG.md` — 확정된 결정 기록 (SSOT)
 - `OPEN_DECISIONS.md` — 미결정 사항 (SSOT)
 - `CHANGELOG.md` — 변경 이력
 
-## 시작하기
+## 브랜치·태그 규칙
 
-> Phase 0 진행 중 — 아직 애플리케이션 코드가 없습니다.
+- `main`: 항상 승인 상태. 직접 push 금지.
+- `feature/*`, `fix/*`, `docs/*`: 작업 단위 브랜치. PR 경유만 main 병합.
+- `phase0-checkpoint-*-approved`: Phase 0 Checkpoint 승인 태그.
+
+## Phase 1 시작 조건
+
+1. Phase 0 최종감사(Checkpoint D) 완료 및 승인
+2. 최종 승인 태그 생성
+3. 운영사 책임자 시작 승인
+4. 로컬 개발 환경 준비 (Node.js, pnpm, Supabase CLI)
+
+> Phase 1 착수 후 아래 명령을 추가합니다 (현재 실행 불가):
+>
+> ```bash
+> # Phase 1 착수 후 추가 예정
+> # pnpm install
+> # pnpm dev
+> # supabase start
+> ```
+
+> 아직 애플리케이션 코드가 없습니다. src/ 와 supabase/migrations/ 는 비어 있습니다.

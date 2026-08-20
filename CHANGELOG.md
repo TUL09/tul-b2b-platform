@@ -6,6 +6,39 @@
 
 ---
 
+## [Phase 0] 2026-08-14 — Checkpoint C2: API 경계 설계 및 배포·운영 가이드
+
+**신규 파일:**
+
+- `API_SPEC.md` — API 실행 경계 설계 SSOT
+  - SA/RH/RPC/EF/WH/DQ/BG/NA 8가지 실행경계 분류 (DEC-041)
+  - 7개 PostgreSQL Database Function 전체 사양 (fn_calculate_price, fn_submit_order_request, fn_approve_revision, fn_create_sales_order, fn_record_shipment, fn_apply_import, fn_update_prices)
+  - API Catalog 50+ 항목 (AUTH/PRD/PRC/CART/ORD/SHIP/RFQ/IMP/CNT)
+  - 오류 카탈로그 30+ 코드 (15개 도메인)
+  - Idempotency 전략 6개 대상 (DEC-042)
+  - API 보안 원칙 (SECURITY_RULES.md 기준)
+  - Phase별 API 활성화 시점
+
+- `DEPLOYMENT_GUIDE.md` — 배포·환경·CI·Migration 가이드 SSOT
+  - 4환경 분리 상세 (Local/Preview/Staging/Production) (DEC-043)
+  - Secret 분류 및 관리 원칙 (service_role key 브라우저 노출 절대 금지)
+  - 브랜치 전략 6종 (DEC-045)
+  - CI 파이프라인 10단계 + Phase별 활성화 시점
+  - Migration Group 10단계 순서 + Gate 정책 (DEC-046)
+  - 배포 흐름 (Preview→Staging→UAT→Production 승인) (DEC-044)
+  - Rollback·장애 대응 7가지 유형
+  - 백업·복구 정책
+  - 모니터링 대상 12개 항목
+
+**업데이트 파일:**
+
+- `AGENTS.md`: 구현 단계 AI 작업 규칙 보강 (DB, 보안, 가격, 테스트, 이력 관리)
+- `README.md`: 승인 Checkpoint 표, GitHub URL, 브랜치 규칙, Phase 1 조건, API_SPEC/DEPLOYMENT_GUIDE 색인 추가
+- `DECISION_LOG.md`: DEC-041~046 신규 결정 6건 추가
+- `OPEN_DECISIONS.md`: OD-025~030 미결정 6건 추가 (Staging 시점, Preview DB, 모니터링 도구, 이메일 제공자, RTO/RPO, CI 서비스)
+
+---
+
 ## [Phase 0] 2026-08-13 — Checkpoint C1 Correction Pass
 
 문서 정합성 수정 (기능 추가 없음):

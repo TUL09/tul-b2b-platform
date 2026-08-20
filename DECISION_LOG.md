@@ -53,3 +53,9 @@
 | 2026-08-07 | DEC-038 | 모바일 홈 콘텐츠 우선순위 | 검색 최상단 고정 → 최근주문/재주문 → 빠른재주문 → 진행주문 → 신제품 → 가격경쟁 → 브랜드. 자동 슬라이드 배너 금지 | 주문 효율 최우선, 광고 방해 금지 | 모바일 홈, 콘텐츠 |
 | 2026-08-07 | DEC-039 | 4개 주문상태 독립 표현 | order_status/fulfillment_status/payment_status/tax_invoice_status를 하나의 배지로 합치지 않고 독립 카드로 표시. 색상+아이콘+텍스트 조합 | 상태 혼동 방지, 접근성 | UI, 주문상태 화면 |
 | 2026-08-07 | DEC-040 | Import 오류 구분 표시 | Blocking Error: 빨간배경+⛔+텍스트+행번호. Warning: 주황배경+⚠+텍스트+행번호. 색상만으로 구분하지 않음 (접근성). Blocking Error 존재 시 Commit 버튼 비활성화 | STRICT_ATOMIC 정책 시각화, 접근성 | Admin Import |
+| 2026-08-14 | DEC-041 | API 실행경계 원칙 | SA(Server Action)/RH(Route Handler)/RPC(PostgreSQL Function)/EF(Edge Function)/WH(Webhook)/DQ(Direct Query+RLS)/BG(Background Job)/NA(No API) 8가지로 분류. 트랜잭션+Row Lock 필요 작업은 RPC, 비동기 외부 연동은 EF, 단순 목록 조회는 DQ. API_SPEC.md SSOT | 기능별 최적 실행 경계 명확화 | 전체 구현 |
+| 2026-08-14 | DEC-042 | Idempotency 필수 적용 대상 | 주문요청 제출(ORD-001), 확정주문 생성(ORD-007), 출고 등록(SHIP-001), Import Apply(IMP-005), 이메일 발송, Webhook 처리에 idempotency_key UUID 또는 동등한 중복 방지 전략 필수 적용 | 네트워크 재시도로 인한 중복 주문·출고·이메일 방지 | 주문, 출고, Import |
+| 2026-08-14 | DEC-043 | 환경 분리 원칙 | Local/Preview/Staging/Production 4환경. 환경별 Supabase 프로젝트 완전 분리. Production 데이터 개발환경 복사 금지. Preview 자동 migration 금지. Production 배포는 사람이 승인 | 데이터 오염 방지, 안전 배포 | 전체 |
+| 2026-08-14 | DEC-044 | Production 배포 승인 절차 | CI 통과 → PR 코드리뷰 → main 병합 → Staging 자동 배포 → UAT → 운영사 책임자 명시적 승인 → Production 배포. Staging Migration 실패 시 Production 배포 금지 | 비승인 배포 방지 | 배포 흐름 |
+| 2026-08-14 | DEC-045 | 브랜치 전략 확정 | main(보호), feature/*, fix/*, docs/*, release/*, hotfix/* 6종류. main 직접 push 금지. force push 금지. --no-ff 병합. DEPLOYMENT_GUIDE.md SSOT | Phase 1 착수 전 브랜치 규칙 명확화 | Git 전체 |
+| 2026-08-14 | DEC-046 | Migration Gate 정책 | 한 번에 44개 테이블 전체 생성 금지. Phase별 Group 순서로 순차 적용. Staging 검증 완료 후 Production 적용. Destructive Migration은 운영사 책임자 서면 승인. Forward Fix 원칙. DEPLOYMENT_GUIDE.md SSOT | 안전한 스키마 변경 | DB Migration |
