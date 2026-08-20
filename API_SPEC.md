@@ -1,4 +1,4 @@
-﻿# API_SPEC.md — TUL B2B 플랫폼 API 사양 (SSOT)
+# API_SPEC.md — TUL B2B 플랫폼 API 사양 (SSOT)
 
 > **SSOT 참조**
 > - 가격·주문·출고 규칙 → BUSINESS_RULES.md
@@ -82,7 +82,7 @@ SECURITY_RULES.md 7절과 DATABASE_SCHEMA.md에 정의된 7개 핵심 Function.
 | caller | Server Action / Server Component (Server-side only) |
 | authentication | authenticated JWT 필수 |
 | capability | 승인 거래처(approved buyer) 이상 |
-| security_invoker | SECURITY DEFINER (가격표 직접 접근), 고정 search_path |
+| security_mode | SECURITY INVOKER (호출자 권한으로 실행, RLS 적용) |
 | request_input | org_id UUID, sku_uom_id UUID, quantity INTEGER |
 | response_output | unit_price, price_source_type, price_source_id, price_source_version, tier_min_quantity, tier_max_quantity, currency_code, tax_inclusion_mode, price_book_code |
 | transaction_boundary | READ ONLY |
@@ -104,7 +104,7 @@ SECURITY_RULES.md 7절과 DATABASE_SCHEMA.md에 정의된 7개 핵심 Function.
 | caller | Server Action (구매자 주문 요청하기 버튼) |
 | authentication | authenticated JWT 필수 |
 | capability | can_create_order_request |
-| security_invoker | SECURITY DEFINER |
+| security_mode | SECURITY INVOKER (호출자 권한, RLS 적용) |
 | request_input | cart_id UUID, idempotency_key UUID, shipping_address_id UUID, buyer_note TEXT |
 | response_output | order_request_id, order_request_number, status, items JSONB |
 | transaction_boundary | 단일 트랜잭션 (cart 검증, 가격 재계산, order_requests INSERT, items INSERT, cart 비우기) |
@@ -127,7 +127,7 @@ SECURITY_RULES.md 7절과 DATABASE_SCHEMA.md에 정의된 7개 핵심 Function.
 | caller | Server Action (구매자 수정안 확인 CTA) |
 | authentication | authenticated JWT 필수 |
 | capability | 해당 주문 소속 조직 구매자 |
-| security_invoker | SECURITY DEFINER |
+| security_mode | SECURITY INVOKER (호출자 권한, RLS 적용) |
 | request_input | order_revision_id UUID, decision TEXT (approved or rejected), buyer_note TEXT |
 | response_output | order_request_id UUID, new_status TEXT |
 | transaction_boundary | 단일 트랜잭션 |
@@ -150,7 +150,7 @@ SECURITY_RULES.md 7절과 DATABASE_SCHEMA.md에 정의된 7개 핵심 Function.
 | caller | Server Action (관리자 확정 주문 생성 액션) |
 | authentication | authenticated JWT 필수 |
 | capability | can_manage_orders |
-| security_invoker | SECURITY DEFINER |
+| security_mode | SECURITY DEFINER (트랜잭션, SET search_path = '', schema-qualified, DEC-035) |
 | request_input | order_request_id UUID, idempotency_key UUID, operator_note TEXT |
 | response_output | sales_order_id UUID, sales_order_number TEXT, items JSONB, total_amount INTEGER |
 | transaction_boundary | 단일 트랜잭션 (order_request 잠금, 상태 전이, sales_orders INSERT, items INSERT with price snapshot) |
@@ -173,7 +173,7 @@ SECURITY_RULES.md 7절과 DATABASE_SCHEMA.md에 정의된 7개 핵심 Function.
 | caller | Server Action (관리자 출고 처리 액션) |
 | authentication | authenticated JWT 필수 |
 | capability | can_manage_shipments |
-| security_invoker | SECURITY DEFINER |
+| security_mode | SECURITY DEFINER (트랜잭션, SET search_path = '', schema-qualified, DEC-035) |
 | request_input | sales_order_id UUID, idempotency_key UUID, shipment_items JSONB, carrier_code TEXT, tracking_number TEXT, shipment_type TEXT |
 | response_output | shipment_id UUID, shipment_number TEXT, status TEXT |
 | transaction_boundary | 단일 트랜잭션 (sales_order_items FOR UPDATE, 수량 검증, shipments INSERT, backordered_quantity 감소, audit INSERT) |
@@ -197,7 +197,7 @@ SECURITY_RULES.md 7절과 DATABASE_SCHEMA.md에 정의된 7개 핵심 Function.
 | caller | Server Action (관리자 최종 반영 버튼) |
 | authentication | authenticated JWT 필수 |
 | capability | can_manage_products |
-| security_invoker | SECURITY DEFINER |
+| security_mode | SECURITY DEFINER (STRICT_ATOMIC, SET search_path = '', schema-qualified, DEC-035) |
 | request_input | import_batch_id UUID, idempotency_key UUID |
 | response_output | applied_count INTEGER, skipped_count INTEGER, error_count INTEGER, status TEXT |
 | transaction_boundary | 단일 원자 트랜잭션. 1건이라도 오류 시 전체 rollback (STRICT_ATOMIC) |
@@ -220,7 +220,7 @@ SECURITY_RULES.md 7절과 DATABASE_SCHEMA.md에 정의된 7개 핵심 Function.
 | caller | Server Action (관리자 가격표 저장) |
 | authentication | authenticated JWT 필수 |
 | capability | can_manage_prices |
-| security_invoker | SECURITY DEFINER |
+| security_mode | SECURITY INVOKER (호출자 권한, RLS 적용). price_book_items UPDATE GRANT + RLS can_manage_prices 필요 (SECURITY_RULES §12.3) |
 | request_input | price_book_id UUID, items JSONB, effective_from DATE |
 | response_output | updated_count INTEGER, conflict_count INTEGER |
 | transaction_boundary | 단일 트랜잭션 (구간 중복 검증, price_book_items upsert) |
@@ -480,8 +480,8 @@ SECURITY_RULES.md 7절과 DATABASE_SCHEMA.md에 정의된 7개 핵심 Function.
 | 확정주문 생성 | ORD-007 | idempotency_key UUID + order_request 상태 검증 |
 | 출고 등록 | SHIP-001 | idempotency_key UUID + Row Lock |
 | Import Apply | IMP-005 | idempotency_key UUID + import_batch 상태 |
-| 이메일 발송 | AUTH-010 | 발송 이력 테이블 조회 후 중복 방지 |
-| Webhook 처리 | SHIP-006 | event_id 중복 확인 (processed_webhooks 테이블) |
+| 이메일 발송 | AUTH-010 | 발송 이력 기록 후 중복 방지 (저장 구조는 OD-031 참조) |
+| Webhook 처리 | SHIP-006 | event_id 중복 확인 (저장 구조는 OD-032 참조) |
 
 Idempotency Key 생성: 클라이언트에서 crypto.randomUUID()로 생성. 서버에서 형식 검증 필수.
 

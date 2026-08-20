@@ -1,4 +1,4 @@
-﻿# DEPLOYMENT_GUIDE.md — TUL B2B 플랫폼 배포 및 운영 가이드 (SSOT)
+# DEPLOYMENT_GUIDE.md — TUL B2B 플랫폼 배포 및 운영 가이드 (SSOT)
 
 > **SSOT 참조**
 > - API 실행 경계 → API_SPEC.md
@@ -185,18 +185,19 @@ CI는 구현 시점에 GitHub Actions 또는 동등한 CI 서비스로 구성합
 
 ### 5.2 Migration Group 순서 (Phase별 권장)
 
-| 순서 | 내용 | 대상 Phase |
-|---|---|---|
-| Group 1 | 인증 기반 테이블 (profiles, organizations, organization_members, buyer_accounts) | Phase 2 |
-| Group 2 | 상품 기반 테이블 (brands, products, product_skus, sku_uoms, categories) | Phase 3 |
-| Group 3 | Import 테이블 (catalog_imports) | Phase 3 |
-| Group 4 | 가격 테이블 (price_books, price_book_items, organization_price_books, organization_price_overrides) | Phase 4 |
-| Group 5 | 공급 테이블 (supplier_offers, addresses) | Phase 4 |
-| Group 6 | 주문 테이블 (carts, cart_items, order_requests, order_request_items, order_revisions) | Phase 4 |
-| Group 7 | 확정주문·출고 (sales_orders, sales_order_items, shipments, shipment_items) | Phase 4 |
-| Group 8 | RFQ, 콘텐츠, 감사 (rfqs, contents, audit_logs) | Phase 5 |
-| Group 9 | DB Functions (fn_calculate_price 등 7개 함수) | Phase 3~4 |
-| Group 10 | RLS 정책 (테이블별 policy) | Phase 2~4 (테이블 생성과 동시) |
+| Group | 이름 | 테이블 수 | 대상 Phase | 비고 |
+|---|---|---|---|---|
+| MG-01 | Identity & Organizations | 7 | Phase 2 | profiles, organizations, organization_roles, organization_business_profiles, buyer_accounts, organization_members, addresses |
+| MG-02 | Catalog Core | 7 | Phase 3 | brands, categories, products, product_skus, product_images, product_documents, search_synonyms |
+| MG-03 | UOM & Search | 4 + 1 View | Phase 3~5 | sku_uoms, sku_barcodes, product_search_terms, search_events, sku_search_index(View) |
+| MG-04 | Pricing | 5 | Phase 3~4 | price_books, price_book_items, organization_price_books, organization_price_overrides, supplier_offers |
+| MG-05 | Cart & Order Request | 6 | Phase 4 | carts, cart_items, order_requests, order_request_items, order_revisions, order_revision_items |
+| MG-06 | Sales Order & Shipment | 6 | Phase 4 | sales_orders, sales_order_items, shipments, shipment_items, order_request_status_history, sales_order_status_history |
+| MG-07 | Import & Audit | 4 | Phase 2~5 | catalog_imports, catalog_import_rows, catalog_import_errors, audit_logs |
+| MG-08 | RFQ & Pilot | 5 | Phase 4~5 | rfqs, rfq_items, rfq_attachments, shipment_status_history, tax_policies |
+
+> DB Functions와 RLS 정책은 별도 Group이 아닌, 각 테이블 Group의 Migration 파일 내에서 해당 테이블과 함께 생성합니다.
+> Migration Group ID는 DATABASE_SCHEMA.md의 MG 번호를 SSOT로 따릅니다.
 
 ### 5.3 Migration 적용 흐름
 

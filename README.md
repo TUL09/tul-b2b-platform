@@ -3,7 +3,7 @@
 > **현재 단계**: Development Phase 0 완료 (사업 및 시스템 설계) — Phase 1 착수 전 최종감사 대기 중
 > **GitHub**: https://github.com/TUL09/tul-b2b-platform (Private)
 
-## 승인된 Checkpoint
+## Checkpoint 현황
 
 | Checkpoint | 내용 | 태그 |
 |---|---|---|

@@ -6,6 +6,31 @@
 
 ---
 
+## [Phase 0] 2026-08-20 — Checkpoint D: Phase 0 최종감사 수정
+
+**API_SPEC.md** (보안 모드 정합성 수정):
+- fn_calculate_price: SECURITY DEFINER → **SECURITY INVOKER** (SECURITY_RULES §12.2 F-01 기준)
+- fn_submit_order_request: SECURITY DEFINER → **SECURITY INVOKER** (§12.2 F-02)
+- fn_approve_revision: SECURITY DEFINER → **SECURITY INVOKER** (§12.2 F-03)
+- fn_update_prices: SECURITY DEFINER → **SECURITY INVOKER** (§12.2 F-07, §12.3 GRANT/RLS 일관성)
+- fn_create_sales_order, fn_record_shipment, fn_apply_import: SECURITY DEFINER 유지 (§12.1 F-04/F-05/F-06) — DEC-035 참조 추가
+- 필드명 `security_invoker` → `security_mode`로 통일
+- Idempotency §6: 미존재 테이블 참조 제거 (`processed_webhooks`, 이메일 발송 이력 테이블) → OD-031/032로 전환
+
+**DEPLOYMENT_GUIDE.md** (Migration Group 정합성 수정):
+- Group 1~10 → DATABASE_SCHEMA.md SSOT MG-01~MG-08로 정렬
+- Group 9 (DB Functions), Group 10 (RLS 정책) 별도 그룹 폐기 — 각 테이블 Group에 포함
+- 테이블 할당을 Schema Inventory와 일치시킴
+
+**OPEN_DECISIONS.md**:
+- OD-031 이메일 발송 중복 방지 저장구조 추가
+- OD-032 Webhook 이벤트 중복 방지 저장구조 추가
+
+**README.md**:
+- "승인된 Checkpoint" → "Checkpoint 현황"으로 제목 수정 (C2 미승인 상태 반영)
+
+---
+
 ## [Phase 0] 2026-08-14 — Checkpoint C2: API 경계 설계 및 배포·운영 가이드
 
 **신규 파일:**

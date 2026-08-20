@@ -43,4 +43,6 @@
 | OD-028 | 이메일 제공자 최종 선택 | Resend 또는 다른 이메일 제공자 | 임시: Resend를 API_SPEC.md에 기본으로 설계. 최종 계약 및 도메인 인증은 Phase 2 이전 확정 | Phase 2 착수 전 | 이메일, Auth |
 | OD-029 | RTO/RPO 목표치 | 목표 복구 시간(RTO)과 허용 데이터 손실(RPO) 수치 | 미정. 운영 규모와 SLA에 따라 결정 필요 | Phase 6 (Customer Pilot 전) | 운영, 백업 |
 | OD-030 | CI 서비스 선택 | GitHub Actions 또는 다른 CI 서비스 | 임시: GitHub Actions를 기본으로 DEPLOYMENT_GUIDE 설계. 세부 workflow 파일은 Phase 1 착수 시 작성 | Phase 1 착수 시 | CI, 배포 |
+| OD-031 | 이메일 발송 중복 방지 저장구조 | 이메일 발송 이력 기록 및 중복 방지를 위한 저장 구조 | 기존 audit_logs 활용 가능성 검토. 별도 테이블 필요 시 DATABASE_SCHEMA.md에 추가 필요 | Phase 2 착수 시 | Auth, 이메일 |
+| OD-032 | Webhook 이벤트 중복 방지 저장구조 | 외부 Webhook event_id 중복 확인을 위한 저장 구조 | 기존 테이블 활용 또는 별도 테이블 필요 시 DATABASE_SCHEMA.md에 추가 필요 | Phase 5 착수 시 | 출고, Webhook |
 
