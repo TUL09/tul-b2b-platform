@@ -37,5 +37,12 @@
 | OD-022 | 검색 인덱스 갱신 전략 | Materialized View refresh vs 실시간 vs 주기 | MVP에서 결정 | Phase 3 | 검색 성능 |
 | OD-023 | 실제 로고 파일 | TUL 로고 최종 SVG/PNG | DESIGN_SYSTEM.md에 색상 확정, 로고 임의 설계 금지 | Phase 1 착수 전 | 전체 UI |
 | OD-024 | 입고예정 상품 주문 가능 여부 | `available_to_order` 상태 상품에 대해 예약주문을 허용할지, 허용 시 관리자 확인 절차가 필요한지 | 임시: 버튼 활성화 + "입고예정 · 관리자 확인 후 주문접수" 문구. WF-02(모바일)·WF-04(PC)·DESIGN_SYSTEM.md §7.e 동일 적용 | Phase 3 착수 전 | 주문, UX, BUSINESS_RULES |
-
+| OD-025 | Staging Supabase 프로젝트 생성 시점 | Staging 전용 Supabase 프로젝트를 언제 생성할지 | DEPLOYMENT_GUIDE.md에 Staging 환경 설계 완료, 실제 프로젝트 생성은 Phase 2 착수 전 수행 | Phase 2 착수 전 | 배포, DB |
+| OD-026 | Preview 환경 DB 전략 | PR Preview에서 별도 Supabase Preview 프로젝트를 사용할지, Staging을 공유할지 | 임시: 개발자 로컬 Supabase 사용 권장. Preview-Staging 공유 또는 분리 여부 결정 필요 | Phase 2 착수 전 | 배포, 비용 |
+| OD-027 | 모니터링 도구 | Sentry, Datadog, Vercel Analytics 등 구체적 도구 선택 | 임시: Vercel 내장 Analytics + Supabase 로그로 Phase 6까지 운영. Phase 6 이후 전문 도구 도입 검토 | Phase 6 | 운영, 비용 |
+| OD-028 | 이메일 제공자 최종 선택 | Resend 또는 다른 이메일 제공자 | 임시: Resend를 API_SPEC.md에 기본으로 설계. 최종 계약 및 도메인 인증은 Phase 2 이전 확정 | Phase 2 착수 전 | 이메일, Auth |
+| OD-029 | RTO/RPO 목표치 | 목표 복구 시간(RTO)과 허용 데이터 손실(RPO) 수치 | 미정. 운영 규모와 SLA에 따라 결정 필요 | Phase 6 (Customer Pilot 전) | 운영, 백업 |
+| OD-030 | CI 서비스 선택 | GitHub Actions 또는 다른 CI 서비스 | 임시: GitHub Actions를 기본으로 DEPLOYMENT_GUIDE 설계. 세부 workflow 파일은 Phase 1 착수 시 작성 | Phase 1 착수 시 | CI, 배포 |
+| OD-031 | 이메일 발송 중복 방지 저장구조 | 이메일 발송 이력 기록 및 중복 방지를 위한 저장 구조 | 기존 audit_logs 활용 가능성 검토. 별도 테이블 필요 시 DATABASE_SCHEMA.md에 추가 필요 | Phase 2 착수 시 | Auth, 이메일 |
+| OD-032 | Webhook 이벤트 중복 방지 저장구조 | 외부 Webhook event_id 중복 확인을 위한 저장 구조 | 기존 테이블 활용 또는 별도 테이블 필요 시 DATABASE_SCHEMA.md에 추가 필요 | Phase 5 착수 시 | 출고, Webhook |
 

@@ -6,6 +6,31 @@
 
 ---
 
+## [Phase 0] 2026-08-20 — Checkpoint D: Phase 0 최종감사 수정
+
+**API_SPEC.md** (보안 모드 정합성 수정):
+- fn_calculate_price: SECURITY DEFINER → **SECURITY INVOKER** (SECURITY_RULES §12.2 F-01 기준)
+- fn_submit_order_request: SECURITY DEFINER → **SECURITY INVOKER** (§12.2 F-02)
+- fn_approve_revision: SECURITY DEFINER → **SECURITY INVOKER** (§12.2 F-03)
+- fn_update_prices: SECURITY DEFINER → **SECURITY INVOKER** (§12.2 F-07, §12.3 GRANT/RLS 일관성)
+- fn_create_sales_order, fn_record_shipment, fn_apply_import: SECURITY DEFINER 유지 (§12.1 F-04/F-05/F-06) — DEC-035 참조 추가
+- 필드명 `security_invoker` → `security_mode`로 통일
+- Idempotency §6: 미존재 테이블 참조 제거 (`processed_webhooks`, 이메일 발송 이력 테이블) → OD-031/032로 전환
+
+**DEPLOYMENT_GUIDE.md** (Migration Group 정합성 수정):
+- Group 1~10 → DATABASE_SCHEMA.md SSOT MG-01~MG-08로 정렬
+- Group 9 (DB Functions), Group 10 (RLS 정책) 별도 그룹 폐기 — 각 테이블 Group에 포함
+- 테이블 할당을 Schema Inventory와 일치시킴
+
+**OPEN_DECISIONS.md**:
+- OD-031 이메일 발송 중복 방지 저장구조 추가
+- OD-032 Webhook 이벤트 중복 방지 저장구조 추가
+
+**README.md**:
+- "승인된 Checkpoint" → "Checkpoint 현황"으로 제목 수정 (C2 미승인 상태 반영)
+
+---
+
 ## [Phase 0] 2026-08-19 — Checkpoint C1 Final Fix Pass
 
 C1 최종 감사 결함 보정 (애플리케이션 코드·DB Migration 변경 없음):
@@ -21,6 +46,39 @@ C1 최종 감사 결함 보정 (애플리케이션 코드·DB Migration 변경 �
 - WF-01~08의 OS·Font 의존 이모지 제거 완료: 검증 기준 잔존 0건
 - Markdown의 Windows 전용 절대 링크 33개를 저장소 상대 링크로 변경
 - `TRACEABILITY_MATRIX.md`, `PROJECT_STATUS.md`, C1 최종 검증 문서 추가
+
+---
+
+## [Phase 0] 2026-08-14 — Checkpoint C2: API 경계 설계 및 배포·운영 가이드
+
+**신규 파일:**
+
+- `API_SPEC.md` — API 실행 경계 설계 SSOT
+  - SA/RH/RPC/EF/WH/DQ/BG/NA 8가지 실행경계 분류 (DEC-041)
+  - 7개 PostgreSQL Database Function 전체 사양 (fn_calculate_price, fn_submit_order_request, fn_approve_revision, fn_create_sales_order, fn_record_shipment, fn_apply_import, fn_update_prices)
+  - API Catalog 50+ 항목 (AUTH/PRD/PRC/CART/ORD/SHIP/RFQ/IMP/CNT)
+  - 오류 카탈로그 30+ 코드 (15개 도메인)
+  - Idempotency 전략 6개 대상 (DEC-042)
+  - API 보안 원칙 (SECURITY_RULES.md 기준)
+  - Phase별 API 활성화 시점
+
+- `DEPLOYMENT_GUIDE.md` — 배포·환경·CI·Migration 가이드 SSOT
+  - 4환경 분리 상세 (Local/Preview/Staging/Production) (DEC-043)
+  - Secret 분류 및 관리 원칙 (service_role key 브라우저 노출 절대 금지)
+  - 브랜치 전략 6종 (DEC-045)
+  - CI 파이프라인 10단계 + Phase별 활성화 시점
+  - Migration Group 10단계 순서 + Gate 정책 (DEC-046)
+  - 배포 흐름 (Preview→Staging→UAT→Production 승인) (DEC-044)
+  - Rollback·장애 대응 7가지 유형
+  - 백업·복구 정책
+  - 모니터링 대상 12개 항목
+
+**업데이트 파일:**
+
+- `AGENTS.md`: 구현 단계 AI 작업 규칙 보강 (DB, 보안, 가격, 테스트, 이력 관리)
+- `README.md`: 승인 Checkpoint 표, GitHub URL, 브랜치 규칙, Phase 1 조건, API_SPEC/DEPLOYMENT_GUIDE 색인 추가
+- `DECISION_LOG.md`: DEC-041~046 신규 결정 6건 추가
+- `OPEN_DECISIONS.md`: OD-025~030 미결정 6건 추가 (Staging 시점, Preview DB, 모니터링 도구, 이메일 제공자, RTO/RPO, CI 서비스)
 
 ---
 
