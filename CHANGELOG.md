@@ -6,7 +6,29 @@
 
 ---
 
-## [Phase 0] 2026-08-20 — Checkpoint D: Phase 0 최종감사 수정
+## [Phase 0] 2026-08-20 — Phase 0 완료 및 Phase 1 착수 승인
+
+**Phase 0 Closeout:**
+- Checkpoint D 최종감사 결과: **PASS**
+- Checkpoint C2 최종 승인 — 커밋 `f1f26b3`, 태그 `phase0-checkpoint-c2-approved` (병합 커밋 `82bb237`)
+- Phase 0 전체 완료 — 태그 `phase0-approved`
+- Development Phase 1 (정적 화면 시제품) 착수 승인
+
+**Phase 0 승인 기록:**
+
+| Checkpoint | 승인 태그 | 기준 커밋 |
+|---|---|---|
+| Checkpoint A | phase0-checkpoint-a-approved | — |
+| Checkpoint B | phase0-checkpoint-b-approved | 20a3084 |
+| Checkpoint C1 | phase0-checkpoint-c1-approved | ecaeb61 |
+| Checkpoint C2 | phase0-checkpoint-c2-approved | f1f26b3 (병합 82bb237) |
+| Phase 0 전체 | phase0-approved | (Closeout 병합 커밋) |
+
+**다음 단계:** Development Phase 1 — Next.js App Router 정적 화면 시제품
+
+---
+
+
 
 **API_SPEC.md** (보안 모드 정합성 수정):
 - fn_calculate_price: SECURITY DEFINER → **SECURITY INVOKER** (SECURITY_RULES §12.2 F-01 기준)

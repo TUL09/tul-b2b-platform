@@ -1,16 +1,18 @@
 # 독립 공구 브랜드 연합형 B2B 유통 웹앱
 
-> **현재 단계**: Development Phase 0 완료 (사업 및 시스템 설계) — Phase 1 착수 전 최종감사 대기 중
+> **현재 단계**: Development Phase 0 완료 ✅ — 다음 단계: Development Phase 1 정적 화면 시제품 (미시작)
 > **GitHub**: https://github.com/TUL09/tul-b2b-platform (Private)
 
 ## Checkpoint 현황
 
-| Checkpoint | 내용 | 태그 |
-|---|---|---|
-| Checkpoint A | 핵심 사업·데이터 설계 문서 | phase0-checkpoint-a-approved |
-| Checkpoint B | 보안 강화 및 스키마 정합성 | phase0-checkpoint-b-approved |
-| Checkpoint C1 | 디자인 시스템, 콘텐츠 시스템, 8개 와이어프레임 | phase0-checkpoint-c1-approved |
-| Checkpoint C2 | API 경계 설계, 배포·운영 가이드 | (최종감사 후 승인 예정) |
+| Checkpoint | 내용 | 태그 | 상태 |
+|---|---|---|---|
+| Checkpoint A | 핵심 사업·데이터 설계 문서 | phase0-checkpoint-a-approved | ✅ 승인 완료 |
+| Checkpoint B | 보안 강화 및 스키마 정합성 | phase0-checkpoint-b-approved | ✅ 승인 완료 |
+| Checkpoint C1 | 디자인 시스템, 콘텐츠 시스템, 8개 와이어프레임 | phase0-checkpoint-c1-approved | ✅ 승인 완료 |
+| Checkpoint C2 | API 경계 설계, 배포·운영 가이드 | phase0-checkpoint-c2-approved | ✅ 승인 완료 |
+| Checkpoint D | Phase 0 최종감사 | — | ✅ PASS |
+| Phase 0 | 사업 및 시스템 설계 전체 | phase0-approved | ✅ 완료 |
 
 ## 프로젝트 개요
 
@@ -90,13 +92,16 @@ Phase 0에서 작성하는 프로젝트 문서:
 - `main`: 항상 승인 상태. 직접 push 금지.
 - `feature/*`, `fix/*`, `docs/*`: 작업 단위 브랜치. PR 경유만 main 병합.
 - `phase0-checkpoint-*-approved`: Phase 0 Checkpoint 승인 태그.
+- `phase0-approved`: Phase 0 전체 완료 태그.
 
-## Phase 1 시작 조건
+## Phase 1 시작 조건 (모두 충족 ✅)
 
-1. Phase 0 최종감사(Checkpoint D) 완료 및 승인
-2. 최종 승인 태그 생성
-3. 운영사 책임자 시작 승인
-4. 로컬 개발 환경 준비 (Node.js, pnpm, Supabase CLI)
+1. ✅ Phase 0 최종감사(Checkpoint D) PASS — 2026-08-20
+2. ✅ Phase 0 최종 승인 태그 생성 — `phase0-approved`
+3. ☐ 운영사 책임자 시작 승인 (별도 확인 필요)
+4. ☐ 로컬 개발 환경 준비 (Node.js, pnpm, Supabase CLI)
+
+> **Phase 1은 아직 미시작입니다.** 운영사 책임자 승인 후 착수할 수 있습니다.
 
 > Phase 1 착수 후 아래 명령을 추가합니다 (현재 실행 불가):
 >
