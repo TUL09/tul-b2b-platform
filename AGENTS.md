@@ -1,13 +1,15 @@
-﻿# AI Agents 작업 규칙
+# AI Agents 작업 규칙
 
 이 프로젝트에서 AI 에이전트가 따라야 할 작업 규칙입니다.
 
 ## 현재 작업 제약
 
-- **현재 단계**: Development Phase 0 완료 (사업 및 시스템 설계)
-- **허용**: 프로젝트 문서 작성, 설계, 분석
-- **금지**: 애플리케이션 코드 작성, DB migration, Supabase 연결, Vercel 배포
-- **Phase 1 시작 조건**: Phase 0 최종감사(Checkpoint D) 완료 및 승인 후
+- **current_phase**: Phase 0 completed ✅
+- **next_allowed_phase**: Development Phase 1 (정적 화면 시제품)
+- **Phase 1 착수 조건**: 운영사 책임자 승인 후 — `phase0-approved` 태그 생성 완료
+- **허용**: Phase 1 정적 화면 구현 (Next.js App Router, TypeScript, Tailwind CSS v4)
+- **금지**: Phase 2 이상 자동 진행. DB migration, Supabase 연결, 인증, API는 Phase 2 이후
+- **Phase 2 이상 자동 진행 금지**: 단계별 명시적 승인 필요
 
 ## 핵심 규칙
 
